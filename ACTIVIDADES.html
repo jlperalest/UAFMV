@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#812843" />
+  <title>Educación 5.0 | Actividades y productos</title>
+
+  <style>
+    :root{
+      --vino:#812843;
+      --vino-oscuro:#4f1026;
+      --vino-suave:#f5e8ed;
+      --magenta:#c73765;
+      --magenta-suave:#faeaf0;
+      --azul:#7395a2;
+      --azul-oscuro:#385d69;
+      --azul-suave:#eaf1f4;
+      --blanco:#ffffff;
+      --fondo:#f4f7f8;
+      --gris:#d6dfe3;
+      --gris-2:#b8c6cc;
+      --texto:#1e272c;
+      --texto-sec:#405058;
+      --verde:#34745f;
+      --verde-suave:#eaf4f0;
+      --naranja:#9b602f;
+      --naranja-suave:#f7eee7;
+      --sombra:0 24px 60px rgba(31,47,55,.14);
+      --sombra-card:0 14px 32px rgba(31,47,55,.10);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      overflow-x:hidden;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--texto);
+      background:
+        radial-gradient(circle at 7% 8%,rgba(115,149,162,.20),transparent 23rem),
+        radial-gradient(circle at 92% 16%,rgba(199,55,101,.11),transparent 26rem),
+        linear-gradient(180deg,#fff 0%,var(--fondo) 100%);
+    }
+
+    button{font:inherit;cursor:pointer}
+    button:focus-visible{
+      outline:4px solid rgba(199,55,101,.28);
+      outline-offset:3px;
+    }
+
+    .frame{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:100;
+      border:10px solid transparent;
+      border-image:linear-gradient(135deg,var(--azul),var(--vino),var(--magenta),var(--azul)) 1;
+      opacity:.94;
+    }
+
+    .page{
+      width:min(1220px,calc(100% - 30px));
+      margin:0 auto;
+      padding:38px 0 68px;
+    }
+
+    .topbar{
+      position:sticky;
+      top:14px;
+      z-index:50;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:12px 14px;
+      margin-bottom:18px;
+      border:1px solid rgba(56,93,105,.22);
+      border-radius:20px;
+      background:rgba(255,255,255,.95);
+      backdrop-filter:blur(18px);
+      box-shadow:0 12px 30px rgba(31,47,55,.11);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-mark{
+      width:44px;
+      height:44px;
+      display:grid;
+      place-items:center;
+      border-radius:14px;
+      color:#fff;
+      background:linear-gradient(145deg,var(--vino),var(--magenta));
+      font-weight:950;
+      box-shadow:0 10px 24px rgba(129,40,67,.24);
+    }
+
+    .brand strong{
+      display:block;
+      color:var(--vino);
+      line-height:1.1;
+    }
+
+    .brand small{
+      display:block;
+      margin-top:3px;
+      color:var(--texto-sec);
+      font-weight:650;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .status{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      color:var(--azul-oscuro);
+      background:var(--azul-suave);
+      font-size:.82rem;
+      font-weight:850;
+    }
+
+    .status::before{
+      content:"";
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background:var(--magenta);
+      box-shadow:0 0 0 5px rgba(199,55,101,.12);
+    }
+
+    .contrast{
+      border:1px solid var(--vino);
+      border-radius:12px;
+      padding:9px 11px;
+      color:var(--vino);
+      background:#fff;
+      font-weight:850;
+    }
+
+    .contrast:hover{
+      color:#fff;
+      background:var(--vino);
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:1.06fr .94fr;
+      min-height:550px;
+      align-items:center;
+      border:1px solid rgba(56,93,105,.25);
+      border-radius:34px;
+      background:#fff;
+      box-shadow:var(--sombra);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0 auto 0 0;
+      width:9px;
+      background:linear-gradient(var(--vino),var(--magenta),var(--azul));
+      z-index:4;
+    }
+
+    .hero-copy{
+      position:relative;
+      z-index:3;
+      padding:62px 54px;
+      background:#fff;
+    }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      padding:9px 14px;
+      border-radius:999px;
+      color:var(--vino-oscuro);
+      background:var(--vino-suave);
+      border:1px solid #d9a9ba;
+      font-size:.8rem;
+      font-weight:900;
+      letter-spacing:.055em;
+      text-transform:uppercase;
+    }
+
+    .kicker::before{
+      content:"";
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background:var(--magenta);
+      box-shadow:0 0 0 6px rgba(199,55,101,.13);
+    }
+
+    h1{
+      margin:22px 0 10px;
+      color:var(--vino);
+      font-size:clamp(2.8rem,6.2vw,5.9rem);
+      line-height:.92;
+      letter-spacing:-.075em;
+    }
+
+    .hero-subtitle{
+      margin:0 0 18px;
+      color:var(--azul-oscuro);
+      font-size:clamp(1.1rem,2.1vw,1.55rem);
+      font-weight:900;
+    }
+
+    .hero-text{
+      max-width:690px;
+      margin:0;
+      color:var(--texto-sec);
+      line-height:1.75;
+      font-size:1.05rem;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:11px;
+      margin-top:28px;
+    }
+
+    .btn-primary,.btn-secondary{
+      padding:13px 17px;
+      border-radius:15px;
+      font-weight:900;
+      transition:.22s ease;
+    }
+
+    .btn-primary{
+      border:0;
+      color:#fff;
+      background:linear-gradient(135deg,var(--vino),var(--magenta));
+      box-shadow:0 12px 26px rgba(129,40,67,.23);
+    }
+
+    .btn-secondary{
+      color:var(--vino);
+      background:#fff;
+      border:2px solid var(--vino);
+    }
+
+    .btn-primary:hover,.btn-secondary:hover{transform:translateY(-2px)}
+    .btn-secondary:hover{color:#fff;background:var(--vino)}
+
+    .hero-visual{
+      position:relative;
+      height:100%;
+      min-height:550px;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 60% 30%,rgba(255,255,255,.24),transparent 15rem),
+        linear-gradient(145deg,var(--azul-oscuro),var(--azul));
+    }
+
+    .hero-visual::before,
+    .hero-visual::after{
+      content:"";
+      position:absolute;
+      width:410px;
+      height:88px;
+      border-radius:30px;
+      transform:rotate(-24deg);
+      background:linear-gradient(90deg,var(--vino),var(--magenta));
+    }
+
+    .hero-visual::before{top:50px;right:-120px}
+    .hero-visual::after{bottom:48px;left:-130px;opacity:.62}
+
+    .workflow{
+      position:relative;
+      width:min(440px,87%);
+      aspect-ratio:1;
+      z-index:2;
+    }
+
+    .workflow-line{
+      position:absolute;
+      left:49%;
+      top:10%;
+      bottom:10%;
+      width:7px;
+      transform:translateX(-50%);
+      border-radius:999px;
+      background:rgba(255,255,255,.58);
+    }
+
+    .workflow-node{
+      position:absolute;
+      left:49%;
+      width:92px;
+      height:92px;
+      display:grid;
+      place-items:center;
+      transform:translateX(-50%);
+      border-radius:28px;
+      color:var(--vino-oscuro);
+      background:#fff;
+      box-shadow:0 15px 34px rgba(20,38,46,.25);
+      font-size:1.8rem;
+      animation:float 4.3s ease-in-out infinite;
+    }
+
+    .workflow-node small{
+      position:absolute;
+      width:175px;
+      padding:8px 10px;
+      border-radius:11px;
+      color:#fff;
+      background:rgba(35,64,74,.95);
+      font-size:.76rem;
+      font-weight:850;
+      line-height:1.3;
+    }
+
+    .workflow-node:nth-of-type(odd) small{
+      left:108px;
+      text-align:left;
+    }
+
+    .workflow-node:nth-of-type(even) small{
+      right:108px;
+      text-align:right;
+    }
+
+    .w1{top:5%;animation-delay:-.4s}
+    .w2{top:28%;animation-delay:-1.1s}
+    .w3{top:51%;animation-delay:-1.8s}
+    .w4{top:74%;animation-delay:-2.5s}
+
+    @keyframes float{
+      0%,100%{transform:translateX(-50%) translateY(0)}
+      50%{transform:translateX(-50%) translateY(-8px)}
+    }
+
+    .section{
+      margin-top:24px;
+      scroll-margin-top:100px;
+    }
+
+    .panel{
+      overflow:hidden;
+      border:1px solid var(--gris-2);
+      border-radius:30px;
+      background:#fff;
+      box-shadow:var(--sombra);
+    }
+
+    .panel-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+      padding:30px 32px 22px;
+      border-bottom:1px solid var(--gris);
+      background:#fff;
+    }
+
+    .panel-head h2{
+      margin:0;
+      color:var(--vino);
+      font-size:clamp(1.55rem,3vw,2.45rem);
+      letter-spacing:-.03em;
+    }
+
+    .panel-head p{
+      margin:7px 0 0;
+      max-width:74ch;
+      color:var(--texto-sec);
+      line-height:1.6;
+    }
+
+    .week-toolbar{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .week-pill{
+      min-width:46px;
+      height:42px;
+      padding:0 13px;
+      border:1px solid var(--gris-2);
+      border-radius:13px;
+      color:var(--texto-sec);
+      background:#fff;
+      font-weight:900;
+      transition:.22s ease;
+    }
+
+    .week-pill:hover{border-color:var(--vino);color:var(--vino)}
+    .week-pill.active{
+      color:#fff;
+      border-color:var(--vino);
+      background:var(--vino);
+      box-shadow:0 8px 18px rgba(129,40,67,.22);
+    }
+
+    .explorer{
+      display:grid;
+      grid-template-columns:.72fr 1.28fr;
+      gap:24px;
+      padding:30px 32px 36px;
+      background:#fff;
+    }
+
+    .week-menu{
+      display:grid;
+      gap:11px;
+    }
+
+    .week-card{
+      width:100%;
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      align-items:center;
+      gap:13px;
+      padding:15px;
+      border:1px solid var(--gris-2);
+      border-radius:19px;
+      color:var(--texto);
+      background:#fff;
+      text-align:left;
+      transition:.24s ease;
+    }
+
+    .week-card:hover{
+      transform:translateX(4px);
+      border-color:var(--vino);
+      box-shadow:var(--sombra-card);
+    }
+
+    .week-card.active{
+      color:#fff;
+      border-color:var(--vino-oscuro);
+      background:linear-gradient(135deg,var(--vino-oscuro),var(--vino));
+      box-shadow:0 14px 28px rgba(79,16,38,.22);
+    }
+
+    .week-index{
+      width:50px;
+      height:50px;
+      display:grid;
+      place-items:center;
+      border-radius:16px;
+      color:var(--vino);
+      background:var(--vino-suave);
+      border:1px solid #d5a3b6;
+      font-weight:950;
+    }
+
+    .week-card.active .week-index{
+      color:var(--vino-oscuro);
+      background:#fff;
+      border-color:#fff;
+    }
+
+    .week-card strong{display:block;color:inherit;font-weight:900}
+    .week-card small{
+      display:block;
+      margin-top:4px;
+      color:var(--texto-sec);
+      font-weight:650;
+    }
+    .week-card.active small{color:#fff}
+
+    .detail{
+      position:relative;
+      overflow:hidden;
+      min-height:690px;
+      padding:30px;
+      border:1px solid var(--gris-2);
+      border-radius:26px;
+      background:
+        radial-gradient(circle at 92% 8%,rgba(199,55,101,.09),transparent 14rem),
+        linear-gradient(145deg,#fff,#f7f9fa);
+    }
+
+    .detail::after{
+      content:"";
+      position:absolute;
+      width:190px;
+      height:190px;
+      border-radius:50%;
+      right:-85px;
+      bottom:-85px;
+      background:rgba(115,149,162,.12);
+    }
+
+    .detail-top{
+      position:relative;
+      z-index:2;
+      display:flex;
+      justify-content:space-between;
+      gap:15px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+
+    .detail-icon{
+      width:68px;
+      height:68px;
+      display:grid;
+      place-items:center;
+      border-radius:21px;
+      color:#fff;
+      background:linear-gradient(145deg,var(--vino),var(--magenta));
+      box-shadow:0 12px 27px rgba(129,40,67,.23);
+      font-size:1.8rem;
+    }
+
+    .detail-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:8px 11px;
+      border-radius:999px;
+      color:#fff;
+      background:var(--azul-oscuro);
+      font-size:.76rem;
+      font-weight:900;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+    }
+
+    .detail h3{
+      position:relative;
+      z-index:2;
+      margin:20px 0 8px;
+      color:var(--vino-oscuro);
+      font-size:clamp(1.7rem,3vw,2.35rem);
+      line-height:1.12;
+      letter-spacing:-.03em;
+    }
+
+    .detail-intro{
+      position:relative;
+      z-index:2;
+      margin:0;
+      color:var(--texto-sec);
+      line-height:1.72;
+      font-size:1.02rem;
+    }
+
+    .detail-section-title{
+      position:relative;
+      z-index:2;
+      margin:24px 0 11px;
+      color:var(--azul-oscuro);
+      font-weight:900;
+    }
+
+    .activity-grid{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:11px;
+    }
+
+    .activity-card{
+      min-height:154px;
+      padding:16px;
+      border:1px solid var(--gris-2);
+      border-radius:17px;
+      background:#fff;
+      transition:.22s ease;
+    }
+
+    .activity-card:hover{
+      transform:translateY(-3px);
+      border-color:var(--azul-oscuro);
+      box-shadow:var(--sombra-card);
+    }
+
+    .activity-meta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      margin-bottom:12px;
+    }
+
+    .activity-icon{
+      width:38px;
+      height:38px;
+      display:grid;
+      place-items:center;
+      border-radius:12px;
+      color:#fff;
+      background:var(--azul-oscuro);
+      font-size:1rem;
+    }
+
+    .activity-type{
+      padding:6px 8px;
+      border-radius:999px;
+      color:var(--azul-oscuro);
+      background:var(--azul-suave);
+      font-size:.7rem;
+      font-weight:900;
+      text-transform:uppercase;
+    }
+
+    .activity-card strong{
+      display:block;
+      color:var(--vino-oscuro);
+      line-height:1.35;
+    }
+
+    .activity-card p{
+      margin:7px 0 0;
+      color:var(--texto-sec);
+      font-size:.9rem;
+      line-height:1.5;
+    }
+
+    .product-box{
+      position:relative;
+      z-index:2;
+      margin-top:21px;
+      padding:19px;
+      border-radius:19px;
+      color:#fff;
+      background:linear-gradient(135deg,var(--vino-oscuro),var(--vino),var(--magenta));
+      box-shadow:0 13px 28px rgba(79,16,38,.22);
+    }
+
+    .product-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .product-label{
+      display:inline-block;
+      padding:7px 10px;
+      border-radius:999px;
+      color:var(--vino-oscuro);
+      background:#fff;
+      font-size:.72rem;
+      font-weight:950;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+    }
+
+    .ai-level{
+      display:inline-block;
+      padding:7px 10px;
+      border-radius:999px;
+      color:#fff;
+      background:rgba(255,255,255,.16);
+      border:1px solid rgba(255,255,255,.32);
+      font-size:.72rem;
+      font-weight:900;
+    }
+
+    .product-box h4{
+      margin:14px 0 7px;
+      color:#fff;
+      font-size:1.35rem;
+    }
+
+    .product-box p{
+      margin:0;
+      color:#fff;
+      line-height:1.58;
+    }
+
+    .product-specs{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:9px;
+      margin-top:15px;
+    }
+
+    .product-spec{
+      padding:11px;
+      border-radius:13px;
+      background:rgba(255,255,255,.13);
+      border:1px solid rgba(255,255,255,.22);
+    }
+
+    .product-spec strong{
+      display:block;
+      color:#fff;
+      font-size:.78rem;
+    }
+
+    .product-spec span{
+      display:block;
+      margin-top:3px;
+      color:#fff;
+      font-size:.78rem;
+      line-height:1.35;
+    }
+
+    .detail-controls{
+      position:relative;
+      z-index:2;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:22px;
+    }
+
+    .detail-btn{
+      padding:11px 14px;
+      border:2px solid var(--vino);
+      border-radius:13px;
+      color:var(--vino);
+      background:#fff;
+      font-weight:900;
+    }
+
+    .detail-btn:hover{color:#fff;background:var(--vino)}
+
+    .sequence{
+      padding:30px 32px 36px;
+      background:#fff;
+    }
+
+    .sequence-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:14px;
+    }
+
+    .sequence-card{
+      position:relative;
+      min-height:220px;
+      padding:22px;
+      border:1px solid var(--gris-2);
+      border-radius:22px;
+      background:#fff;
+      overflow:hidden;
+      transition:.22s ease;
+    }
+
+    .sequence-card:hover{
+      transform:translateY(-4px);
+      border-color:var(--vino);
+      box-shadow:var(--sombra-card);
+    }
+
+    .sequence-number{
+      width:47px;
+      height:47px;
+      display:grid;
+      place-items:center;
+      border-radius:15px;
+      color:#fff;
+      background:var(--azul-oscuro);
+      font-weight:950;
+    }
+
+    .sequence-card strong{
+      display:block;
+      margin-top:16px;
+      color:var(--vino-oscuro);
+      font-size:1.08rem;
+    }
+
+    .sequence-card p{
+      margin:8px 0 0;
+      color:var(--texto-sec);
+      line-height:1.58;
+      font-size:.92rem;
+    }
+
+    .sequence-card::after{
+      content:"";
+      position:absolute;
+      width:120px;
+      height:120px;
+      border-radius:50%;
+      right:-55px;
+      bottom:-55px;
+      background:var(--magenta-suave);
+    }
+
+    .product-gallery{
+      padding:30px 32px 36px;
+      background:#fff;
+    }
+
+    .gallery-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+    }
+
+    .gallery-card{
+      border:1px solid var(--gris-2);
+      border-radius:22px;
+      background:#fff;
+      overflow:hidden;
+      transition:.22s ease;
+    }
+
+    .gallery-card:hover{
+      transform:translateY(-4px);
+      border-color:var(--azul-oscuro);
+      box-shadow:var(--sombra-card);
+    }
+
+    .gallery-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      padding:16px;
+      color:#fff;
+      background:linear-gradient(135deg,var(--azul-oscuro),var(--vino));
+    }
+
+    .gallery-head strong{color:#fff}
+
+    .gallery-week{
+      width:34px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      border-radius:11px;
+      color:var(--vino-oscuro);
+      background:#fff;
+      font-weight:950;
+    }
+
+    .gallery-body{
+      padding:18px;
+    }
+
+    .gallery-body h4{
+      margin:0 0 8px;
+      color:var(--vino-oscuro);
+      font-size:1.05rem;
+    }
+
+    .gallery-body p{
+      margin:0;
+      color:var(--texto-sec);
+      line-height:1.55;
+      font-size:.9rem;
+    }
+
+    .gallery-tag{
+      display:inline-block;
+      margin-top:13px;
+      padding:7px 9px;
+      border-radius:999px;
+      color:var(--azul-oscuro);
+      background:var(--azul-suave);
+      font-size:.72rem;
+      font-weight:900;
+    }
+
+    .closing{
+      margin-top:24px;
+      padding:30px;
+      border-radius:30px;
+      color:#fff;
+      background:
+        radial-gradient(circle at 85% 20%,rgba(255,255,255,.12),transparent 15rem),
+        linear-gradient(120deg,var(--vino-oscuro),var(--vino),var(--magenta));
+      box-shadow:var(--sombra);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .closing strong{
+      display:block;
+      max-width:860px;
+      color:#fff;
+      font-size:clamp(1.35rem,2.8vw,2.05rem);
+      line-height:1.24;
+    }
+
+    .closing span{
+      display:block;
+      margin-top:7px;
+      color:#fff;
+    }
+
+    .closing-mark{
+      width:105px;
+      height:105px;
+      display:grid;
+      place-items:center;
+      border-radius:31px;
+      color:#fff;
+      background:rgba(255,255,255,.14);
+      border:2px solid rgba(255,255,255,.45);
+      font-size:2rem;
+      font-weight:950;
+      transform:rotate(5deg);
+    }
+
+    body.high{
+      --texto:#101719;
+      --texto-sec:#243136;
+      --gris:#aab8be;
+      --gris-2:#7f929a;
+      --fondo:#fff;
+    }
+
+    body.high .panel,
+    body.high .detail,
+    body.high .activity-card,
+    body.high .week-card,
+    body.high .sequence-card,
+    body.high .gallery-card{
+      border-width:2px;
+    }
+
+    @media(max-width:1020px){
+      .hero{grid-template-columns:1fr}
+      .hero-visual{min-height:470px}
+      .explorer{grid-template-columns:1fr}
+      .sequence-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+
+    @media(max-width:720px){
+      .status{display:none}
+      .hero-copy{padding:48px 26px}
+      .hero-visual{min-height:420px}
+      .workflow{width:315px}
+      .workflow-node{
+        width:72px;
+        height:72px;
+        border-radius:22px;
+        font-size:1.45rem;
+      }
+      .workflow-node small{
+        width:112px;
+        font-size:.65rem;
+      }
+      .workflow-node:nth-of-type(odd) small{left:84px}
+      .workflow-node:nth-of-type(even) small{right:84px}
+      .panel-head,
+      .explorer,
+      .sequence,
+      .product-gallery{
+        padding-left:18px;
+        padding-right:18px;
+      }
+      .activity-grid{grid-template-columns:1fr}
+      .product-specs{grid-template-columns:1fr}
+      .detail-controls{flex-direction:column}
+      .sequence-grid{grid-template-columns:1fr}
+      .gallery-grid{grid-template-columns:1fr}
+      .closing{justify-content:center;text-align:center}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="frame"></div>
+
+  <main class="page">
+    <nav class="topbar" aria-label="Navegación de la sección">
+      <div class="brand">
+        <div class="brand-mark">UAF</div>
+        <div>
+          <strong>Actividades y productos</strong>
+          <small>Educación 5.0: Innovación y Tecnología</small>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <div class="status" id="statusText">Semana 1 de 6</div>
+        <button class="contrast" id="contrastBtn" type="button">Alto contraste</button>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="kicker">Educación 5.0</div>
+        <h1>Actividades y productos</h1>
+        <p class="hero-subtitle">Aprender mediante análisis, aplicación, creación y reflexión</p>
+
+        <p class="hero-text">
+          Cada semana combina actividades de exploración, pensamiento crítico, aplicación práctica
+          e interacción. Los productos permiten demostrar el aprendizaje y construir evidencias
+          progresivas vinculadas con situaciones educativas reales.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn-primary" id="exploreBtn" type="button">Explorar por semana</button>
+          <button class="btn-secondary" id="galleryBtn" type="button">Ver todos los productos</button>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="workflow" aria-label="Secuencia de aprendizaje">
+          <div class="workflow-line"></div>
+          <div class="workflow-node w1">🔎<small>Explorar y comprender</small></div>
+          <div class="workflow-node w2">💬<small>Analizar y participar</small></div>
+          <div class="workflow-node w3">🛠️<small>Aplicar y construir</small></div>
+          <div class="workflow-node w4">📦<small>Entregar evidencia</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section panel" id="explorer">
+      <div class="panel-head">
+        <div>
+          <h2>Explorador de actividades y productos</h2>
+          <p>Selecciona una semana para revisar las actividades principales, el producto esperado y el nivel autorizado de uso de inteligencia artificial.</p>
+        </div>
+
+        <div class="week-toolbar" aria-label="Selector rápido de semana">
+          <button class="week-pill active" data-week="0" type="button">1</button>
+          <button class="week-pill" data-week="1" type="button">2</button>
+          <button class="week-pill" data-week="2" type="button">3</button>
+          <button class="week-pill" data-week="3" type="button">4</button>
+          <button class="week-pill" data-week="4" type="button">5</button>
+          <button class="week-pill" data-week="5" type="button">6</button>
+        </div>
+      </div>
+
+      <div class="explorer">
+        <div class="week-menu">
+          <button class="week-card active" data-week="0" type="button">
+            <span class="week-index">1</span>
+            <span><strong>Analizar el contexto</strong><small>Fundamentos y diagnóstico inicial</small></span>
+            <span>→</span>
+          </button>
+
+          <button class="week-card" data-week="1" type="button">
+            <span class="week-index">2</span>
+            <span><strong>Comprender a las personas</strong><small>Necesidades, inclusión y barreras</small></span>
+            <span>→</span>
+          </button>
+
+          <button class="week-card" data-week="2" type="button">
+            <span class="week-index">3</span>
+            <span><strong>Diseñar la experiencia</strong><small>Objetivo, metodología y ruta</small></span>
+            <span>→</span>
+          </button>
+
+          <button class="week-card" data-week="3" type="button">
+            <span class="week-index">4</span>
+            <span><strong>Integrar tecnología</strong><small>IA y herramientas pertinentes</small></span>
+            <span>→</span>
+          </button>
+
+          <button class="week-card" data-week="4" type="button">
+            <span class="week-index">5</span>
+            <span><strong>Evaluar y validar</strong><small>Ética, rúbrica y prototipo</small></span>
+            <span>→</span>
+          </button>
+
+          <button class="week-card" data-week="5" type="button">
+            <span class="week-index">6</span>
+            <span><strong>Integrar y presentar</strong><small>Producto final y defensa</small></span>
+            <span>→</span>
+          </button>
+        </div>
+
+        <article class="detail" aria-live="polite">
+          <div class="detail-top">
+            <div class="detail-icon" id="detailIcon">🔎</div>
+            <span class="detail-badge" id="detailBadge">Semana 1</span>
+          </div>
+
+          <h3 id="detailTitle">Analizar una experiencia educativa</h3>
+
+          <p class="detail-intro" id="detailIntro">
+            El estudiante reconoce la diferencia entre digitalización, integración tecnológica,
+            innovación y transformación, y selecciona un contexto educativo para iniciar su análisis.
+          </p>
+
+          <div class="detail-section-title">Actividades principales</div>
+
+          <div class="activity-grid" id="activityGrid">
+            <article class="activity-card">
+              <div class="activity-meta">
+                <div class="activity-icon">▶</div>
+                <span class="activity-type">Exploración</span>
+              </div>
+              <strong>Video y diagnóstico inicial</strong>
+              <p>Revisión de conceptos y recuperación de ideas previas sobre tecnología e innovación.</p>
+            </article>
+
+            <article class="activity-card">
+              <div class="activity-meta">
+                <div class="activity-icon">↔</div>
+                <span class="activity-type">Comparación</span>
+              </div>
+              <strong>Línea del tiempo crítica</strong>
+              <p>Comparación de los enfoques Educación 1.0 a 5.0 mediante ejemplos y contraejemplos.</p>
+            </article>
+
+            <article class="activity-card">
+              <div class="activity-meta">
+                <div class="activity-icon">💬</div>
+                <span class="activity-type">Interacción</span>
+              </div>
+              <strong>Foro de hipótesis</strong>
+              <p>Discusión sobre qué debe cambiar para hablar de una verdadera transformación educativa.</p>
+            </article>
+
+            <article class="activity-card">
+              <div class="activity-meta">
+                <div class="activity-icon">🧠</div>
+                <span class="activity-type">Aplicación</span>
+              </div>
+              <strong>Análisis de caso</strong>
+              <p>Diagnóstico de una institución que incorpora IA sin modificar su propuesta pedagógica.</p>
+            </article>
+          </div>
+
+          <div class="product-box">
+            <div class="product-top">
+              <span class="product-label">Producto de la semana</span>
+              <span class="ai-level" id="aiLevel">IA: Nivel 2</span>
+            </div>
+
+            <h4 id="productTitle">Diagnóstico 5.0 de una experiencia educativa</h4>
+
+            <p id="productDescription">
+              Documento o presentación que describa el contexto, diferencie los niveles de integración,
+              identifique una necesidad y proponga mejoras iniciales.
+            </p>
+
+            <div class="product-specs" id="productSpecs">
+              <div class="product-spec"><strong>Formato</strong><span>Documento o presentación</span></div>
+              <div class="product-spec"><strong>Extensión</strong><span>4–6 páginas o 8–10 diapositivas</span></div>
+              <div class="product-spec"><strong>Evidencia</strong><span>Problema y diagnóstico preliminar</span></div>
+            </div>
+          </div>
+
+          <div class="detail-controls">
+            <button class="detail-btn" id="prevBtn" type="button">← Semana anterior</button>
+            <button class="detail-btn" id="nextBtn" type="button">Semana siguiente →</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section panel">
+      <div class="panel-head">
+        <div>
+          <h2>Secuencia de trabajo semanal</h2>
+          <p>Todas las semanas mantienen una estructura reconocible que facilita la autonomía y la navegación del estudiante.</p>
+        </div>
+      </div>
+
+      <div class="sequence">
+        <div class="sequence-grid">
+          <article class="sequence-card">
+            <div class="sequence-number">1</div>
+            <strong>Conecta y explora</strong>
+            <p>Activa conocimientos previos, revisa un video, una lectura o un recurso interactivo.</p>
+          </article>
+
+          <article class="sequence-card">
+            <div class="sequence-number">2</div>
+            <strong>Analiza y participa</strong>
+            <p>Resuelve preguntas, contrasta perspectivas y participa en foros o actividades colaborativas.</p>
+          </article>
+
+          <article class="sequence-card">
+            <div class="sequence-number">3</div>
+            <strong>Aplica y crea</strong>
+            <p>Utiliza los conceptos en un caso, reto, simulación, diseño o situación profesional.</p>
+          </article>
+
+          <article class="sequence-card">
+            <div class="sequence-number">4</div>
+            <strong>Demuestra y reflexiona</strong>
+            <p>Entrega una evidencia, recibe retroalimentación y registra aprendizajes y mejoras.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section panel" id="gallery">
+      <div class="panel-head">
+        <div>
+          <h2>Galería de productos semanales</h2>
+          <p>Las evidencias se desarrollan de manera progresiva y muestran el avance del aprendizaje.</p>
+        </div>
+      </div>
+
+      <div class="product-gallery">
+        <div class="gallery-grid">
+          <article class="gallery-card">
+            <div class="gallery-head"><strong>Diagnóstico 5.0</strong><span class="gallery-week">1</span></div>
+            <div class="gallery-body">
+              <h4>Análisis del contexto</h4>
+              <p>Identifica el problema, los niveles de integración y las primeras oportunidades de mejora.</p>
+              <span class="gallery-tag">Análisis crítico</span>
+            </div>
+          </article>
+
+          <article class="gallery-card">
+            <div class="gallery-head"><strong>Mapa de usuarios</strong><span class="gallery-week">2</span></div>
+            <div class="gallery-body">
+              <h4>Necesidades y barreras</h4>
+              <p>Describe a las personas destinatarias y las condiciones de inclusión y participación.</p>
+              <span class="gallery-tag">Enfoque humanista</span>
+            </div>
+          </article>
+
+          <article class="gallery-card">
+            <div class="gallery-head"><strong>Diseño pedagógico</strong><span class="gallery-week">3</span></div>
+            <div class="gallery-body">
+              <h4>Ruta de aprendizaje</h4>
+              <p>Integra objetivo, metodología, actividades, recursos y evidencias de aprendizaje.</p>
+              <span class="gallery-tag">Diseño instruccional</span>
+            </div>
+          </article>
+
+          <article class="gallery-card">
+            <div class="gallery-head"><strong>Matriz tecnológica</strong><span class="gallery-week">4</span></div>
+            <div class="gallery-body">
+              <h4>Selección justificada</h4>
+              <p>Compara herramientas y argumenta su pertinencia pedagógica, técnica y ética.</p>
+              <span class="gallery-tag">Integración tecnológica</span>
+            </div>
+          </article>
+
+          <article class="gallery-card">
+            <div class="gallery-head"><strong>Prototipo inicial</strong><span class="gallery-week">5</span></div>
+            <div class="gallery-body">
+              <h4>Validación y evaluación</h4>
+              <p>Incluye revisión ética, estrategia de evaluación auténtica y una primera versión funcional.</p>
+              <span class="gallery-tag">Evaluación aplicada</span>
+            </div>
+          </article>
+
+          <article class="gallery-card">
+            <div class="gallery-head"><strong>Solución final</strong><span class="gallery-week">6</span></div>
+            <div class="gallery-body">
+              <h4>Integración y presentación</h4>
+              <p>Consolida la experiencia educativa, el prototipo, las evidencias y la presentación ejecutiva.</p>
+              <span class="gallery-tag">Creación e impacto</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div>
+        <strong>Las actividades convierten los contenidos en experiencias; los productos convierten el aprendizaje en evidencia.</strong>
+        <span>Educación 5.0: Innovación y Tecnología.</span>
+      </div>
+
+      <div class="closing-mark">📦</div>
+    </section>
+  </main>
+
+  <script>
+    const weeks = [
+      {
+        icon:"🔎",
+        badge:"Semana 1",
+        title:"Analizar una experiencia educativa",
+        intro:"El estudiante reconoce la diferencia entre digitalización, integración tecnológica, innovación y transformación, y selecciona un contexto educativo para iniciar su análisis.",
+        activities:[
+          {icon:"▶",type:"Exploración",title:"Video y diagnóstico inicial",text:"Revisión de conceptos y recuperación de ideas previas sobre tecnología e innovación."},
+          {icon:"↔",type:"Comparación",title:"Línea del tiempo crítica",text:"Comparación de los enfoques Educación 1.0 a 5.0 mediante ejemplos y contraejemplos."},
+          {icon:"💬",type:"Interacción",title:"Foro de hipótesis",text:"Discusión sobre qué debe cambiar para hablar de una verdadera transformación educativa."},
+          {icon:"🧠",type:"Aplicación",title:"Análisis de caso",text:"Diagnóstico de una institución que incorpora IA sin modificar su propuesta pedagógica."}
+        ],
+        productTitle:"Diagnóstico 5.0 de una experiencia educativa",
+        productDescription:"Documento o presentación que describa el contexto, diferencie los niveles de integración, identifique una necesidad y proponga mejoras iniciales.",
+        specs:[
+          ["Formato","Documento o presentación"],
+          ["Extensión","4–6 páginas o 8–10 diapositivas"],
+          ["Evidencia","Problema y diagnóstico preliminar"]
+        ],
+        ai:"IA: Nivel 2"
+      },
+      {
+        icon:"🤝",
+        badge:"Semana 2",
+        title:"Comprender a las personas y sus barreras",
+        intro:"El estudiante analiza las características de los usuarios, sus necesidades, condiciones de acceso y posibles barreras para el aprendizaje y la participación.",
+        activities:[
+          {icon:"🎭",type:"Caso",title:"Historia de usuario",text:"Análisis de una experiencia tecnológicamente avanzada que excluye a parte de su población."},
+          {icon:"🧭",type:"Diagnóstico",title:"Mapa de empatía",text:"Identificación de lo que la persona piensa, siente, necesita, hace y enfrenta."},
+          {icon:"💬",type:"Foro",title:"Innovación e inclusión",text:"Debate sobre si una solución puede considerarse innovadora cuando genera nuevas barreras."},
+          {icon:"♿",type:"Revisión",title:"Lista de accesibilidad",text:"Verificación inicial de acceso, navegación, subtítulos, formatos y alternativas."}
+        ],
+        productTitle:"Perfil de usuarios y mapa de necesidades",
+        productDescription:"Documento visual que describa a las personas destinatarias, sus necesidades, motivaciones, barreras y condiciones de participación.",
+        specs:[
+          ["Formato","Mapa visual o infografía"],
+          ["Componentes","Perfil, necesidades y barreras"],
+          ["Evidencia","Criterios de inclusión y accesibilidad"]
+        ],
+        ai:"IA: Nivel 2"
+      },
+      {
+        icon:"🧩",
+        badge:"Semana 3",
+        title:"Diseñar la experiencia de aprendizaje",
+        intro:"El estudiante formula un objetivo observable, selecciona una metodología activa y organiza una ruta de aprendizaje coherente con la necesidad identificada.",
+        activities:[
+          {icon:"🎯",type:"Diseño",title:"Taller de objetivos",text:"Redacción y revisión de un objetivo mediante verbo, contenido, condición y finalidad."},
+          {icon:"🧱",type:"Construcción",title:"Matriz de alineación",text:"Relación entre objetivo, actividades, evidencia y criterios de evaluación."},
+          {icon:"🗺️",type:"Secuencia",title:"Ruta de aprendizaje",text:"Organización de los momentos conecta, explora, aplica, demuestra y reflexiona."},
+          {icon:"👥",type:"Coevaluación",title:"Revisión entre pares",text:"Retroalimentación sobre claridad, pertinencia, viabilidad y centralidad del estudiante."}
+        ],
+        productTitle:"Diseño pedagógico inicial",
+        productDescription:"Propuesta que integre problema, objetivo, metodología activa, secuencia de aprendizaje, recursos y evidencias esperadas.",
+        specs:[
+          ["Formato","Plantilla de diseño instruccional"],
+          ["Componentes","Objetivo, método y secuencia"],
+          ["Evidencia","Alineación pedagógica"]
+        ],
+        ai:"IA: Nivel 3"
+      },
+      {
+        icon:"🤖",
+        badge:"Semana 4",
+        title:"Integrar IA y tecnologías con propósito",
+        intro:"El estudiante explora, compara y selecciona herramientas digitales e inteligencia artificial con base en su valor pedagógico, accesibilidad, seguridad y viabilidad.",
+        activities:[
+          {icon:"🔬",type:"Exploración",title:"Laboratorio tecnológico",text:"Prueba guiada de herramientas de IA, colaboración, simulación y creación de contenidos."},
+          {icon:"⚖️",type:"Comparación",title:"Matriz de selección",text:"Valoración de utilidad, costo, privacidad, accesibilidad y curva de aprendizaje."},
+          {icon:"🧠",type:"Caso",title:"IA con o sin aprendizaje",text:"Análisis de una actividad que automatiza el producto pero elimina el esfuerzo cognitivo."},
+          {icon:"💬",type:"Foro",title:"Decisiones humanas",text:"Debate sobre qué responsabilidades no deben delegarse completamente a un sistema automatizado."}
+        ],
+        productTitle:"Matriz de integración tecnológica",
+        productDescription:"Comparación de herramientas y justificación de aquellas que se integrarán en la experiencia de aprendizaje.",
+        specs:[
+          ["Formato","Matriz comparativa"],
+          ["Criterios","Pedagogía, acceso, ética y costo"],
+          ["Evidencia","Justificación tecnológica"]
+        ],
+        ai:"IA: Nivel 3"
+      },
+      {
+        icon:"🛡️",
+        badge:"Semana 5",
+        title:"Evaluar, proteger y validar la propuesta",
+        intro:"El estudiante revisa riesgos éticos, privacidad, integridad académica y accesibilidad, y diseña una evaluación auténtica junto con una primera versión del prototipo.",
+        activities:[
+          {icon:"⚠️",type:"Dilema",title:"Caso ético",text:"Análisis de una decisión automatizada que puede afectar de manera injusta a un estudiante."},
+          {icon:"🔐",type:"Verificación",title:"Revisión de privacidad",text:"Identificación de datos necesarios, consentimiento, almacenamiento y uso responsable."},
+          {icon:"📏",type:"Evaluación",title:"Diseño de rúbrica",text:"Definición de criterios observables para valorar proceso, producto y argumentación."},
+          {icon:"🧪",type:"Prototipo",title:"Prueba con usuario",text:"Validación inicial de claridad, navegación, accesibilidad y utilidad de la experiencia."}
+        ],
+        productTitle:"Prototipo inicial y estrategia de evaluación",
+        productDescription:"Primera versión de la experiencia acompañada de una rúbrica, revisión ética y registro de validación.",
+        specs:[
+          ["Formato","Prototipo y documento técnico"],
+          ["Componentes","Rúbrica, ética y accesibilidad"],
+          ["Evidencia","Resultados de una prueba inicial"]
+        ],
+        ai:"IA: Nivel 4"
+      },
+      {
+        icon:"🚀",
+        badge:"Semana 6",
+        title:"Integrar, presentar y defender la solución",
+        intro:"El estudiante consolida los componentes de la experiencia, mejora el prototipo y comunica de manera profesional el problema, la solución, la evidencia y el impacto esperado.",
+        activities:[
+          {icon:"🔧",type:"Mejora",title:"Ajuste del prototipo",text:"Incorporación de observaciones y resolución de problemas identificados en la validación."},
+          {icon:"📊",type:"Impacto",title:"Diseño de indicadores",text:"Definición de evidencias para valorar aprendizaje, participación, acceso y satisfacción."},
+          {icon:"🎤",type:"Presentación",title:"Defensa ejecutiva",text:"Exposición breve de las decisiones pedagógicas, tecnológicas, humanas y éticas."},
+          {icon:"🪞",type:"Reflexión",title:"Autoevaluación final",text:"Análisis de aprendizajes, dificultades, uso de IA y oportunidades de mejora."}
+        ],
+        productTitle:"Experiencia educativa 5.0 y presentación ejecutiva",
+        productDescription:"Solución completa con prototipo final, evidencias, indicadores, presentación y reflexión del proceso.",
+        specs:[
+          ["Formato","Proyecto, prototipo y presentación"],
+          ["Componentes","Diseño, evaluación e impacto"],
+          ["Evidencia","Defensa y reflexión final"]
+        ],
+        ai:"IA: Nivel 4"
+      }
+    ];
+
+    let currentWeek = 0;
+
+    const weekCards = [...document.querySelectorAll(".week-card")];
+    const weekPills = [...document.querySelectorAll(".week-pill")];
+    const detailIcon = document.getElementById("detailIcon");
+    const detailBadge = document.getElementById("detailBadge");
+    const detailTitle = document.getElementById("detailTitle");
+    const detailIntro = document.getElementById("detailIntro");
+    const activityGrid = document.getElementById("activityGrid");
+    const productTitle = document.getElementById("productTitle");
+    const productDescription = document.getElementById("productDescription");
+    const productSpecs = document.getElementById("productSpecs");
+    const aiLevel = document.getElementById("aiLevel");
+    const statusText = document.getElementById("statusText");
+
+    function renderWeek(index){
+      currentWeek = index;
+      const data = weeks[index];
+
+      weekCards.forEach((button,i)=>button.classList.toggle("active",i===index));
+      weekPills.forEach((button,i)=>button.classList.toggle("active",i===index));
+
+      detailIcon.textContent = data.icon;
+      detailBadge.textContent = data.badge;
+      detailTitle.textContent = data.title;
+      detailIntro.textContent = data.intro;
+      productTitle.textContent = data.productTitle;
+      productDescription.textContent = data.productDescription;
+      aiLevel.textContent = data.ai;
+      statusText.textContent = `Semana ${index+1} de 6`;
+
+      activityGrid.innerHTML = data.activities.map(activity => `
+        <article class="activity-card">
+          <div class="activity-meta">
+            <div class="activity-icon">${activity.icon}</div>
+            <span class="activity-type">${activity.type}</span>
+          </div>
+          <strong>${activity.title}</strong>
+          <p>${activity.text}</p>
+        </article>
+      `).join("");
+
+      productSpecs.innerHTML = data.specs.map(spec => `
+        <div class="product-spec">
+          <strong>${spec[0]}</strong>
+          <span>${spec[1]}</span>
+        </div>
+      `).join("");
+
+      document.querySelector(".detail").animate(
+        [
+          {opacity:.45,transform:"translateX(12px)"},
+          {opacity:1,transform:"translateX(0)"}
+        ],
+        {duration:340,easing:"ease-out"}
+      );
+    }
+
+    weekCards.forEach((button,index)=>{
+      button.addEventListener("click",()=>renderWeek(index));
+    });
+
+    weekPills.forEach((button,index)=>{
+      button.addEventListener("click",()=>renderWeek(index));
+    });
+
+    document.getElementById("prevBtn").addEventListener("click",()=>{
+      renderWeek((currentWeek - 1 + weeks.length) % weeks.length);
+    });
+
+    document.getElementById("nextBtn").addEventListener("click",()=>{
+      renderWeek((currentWeek + 1) % weeks.length);
+    });
+
+    document.getElementById("exploreBtn").addEventListener("click",()=>{
+      document.getElementById("explorer").scrollIntoView({behavior:"smooth",block:"start"});
+    });
+
+    document.getElementById("galleryBtn").addEventListener("click",()=>{
+      document.getElementById("gallery").scrollIntoView({behavior:"smooth",block:"start"});
+    });
+
+    const contrastBtn = document.getElementById("contrastBtn");
+    contrastBtn.addEventListener("click",()=>{
+      const active = document.body.classList.toggle("high");
+      contrastBtn.textContent = active ? "Contraste normal" : "Alto contraste";
+      contrastBtn.setAttribute("aria-pressed",String(active));
+    });
+  </script>
+</body>
+</html>
