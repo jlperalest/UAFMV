@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#812843">
+  <title>Educación 5.0 | Nombre y enfoque</title>
+
+  <style>
+    :root{
+      --vino:#812843;
+      --vino-oscuro:#5f1831;
+      --magenta:#ca3e6a;
+      --rosa:#a73357;
+      --azul:#7496a4;
+      --azul-oscuro:#527480;
+      --azul-claro:#a9c1c9;
+      --blanco:#ffffff;
+      --fondo:#f3f6f7;
+      --gris:#e2e8eb;
+      --texto:#273036;
+      --texto-suave:#59666c;
+      --sombra:0 18px 42px rgba(42,58,67,.14);
+      --radio:28px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--texto);
+      background:
+        radial-gradient(circle at 7% 8%,rgba(116,150,164,.18),transparent 24rem),
+        radial-gradient(circle at 94% 14%,rgba(202,62,106,.12),transparent 24rem),
+        linear-gradient(180deg,#fff 0%,var(--fondo) 100%);
+      overflow-x:hidden;
+    }
+
+    button,input{font:inherit}
+    button{cursor:pointer}
+
+    .top-band,.bottom-band{
+      position:fixed;
+      left:0;
+      right:0;
+      z-index:50;
+      pointer-events:none;
+    }
+    .top-band{top:0}
+    .bottom-band{bottom:0}
+    .band{
+      height:18px;
+      background:
+        linear-gradient(120deg,
+          var(--azul) 0 24%,
+          transparent 24% 26%,
+          var(--vino) 26% 42%,
+          var(--rosa) 42% 56%,
+          var(--magenta) 56% 70%,
+          transparent 70% 73%,
+          var(--azul) 73% 100%);
+      box-shadow:0 4px 10px rgba(0,0,0,.1);
+    }
+
+    .page{
+      width:min(1180px,calc(100% - 24px));
+      margin:0 auto;
+      padding:46px 0 74px;
+    }
+
+    .nav{
+      position:sticky;
+      top:26px;
+      z-index:30;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      padding:12px 15px;
+      margin-bottom:18px;
+      border:1px solid rgba(116,150,164,.28);
+      border-radius:18px;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(16px);
+      box-shadow:0 10px 26px rgba(48,65,74,.11);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:11px;
+    }
+    .brand-mark{
+      width:43px;
+      height:43px;
+      display:grid;
+      place-items:center;
+      border-radius:13px;
+      background:linear-gradient(145deg,var(--vino),var(--magenta));
+      color:#fff;
+      font-weight:900;
+    }
+    .brand strong{display:block;color:var(--vino)}
+    .brand small{display:block;color:var(--texto-suave)}
+
+    .links{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      gap:7px;
+    }
+    .link-btn{
+      border:0;
+      border-radius:11px;
+      padding:9px 11px;
+      color:var(--texto-suave);
+      background:transparent;
+      font-weight:750;
+    }
+    .link-btn:hover,.link-btn:focus-visible{
+      color:var(--vino);
+      background:rgba(129,40,67,.08);
+      outline:none;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      align-items:center;
+      min-height:540px;
+      border:1px solid rgba(116,150,164,.24);
+      border-radius:34px;
+      background:
+        radial-gradient(circle at 86% 18%,rgba(255,255,255,.23),transparent 16rem),
+        linear-gradient(135deg,#fff 0 59%,var(--azul) 59% 100%);
+      box-shadow:var(--sombra);
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0 auto 0 0;
+      width:9px;
+      background:linear-gradient(var(--vino),var(--magenta),var(--azul));
+    }
+
+    .hero-copy{
+      position:relative;
+      z-index:3;
+      padding:54px 50px;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      padding:9px 14px;
+      border-radius:999px;
+      color:var(--vino);
+      background:rgba(129,40,67,.09);
+      border:1px solid rgba(129,40,67,.12);
+      font-weight:850;
+      font-size:.78rem;
+      letter-spacing:.055em;
+      text-transform:uppercase;
+    }
+    .eyebrow-dot{
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background:var(--magenta);
+      box-shadow:0 0 0 6px rgba(202,62,106,.13);
+    }
+
+    h1{
+      margin:22px 0 9px;
+      font-size:clamp(3rem,7vw,6.4rem);
+      line-height:.9;
+      letter-spacing:-.075em;
+      color:var(--vino);
+    }
+
+    .subtitle{
+      margin:0 0 19px;
+      color:var(--azul-oscuro);
+      font-weight:850;
+      font-size:clamp(1.1rem,2.1vw,1.62rem);
+    }
+
+    .hero-text{
+      max-width:670px;
+      margin:0;
+      color:#455158;
+      line-height:1.72;
+      font-size:1.05rem;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:11px;
+      margin-top:27px;
+    }
+
+    .primary,.secondary{
+      border-radius:14px;
+      padding:13px 16px;
+      border:0;
+      font-weight:850;
+      transition:.22s ease;
+    }
+
+    .primary{
+      color:#fff;
+      background:linear-gradient(135deg,var(--vino),var(--magenta));
+      box-shadow:0 11px 22px rgba(129,40,67,.21);
+    }
+    .secondary{
+      color:var(--vino);
+      background:#fff;
+      border:1px solid rgba(129,40,67,.17);
+    }
+    .primary:hover,.secondary:hover{transform:translateY(-2px)}
+
+    .scroll-hint{
+      display:flex;
+      align-items:center;
+      gap:9px;
+      margin-top:21px;
+      color:var(--texto-suave);
+      font-size:.88rem;
+      font-weight:700;
+    }
+    .scroll-arrow{
+      display:inline-grid;
+      place-items:center;
+      width:31px;
+      height:31px;
+      border-radius:50%;
+      color:#fff;
+      background:var(--azul);
+      animation:bounce 1.8s ease-in-out infinite;
+    }
+    @keyframes bounce{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(6px)}
+    }
+
+    .hero-art{
+      position:relative;
+      height:100%;
+      min-height:540px;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+    }
+    .hero-art::before,.hero-art::after{
+      content:"";
+      position:absolute;
+      width:380px;
+      height:84px;
+      border-radius:28px;
+      transform:rotate(-23deg);
+      background:linear-gradient(90deg,var(--vino),var(--magenta));
+    }
+    .hero-art::before{top:54px;right:-110px}
+    .hero-art::after{bottom:52px;left:-120px;opacity:.55}
+
+    .ecosystem{
+      position:relative;
+      width:min(420px,85%);
+      aspect-ratio:1;
+      z-index:2;
+      transition:transform .25s ease-out;
+      transform-style:preserve-3d;
+    }
+    .orbit{
+      position:absolute;
+      inset:9%;
+      border-radius:50%;
+      border:1px dashed rgba(255,255,255,.5);
+      animation:spin 25s linear infinite;
+    }
+    .orbit.two{
+      inset:22%;
+      animation-direction:reverse;
+      animation-duration:17s;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    .core{
+      position:absolute;
+      inset:31%;
+      display:grid;
+      place-items:center;
+      border-radius:33%;
+      background:#fff;
+      color:var(--vino);
+      box-shadow:0 24px 52px rgba(32,47,55,.25);
+      font-size:clamp(2.3rem,5vw,4.5rem);
+      font-weight:950;
+      letter-spacing:-.08em;
+      transform:rotate(7deg);
+    }
+    .core span{transform:rotate(-7deg)}
+
+    .node{
+      position:absolute;
+      width:74px;
+      height:74px;
+      display:grid;
+      place-items:center;
+      border-radius:22px;
+      background:#fff;
+      color:var(--vino);
+      box-shadow:0 14px 30px rgba(31,47,55,.2);
+      font-size:1.65rem;
+      animation:float 4.2s ease-in-out infinite;
+    }
+    .node small{
+      position:absolute;
+      top:82px;
+      left:50%;
+      transform:translateX(-50%);
+      width:max-content;
+      color:#fff;
+      font-size:.74rem;
+      font-weight:850;
+      text-shadow:0 2px 9px rgba(0,0,0,.28);
+    }
+    .node.a{top:2%;left:41%;animation-delay:-.4s}
+    .node.b{right:0;top:38%;animation-delay:-1.2s}
+    .node.c{bottom:0;left:42%;animation-delay:-2s}
+    .node.d{left:0;top:38%;animation-delay:-2.8s}
+    @keyframes float{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-9px)}
+    }
+
+    .section{
+      margin-top:24px;
+      scroll-margin-top:104px;
+    }
+
+    .panel{
+      overflow:hidden;
+      border:1px solid rgba(116,150,164,.22);
+      border-radius:30px;
+      background:rgba(255,255,255,.94);
+      box-shadow:var(--sombra);
+    }
+
+    .panel-head{
+      padding:29px 31px 21px;
+      border-bottom:1px solid var(--gris);
+    }
+    .panel-head h2{
+      margin:0;
+      color:var(--vino);
+      font-size:clamp(1.55rem,3vw,2.45rem);
+      letter-spacing:-.03em;
+    }
+    .panel-head p{
+      margin:7px 0 0;
+      max-width:70ch;
+      color:var(--texto-suave);
+      line-height:1.58;
+    }
+
+    .focus-layout{
+      display:grid;
+      grid-template-columns:.92fr 1.08fr;
+      gap:23px;
+      padding:29px 31px 35px;
+    }
+
+    .focus-menu{
+      display:grid;
+      gap:11px;
+    }
+
+    .focus-btn{
+      width:100%;
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      align-items:center;
+      gap:13px;
+      padding:16px;
+      border:1px solid var(--gris);
+      border-radius:18px;
+      background:#fff;
+      text-align:left;
+      transition:.22s ease;
+    }
+    .focus-btn:hover,.focus-btn:focus-visible{
+      transform:translateX(4px);
+      outline:none;
+      border-color:rgba(129,40,67,.24);
+      box-shadow:0 10px 21px rgba(42,58,67,.09);
+    }
+    .focus-btn.active{
+      color:#fff;
+      border-color:transparent;
+      background:linear-gradient(135deg,var(--azul-oscuro),var(--vino));
+    }
+    .focus-icon{
+      width:50px;
+      height:50px;
+      display:grid;
+      place-items:center;
+      border-radius:15px;
+      background:var(--fondo);
+      font-size:1.35rem;
+    }
+    .focus-btn.active .focus-icon{background:rgba(255,255,255,.16)}
+    .focus-btn strong{display:block}
+    .focus-btn small{display:block;margin-top:3px;opacity:.75}
+    .focus-arrow{font-weight:900}
+
+    .focus-detail{
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height:420px;
+      padding:28px;
+      border:1px solid var(--gris);
+      border-radius:24px;
+      background:
+        radial-gradient(circle at 90% 10%,rgba(202,62,106,.1),transparent 13rem),
+        linear-gradient(145deg,#fff,#f5f8f9);
+    }
+    .detail-symbol{
+      width:64px;
+      height:64px;
+      display:grid;
+      place-items:center;
+      border-radius:19px;
+      color:#fff;
+      background:linear-gradient(145deg,var(--vino),var(--magenta));
+      font-size:1.7rem;
+      box-shadow:0 11px 24px rgba(129,40,67,.2);
+    }
+    .focus-detail h3{
+      margin:19px 0 9px;
+      color:var(--vino);
+      font-size:1.9rem;
+    }
+    .focus-detail p{
+      margin:0;
+      color:#46535a;
+      line-height:1.7;
+      font-size:1.02rem;
+    }
+
+    .chips{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      margin-top:22px;
+    }
+    .chip{
+      padding:12px 13px;
+      border-radius:14px;
+      border:1px solid var(--gris);
+      background:#fff;
+      color:#47535a;
+      font-weight:750;
+    }
+
+    .quote{
+      margin-top:21px;
+      padding:16px 17px;
+      border-radius:17px;
+      color:#fff;
+      background:linear-gradient(135deg,var(--vino),var(--rosa));
+      font-weight:800;
+      line-height:1.5;
+    }
+
+    .meter-area{
+      padding:30px 31px 35px;
+    }
+
+    .meter-grid{
+      display:grid;
+      grid-template-columns:.86fr 1.14fr;
+      gap:23px;
+    }
+
+    .meter-control,.meter-result{
+      padding:25px;
+      border:1px solid var(--gris);
+      border-radius:23px;
+      background:#fff;
+    }
+    .meter-control label{
+      display:block;
+      margin-bottom:17px;
+      color:var(--vino);
+      font-size:1.1rem;
+      font-weight:850;
+    }
+    .meter-control input{
+      width:100%;
+      accent-color:var(--vino);
+    }
+    .meter-labels{
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      margin-top:10px;
+      color:var(--texto-suave);
+      font-size:.75rem;
+      font-weight:750;
+      text-align:center;
+    }
+    .meter-steps{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:8px;
+      margin-top:21px;
+    }
+    .step{
+      min-height:75px;
+      display:grid;
+      place-items:center;
+      border:1px solid var(--gris);
+      border-radius:14px;
+      background:var(--fondo);
+      color:var(--texto-suave);
+      text-align:center;
+      font-weight:750;
+      transition:.2s ease;
+    }
+    .step.active{
+      color:#fff;
+      background:linear-gradient(145deg,var(--azul-oscuro),var(--vino));
+      transform:translateY(-3px);
+    }
+
+    .meter-result{
+      min-height:248px;
+      background:
+        radial-gradient(circle at 90% 10%,rgba(202,62,106,.12),transparent 13rem),
+        linear-gradient(145deg,#fff,#f5f8f9);
+    }
+    .meter-badge{
+      display:inline-block;
+      padding:8px 11px;
+      border-radius:999px;
+      color:#fff;
+      background:var(--vino);
+      font-size:.76rem;
+      font-weight:850;
+      letter-spacing:.045em;
+      text-transform:uppercase;
+    }
+    .meter-result h3{
+      margin:17px 0 9px;
+      color:var(--vino);
+      font-size:1.95rem;
+    }
+    .meter-result p{
+      margin:0 0 12px;
+      color:#46535a;
+      line-height:1.67;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:14px;
+      padding:29px 31px 35px;
+    }
+    details{
+      min-height:225px;
+      border:1px solid var(--gris);
+      border-radius:21px;
+      background:#fff;
+      overflow:hidden;
+      box-shadow:0 10px 22px rgba(42,58,67,.08);
+    }
+    summary{
+      list-style:none;
+      padding:21px;
+      cursor:pointer;
+      min-height:225px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      background:
+        linear-gradient(150deg,#fff 0 72%,rgba(116,150,164,.15) 72%);
+    }
+    summary::-webkit-details-marker{display:none}
+    summary span:first-child{font-size:1.85rem}
+    summary strong{
+      display:block;
+      margin-top:16px;
+      color:var(--vino);
+      font-size:1.2rem;
+    }
+    summary small{
+      display:block;
+      margin-top:7px;
+      color:var(--texto-suave);
+      line-height:1.5;
+    }
+    summary em{
+      display:block;
+      margin-top:auto;
+      padding-top:18px;
+      color:var(--azul-oscuro);
+      font-style:normal;
+      font-size:.78rem;
+      font-weight:800;
+    }
+    details[open] summary{
+      min-height:auto;
+      color:#fff;
+      background:linear-gradient(145deg,var(--vino),var(--magenta));
+    }
+    details[open] summary strong,
+    details[open] summary small,
+    details[open] summary em{color:#fff}
+    .detail-body{
+      padding:18px 20px 21px;
+      color:#46535a;
+      line-height:1.6;
+      background:#fff;
+    }
+
+    .challenge{
+      display:grid;
+      grid-template-columns:.83fr 1.17fr;
+      gap:23px;
+      padding:29px 31px 35px;
+    }
+    .case{
+      padding:25px;
+      border-radius:23px;
+      color:#fff;
+      background:linear-gradient(145deg,var(--azul-oscuro),var(--vino));
+    }
+    .case h3{margin:0 0 10px;font-size:1.7rem}
+    .case p{line-height:1.65;color:rgba(255,255,255,.9)}
+
+    .options{display:grid;gap:10px}
+    .option{
+      width:100%;
+      padding:15px 16px;
+      border:1px solid var(--gris);
+      border-radius:16px;
+      background:#fff;
+      text-align:left;
+      transition:.2s ease;
+    }
+    .option:hover,.option:focus-visible{
+      transform:translateY(-2px);
+      outline:none;
+      box-shadow:0 9px 19px rgba(42,58,67,.09);
+    }
+    .option.correct{
+      border-color:#76a794;
+      background:#eef7f3;
+    }
+    .option.incorrect{
+      border-color:#c89970;
+      background:#fbf3ec;
+    }
+    .feedback{
+      min-height:80px;
+      margin-top:12px;
+      padding:15px 16px;
+      border:1px solid var(--gris);
+      border-radius:16px;
+      background:var(--fondo);
+      color:#455159;
+      line-height:1.55;
+    }
+
+    .closing{
+      margin-top:24px;
+      padding:28px;
+      border-radius:30px;
+      color:#fff;
+      background:
+        radial-gradient(circle at 84% 20%,rgba(255,255,255,.12),transparent 14rem),
+        linear-gradient(120deg,var(--vino-oscuro),var(--vino),var(--magenta));
+      box-shadow:var(--sombra);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .closing strong{
+      display:block;
+      max-width:850px;
+      font-size:clamp(1.3rem,2.8vw,2rem);
+      line-height:1.22;
+    }
+    .closing span{
+      display:block;
+      margin-top:7px;
+      color:rgba(255,255,255,.82);
+    }
+    .closing-mark{
+      width:100px;
+      height:100px;
+      display:grid;
+      place-items:center;
+      border-radius:29px;
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.25);
+      font-size:1.8rem;
+      font-weight:950;
+      transform:rotate(5deg);
+    }
+
+    @media(max-width:950px){
+      .hero{grid-template-columns:1fr}
+      .hero-art{min-height:460px}
+      .focus-layout,.meter-grid,.challenge{grid-template-columns:1fr}
+      .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+
+    @media(max-width:690px){
+      .links{display:none}
+      .hero-copy{padding:45px 25px}
+      .hero-art{min-height:365px}
+      .ecosystem{width:310px}
+      .node{width:61px;height:61px;border-radius:18px;font-size:1.3rem}
+      .node small{top:68px}
+      .focus-layout,.meter-area,.cards,.challenge{padding-left:18px;padding-right:18px}
+      .panel-head{padding-left:18px;padding-right:18px}
+      .chips{grid-template-columns:1fr}
+      .cards{grid-template-columns:1fr}
+      .meter-steps{grid-template-columns:repeat(2,1fr)}
+      .closing{justify-content:center;text-align:center}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-band"><div class="band"></div></div>
+  <div class="bottom-band"><div class="band"></div></div>
+
+  <main class="page">
+    <nav class="nav" aria-label="Navegación">
+      <div class="brand">
+        <div class="brand-mark">UAF</div>
+        <div>
+          <strong>Educación 5.0</strong>
+          <small>Nombre y enfoque de la materia</small>
+        </div>
+      </div>
+
+      <div class="links">
+        <button class="link-btn" data-go="inicio">Inicio</button>
+        <button class="link-btn" data-go="enfoque">Enfoque</button>
+        <button class="link-btn" data-go="transformometro">Transformómetro</button>
+        <button class="link-btn" data-go="principios">Principios</button>
+        <button class="link-btn" data-go="desafio">Desafío</button>
+      </div>
+    </nav>
+
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> Materia de licenciatura</div>
+        <h1>Educación 5.0</h1>
+        <p class="subtitle">Innovación, Tecnología y Aprendizaje Humanista</p>
+
+        <p class="hero-text">
+          Una experiencia formativa para comprender, analizar y diseñar propuestas educativas
+          donde la tecnología, la inteligencia artificial y las metodologías activas se integran
+          con intención pedagógica, responsabilidad ética, inclusión y sentido humano.
+        </p>
+
+        <div class="hero-actions">
+          <button class="primary" id="exploreBtn">Explorar el enfoque</button>
+          <button class="secondary" id="ideaBtn">Cambiar idea central</button>
+        </div>
+
+        <div class="scroll-hint">
+          <span class="scroll-arrow">↓</span>
+          <span>Desplázate para ver toda la experiencia interactiva.</span>
+        </div>
+      </div>
+
+      <div class="hero-art" id="heroArt">
+        <div class="ecosystem" id="ecosystem">
+          <div class="orbit"></div>
+          <div class="orbit two"></div>
+          <div class="core"><span>5.0</span></div>
+
+          <div class="node a">🤝<small>Humanismo</small></div>
+          <div class="node b">🤖<small>Tecnología</small></div>
+          <div class="node c">🎯<small>Aplicación</small></div>
+          <div class="node d">🧭<small>Pedagogía</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section panel" id="enfoque">
+      <div class="panel-head">
+        <h2>Ecosistema del enfoque 5.0</h2>
+        <p>Selecciona una dimensión para conocer cómo contribuye al enfoque integral de la materia.</p>
+      </div>
+
+      <div class="focus-layout">
+        <div class="focus-menu">
+          <button class="focus-btn active" data-focus="humanista">
+            <span class="focus-icon">🤝</span>
+            <span><strong>Humanista</strong><small>La persona al centro</small></span>
+            <span class="focus-arrow">→</span>
+          </button>
+
+          <button class="focus-btn" data-focus="pedagogico">
+            <span class="focus-icon">🧭</span>
+            <span><strong>Pedagógico</strong><small>Aprendizaje activo</small></span>
+            <span class="focus-arrow">→</span>
+          </button>
+
+          <button class="focus-btn" data-focus="tecnologico">
+            <span class="focus-icon">🤖</span>
+            <span><strong>Tecnológico</strong><small>IA con propósito</small></span>
+            <span class="focus-arrow">→</span>
+          </button>
+
+          <button class="focus-btn" data-focus="profesional">
+            <span class="focus-icon">🎯</span>
+            <span><strong>Profesional</strong><small>Aplicación real</small></span>
+            <span class="focus-arrow">→</span>
+          </button>
+        </div>
+
+        <article class="focus-detail" aria-live="polite">
+          <div>
+            <div class="detail-symbol" id="detailSymbol">🤝</div>
+            <h3 id="detailTitle">Enfoque humanista</h3>
+            <p id="detailText">
+              Coloca a la persona en el centro de las decisiones educativas. La tecnología se utiliza
+              para ampliar oportunidades, reducir barreras, fortalecer la autonomía y construir
+              experiencias más inclusivas, significativas y acompañadas.
+            </p>
+
+            <div class="chips" id="detailChips">
+              <div class="chip">Inclusión y accesibilidad</div>
+              <div class="chip">Bienestar digital</div>
+              <div class="chip">Autonomía responsable</div>
+              <div class="chip">Acompañamiento humano</div>
+            </div>
+          </div>
+
+          <div class="quote" id="detailQuote">
+            La tecnología amplía capacidades humanas; no reemplaza la sensibilidad, el juicio ni la responsabilidad.
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section panel" id="transformometro">
+      <div class="panel-head">
+        <h2>Transformómetro educativo</h2>
+        <p>Mueve el control para observar cómo evoluciona una experiencia desde la digitalización hasta la transformación 5.0.</p>
+      </div>
+
+      <div class="meter-area">
+        <div class="meter-grid">
+          <div class="meter-control">
+            <label for="levelRange">Nivel de transformación</label>
+            <input id="levelRange" type="range" min="0" max="3" value="0" step="1">
+
+            <div class="meter-labels">
+              <span>Digitalización</span>
+              <span>Integración</span>
+              <span>Innovación</span>
+              <span>Educación 5.0</span>
+            </div>
+
+            <div class="meter-steps">
+              <div class="step active">1<br>Digitaliza</div>
+              <div class="step">2<br>Integra</div>
+              <div class="step">3<br>Innova</div>
+              <div class="step">4<br>Transforma</div>
+            </div>
+          </div>
+
+          <article class="meter-result" aria-live="polite">
+            <span class="meter-badge" id="meterBadge">Nivel 1</span>
+            <h3 id="meterTitle">Digitalización</h3>
+            <p id="meterText">
+              El contenido cambia de formato, pero la experiencia de aprendizaje permanece casi igual.
+              Un ejemplo sería convertir un examen impreso en un formulario digital.
+            </p>
+            <p><strong>Pregunta crítica:</strong> <span id="meterQuestion">¿Qué cambió realmente en la manera de aprender?</span></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section panel" id="principios">
+      <div class="panel-head">
+        <h2>Principios vivos del enfoque</h2>
+        <p>Abre cada tarjeta para conocer cómo se traduce el principio en una experiencia educativa real.</p>
+      </div>
+
+      <div class="cards">
+        <details>
+          <summary>
+            <span>🧠</span>
+            <span>
+              <strong>Pensamiento crítico</strong>
+              <small>Analizar, contrastar y justificar antes de aceptar una respuesta.</small>
+            </span>
+            <em>Selecciona para descubrir la aplicación</em>
+          </summary>
+          <div class="detail-body">
+            Comparar respuestas de IA, detectar errores, verificar fuentes y defender una conclusión propia.
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span>💡</span>
+            <span>
+              <strong>Innovación pertinente</strong>
+              <small>La herramienta se elige después de identificar la necesidad.</small>
+            </span>
+            <em>Selecciona para descubrir la aplicación</em>
+          </summary>
+          <div class="detail-body">
+            Diseñar una solución que mejore el aprendizaje y demostrar su impacto mediante evidencias observables.
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span>🌐</span>
+            <span>
+              <strong>Inclusión</strong>
+              <small>La innovación debe reducir barreras y no crear nuevas exclusiones.</small>
+            </span>
+            <em>Selecciona para descubrir la aplicación</em>
+          </summary>
+          <div class="detail-body">
+            Ofrecer subtítulos, navegación clara, recursos accesibles y alternativas de bajo consumo de datos.
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span>🤖</span>
+            <span>
+              <strong>IA responsable</strong>
+              <small>La inteligencia artificial apoya el proceso, pero no sustituye la autoría.</small>
+            </span>
+            <em>Selecciona para descubrir la aplicación</em>
+          </summary>
+          <div class="detail-body">
+            Declarar su uso, proteger datos, verificar resultados y demostrar las decisiones tomadas por la persona.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section panel" id="desafio">
+      <div class="panel-head">
+        <h2>Desafío rápido: ¿esto es Educación 5.0?</h2>
+        <p>Selecciona la opción que representa una transformación educativa auténtica.</p>
+      </div>
+
+      <div class="challenge">
+        <article class="case">
+          <h3>Una universidad incorpora inteligencia artificial</h3>
+          <p>
+            La institución desea presentarse como innovadora. ¿Cuál de las siguientes decisiones
+            se aproxima realmente al enfoque de Educación 5.0?
+          </p>
+        </article>
+
+        <div>
+          <div class="options">
+            <button class="option" data-correct="false">
+              Reemplazar todas las explicaciones docentes por respuestas automáticas.
+            </button>
+
+            <button class="option" data-correct="false">
+              Convertir todos los exámenes impresos en cuestionarios digitales.
+            </button>
+
+            <button class="option" data-correct="true">
+              Diseñar retos reales donde el estudiante use IA, verifique información, argumente decisiones y reciba acompañamiento.
+            </button>
+
+            <button class="option" data-correct="false">
+              Incorporar más aplicaciones en cada materia, aunque no respondan a un objetivo.
+            </button>
+          </div>
+
+          <div class="feedback" id="feedback" aria-live="polite">
+            Selecciona una opción para recibir retroalimentación.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div>
+        <strong id="closingIdea">
+          La Educación 5.0 no consiste en utilizar más tecnología, sino en utilizarla con propósito humano.
+        </strong>
+        <span>Nombre y enfoque de la materia.</span>
+      </div>
+
+      <div class="closing-mark">5.0</div>
+    </section>
+  </main>
+
+  <script>
+    document.querySelectorAll(".link-btn").forEach(button=>{
+      button.addEventListener("click",()=>{
+        const target=document.getElementById(button.dataset.go);
+        if(target) target.scrollIntoView({behavior:"smooth",block:"start"});
+      });
+    });
+
+    document.getElementById("exploreBtn").addEventListener("click",()=>{
+      document.getElementById("enfoque").scrollIntoView({behavior:"smooth",block:"start"});
+    });
+
+    const ideas=[
+      "La Educación 5.0 no consiste en utilizar más tecnología, sino en utilizarla con propósito humano.",
+      "La innovación comienza con una necesidad educativa, no con una herramienta.",
+      "La inteligencia artificial debe ampliar el pensamiento humano, no sustituirlo.",
+      "Transformar la educación significa cambiar la experiencia de aprendizaje, no solamente el formato."
+    ];
+
+    let ideaIndex=0;
+    const closingIdea=document.getElementById("closingIdea");
+
+    document.getElementById("ideaBtn").addEventListener("click",()=>{
+      ideaIndex=(ideaIndex+1)%ideas.length;
+      closingIdea.textContent=ideas[ideaIndex];
+      document.querySelector(".closing").scrollIntoView({behavior:"smooth",block:"center"});
+    });
+
+    const heroArt=document.getElementById("heroArt");
+    const ecosystem=document.getElementById("ecosystem");
+
+    heroArt.addEventListener("pointermove",event=>{
+      const rect=heroArt.getBoundingClientRect();
+      const x=(event.clientX-rect.left)/rect.width-.5;
+      const y=(event.clientY-rect.top)/rect.height-.5;
+      ecosystem.style.transform=`rotateY(${x*8}deg) rotateX(${-y*8}deg)`;
+    });
+
+    heroArt.addEventListener("pointerleave",()=>{
+      ecosystem.style.transform="rotateY(0deg) rotateX(0deg)";
+    });
+
+    const focusData={
+      humanista:{
+        symbol:"🤝",
+        title:"Enfoque humanista",
+        text:"Coloca a la persona en el centro de las decisiones educativas. La tecnología se utiliza para ampliar oportunidades, reducir barreras, fortalecer la autonomía y construir experiencias más inclusivas, significativas y acompañadas.",
+        chips:["Inclusión y accesibilidad","Bienestar digital","Autonomía responsable","Acompañamiento humano"],
+        quote:"La tecnología amplía capacidades humanas; no reemplaza la sensibilidad, el juicio ni la responsabilidad."
+      },
+      pedagogico:{
+        symbol:"🧭",
+        title:"Enfoque pedagógico",
+        text:"Parte de objetivos claros y articula metodologías activas, actividades auténticas, retroalimentación y evaluación del proceso. La tecnología se integra únicamente cuando aporta valor al aprendizaje.",
+        chips:["Aprendizaje activo","Alineación pedagógica","Evaluación auténtica","Retroalimentación"],
+        quote:"Primero se diseña la experiencia de aprendizaje; después se selecciona la tecnología."
+      },
+      tecnologico:{
+        symbol:"🤖",
+        title:"Enfoque tecnológico",
+        text:"Integra inteligencia artificial y tecnologías emergentes con criterios de pertinencia, accesibilidad, seguridad, privacidad y ética. Las herramientas apoyan la creación, el análisis y la personalización.",
+        chips:["IA generativa","Analítica educativa","Tecnologías emergentes","Seguridad y privacidad"],
+        quote:"La innovación tecnológica solo tiene sentido cuando mejora una experiencia humana."
+      },
+      profesional:{
+        symbol:"🎯",
+        title:"Enfoque profesional",
+        text:"Relaciona el aprendizaje con situaciones académicas, sociales y laborales. El estudiante desarrolla soluciones, prototipos y evidencias que demuestran aplicación, creatividad y pensamiento crítico.",
+        chips:["Problemas reales","Proyectos aplicados","Prototipos","Evidencias profesionales"],
+        quote:"Aprender significa poder utilizar el conocimiento para resolver, crear y transformar."
+      }
+    };
+
+    const focusButtons=document.querySelectorAll(".focus-btn");
+    const detailSymbol=document.getElementById("detailSymbol");
+    const detailTitle=document.getElementById("detailTitle");
+    const detailText=document.getElementById("detailText");
+    const detailChips=document.getElementById("detailChips");
+    const detailQuote=document.getElementById("detailQuote");
+
+    focusButtons.forEach(button=>{
+      button.addEventListener("click",()=>{
+        focusButtons.forEach(item=>item.classList.remove("active"));
+        button.classList.add("active");
+
+        const data=focusData[button.dataset.focus];
+        detailSymbol.textContent=data.symbol;
+        detailTitle.textContent=data.title;
+        detailText.textContent=data.text;
+        detailQuote.textContent=data.quote;
+        detailChips.innerHTML=data.chips.map(item=>`<div class="chip">${item}</div>`).join("");
+      });
+    });
+
+    const levels=[
+      {
+        badge:"Nivel 1",
+        title:"Digitalización",
+        text:"El contenido cambia de formato, pero la experiencia de aprendizaje permanece casi igual. Un ejemplo sería convertir un examen impreso en un formulario digital.",
+        question:"¿Qué cambió realmente en la manera de aprender?"
+      },
+      {
+        badge:"Nivel 2",
+        title:"Integración tecnológica",
+        text:"Se incorpora una herramienta para apoyar una práctica. Puede mejorar el acceso o la rapidez, pero todavía no garantiza una transformación pedagógica.",
+        question:"¿La herramienta responde a un objetivo de aprendizaje?"
+      },
+      {
+        badge:"Nivel 3",
+        title:"Innovación educativa",
+        text:"La experiencia cambia de manera intencionada para atender una necesidad. Las actividades, la evaluación o el acompañamiento producen una mejora observable.",
+        question:"¿Qué evidencia demuestra que el aprendizaje mejoró?"
+      },
+      {
+        badge:"Nivel 4",
+        title:"Transformación 5.0",
+        text:"Pedagogía, tecnología, ética, inclusión y acompañamiento humano se articulan para resolver necesidades reales y ampliar las capacidades del estudiante.",
+        question:"¿Cómo transforma la experiencia sin perder su dimensión humana?"
+      }
+    ];
+
+    const range=document.getElementById("levelRange");
+    const steps=document.querySelectorAll(".step");
+    const meterBadge=document.getElementById("meterBadge");
+    const meterTitle=document.getElementById("meterTitle");
+    const meterText=document.getElementById("meterText");
+    const meterQuestion=document.getElementById("meterQuestion");
+
+    range.addEventListener("input",()=>{
+      const index=Number(range.value);
+      const data=levels[index];
+
+      meterBadge.textContent=data.badge;
+      meterTitle.textContent=data.title;
+      meterText.textContent=data.text;
+      meterQuestion.textContent=data.question;
+
+      steps.forEach((step,i)=>step.classList.toggle("active",i===index));
+    });
+
+    const optionButtons=document.querySelectorAll(".option");
+    const feedback=document.getElementById("feedback");
+
+    optionButtons.forEach(button=>{
+      button.addEventListener("click",()=>{
+        optionButtons.forEach(item=>item.classList.remove("correct","incorrect"));
+
+        if(button.dataset.correct==="true"){
+          button.classList.add("correct");
+          feedback.innerHTML="<strong>Correcto.</strong> Esta decisión integra la IA con un propósito pedagógico, conserva el razonamiento del estudiante y mantiene el acompañamiento humano.";
+        }else{
+          button.classList.add("incorrect");
+          feedback.innerHTML="<strong>Aún no.</strong> Utilizar tecnología o automatizar una tarea no demuestra por sí mismo una transformación educativa.";
+        }
+      });
+    });
+  </script>
+</body>
+</html>
