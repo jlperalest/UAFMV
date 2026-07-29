@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#812843" />
+  <title>Educación 5.0 | Evaluaciones</title>
+
+  <style>
+    :root{
+      --vino:#812843;
+      --vino-oscuro:#4f1026;
+      --vino-suave:#f5e8ed;
+      --magenta:#c73765;
+      --magenta-suave:#faeaf0;
+      --azul:#7395a2;
+      --azul-oscuro:#385d69;
+      --azul-suave:#eaf1f4;
+      --blanco:#ffffff;
+      --fondo:#f4f7f8;
+      --gris:#d6dfe3;
+      --gris-2:#b8c6cc;
+      --texto:#1e272c;
+      --texto-sec:#405058;
+      --verde:#34745f;
+      --verde-suave:#eaf4f0;
+      --naranja:#9b602f;
+      --naranja-suave:#f7eee7;
+      --sombra:0 24px 60px rgba(31,47,55,.14);
+      --sombra-card:0 14px 32px rgba(31,47,55,.10);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      overflow-x:hidden;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--texto);
+      background:
+        radial-gradient(circle at 7% 8%,rgba(115,149,162,.20),transparent 23rem),
+        radial-gradient(circle at 92% 16%,rgba(199,55,101,.11),transparent 26rem),
+        linear-gradient(180deg,#fff 0%,var(--fondo) 100%);
+    }
+
+    button{font:inherit;cursor:pointer}
+    button:focus-visible{
+      outline:4px solid rgba(199,55,101,.28);
+      outline-offset:3px;
+    }
+
+    .frame{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:100;
+      border:10px solid transparent;
+      border-image:linear-gradient(135deg,var(--azul),var(--vino),var(--magenta),var(--azul)) 1;
+      opacity:.94;
+    }
+
+    .page{
+      width:min(1220px,calc(100% - 30px));
+      margin:0 auto;
+      padding:38px 0 68px;
+    }
+
+    .topbar{
+      position:sticky;
+      top:14px;
+      z-index:50;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:12px 14px;
+      margin-bottom:18px;
+      border:1px solid rgba(56,93,105,.22);
+      border-radius:20px;
+      background:rgba(255,255,255,.95);
+      backdrop-filter:blur(18px);
+      box-shadow:0 12px 30px rgba(31,47,55,.11);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-mark{
+      width:44px;
+      height:44px;
+      display:grid;
+      place-items:center;
+      border-radius:14px;
+      color:#fff;
+      background:linear-gradient(145deg,var(--vino),var(--magenta));
+      font-weight:950;
+      box-shadow:0 10px 24px rgba(129,40,67,.24);
+    }
+
+    .brand strong{
+      display:block;
+      color:var(--vino);
+      line-height:1.1;
+    }
+
+    .brand small{
+      display:block;
+      margin-top:3px;
+      color:var(--texto-sec);
+      font-weight:650;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .status{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      color:var(--azul-oscuro);
+      background:var(--azul-suave);
+      font-size:.82rem;
+      font-weight:850;
+    }
+
+    .status::before{
+      content:"";
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background:var(--magenta);
+      box-shadow:0 0 0 5px rgba(199,55,101,.12);
+    }
+
+    .contrast{
+      border:1px solid var(--vino);
+      border-radius:12px;
+      padding:9px 11px;
+      color:var(--vino);
+      background:#fff;
+      font-weight:850;
+    }
+
+    .contrast:hover{
+      color:#fff;
+      background:var(--vino);
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:1.06fr .94fr;
+      min-height:550px;
+      align-items:center;
+      border:1px solid rgba(56,93,105,.25);
+      border-radius:34px;
+      background:#fff;
+      box-shadow:var(--sombra);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0 auto 0 0;
+      width:9px;
+      background:linear-gradient(var(--vino),var(--magenta),var(--azul));
+      z-index:4;
+    }
+
+    .hero-copy{
+      position:relative;
+      z-index:3;
+      padding:62px 54px;
+      background:#fff;
+    }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      padding:9px 14px;
+      border-radius:999px;
+      color:var(--vino-oscuro);
+      background:var(--vino-suave);
+      border:1px solid #d9a9ba;
+      font-size:.8rem;
+      font-weight:900;
+      letter-spacing:.055em;
+      text-transform:uppercase;
+    }
+
+    .kicker::before{
+      content:"";
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background:var(--magenta);
+      box-shadow:0 0 0 6px rgba(199,55,101,.13);
+    }
+
+    h1{
+      margin:22px 0 10px;
+      color:var(--vino);
+      font-size:clamp(2.8rem,6.2vw,5.9rem);
+      line-height:.92;
+      letter-spacing:-.075em;
+    }
+
+    .hero-subtitle{
+      margin:0 0 18px;
+      color:var(--azul-oscuro);
+      font-size:clamp(1.1rem,2.1vw,1.55rem);
+      font-weight:900;
+    }
+
+    .hero-text{
+      max-width:690px;
+      margin:0;
+      color:var(--texto-sec);
+      line-height:1.75;
+      font-size:1.05rem;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:11px;
+      margin-top:28px;
+    }
+
+    .btn-primary,.btn-secondary{
+      padding:13px 17px;
+      border-radius:15px;
+      font-weight:900;
+      transition:.22s ease;
+    }
+
+    .btn-primary{
+      border:0;
+      color:#fff;
+      background:linear-gradient(135deg,var(--vino),var(--magenta));
+      box-shadow:0 12px 26px rgba(129,40,67,.23);
+    }
+
+    .btn-secondary{
+      color:var(--vino);
+      background:#fff;
+      border:2px solid var(--vino);
+    }
+
+    .btn-primary:hover,.btn-secondary:hover{transform:translateY(-2px)}
+    .btn-secondary:hover{color:#fff;background:var(--vino)}
+
+    .hero-visual{
+      position:relative;
+      height:100%;
+      min-height:550px;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 60% 30%,rgba(255,255,255,.24),transparent 15rem),
+        linear-gradient(145deg,var(--azul-oscuro),var(--azul));
+    }
+
+    .hero-visual::before,
+    .hero-visual::after{
+      content:"";
+      position:absolute;
+      width:410px;
+      height:88px;
+      border-radius:30px;
+      transform:rotate(-24deg);
+      background:linear-gradient(90deg,var(--vino),var(--magenta));
+    }
+
+    .hero-visual::before{top:50px;right:-120px}
+    .hero-visual::after{bottom:48px;left:-130px;opacity:.62}
+
+    .assessment-ring{
+      position:relative;
+      width:min(430px,86%);
+      aspect-ratio:1;
+      z-index:2;
+    }
+
+    .ring-track{
+      position:absolute;
+      inset:8%;
+      border-radius:50%;
+      background:
+        conic-gradient(
+          var(--vino) 0 72deg,
+          #fff 72deg 78deg,
+          var(--magenta) 78deg 150deg,
+          #fff 150deg 156deg,
+          var(--azul-oscuro) 156deg 228deg,
+          #fff 228deg 234deg,
+          var(--azul) 234deg 360deg
+        );
+      box-shadow:0 24px 55px rgba(20,38,46,.26);
+    }
+
+    .ring-hole{
+      position:absolute;
+      inset:29%;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:#fff;
+      color:var(--vino);
+      text-align:center;
+      box-shadow:inset 0 0 0 1px var(--gris);
+    }
+
+    .ring-hole strong{
+      display:block;
+      font-size:3rem;
+      line-height:.9;
+      font-weight:950;
+    }
+
+    .ring-hole span{
+      display:block;
+      margin-top:7px;
+      color:var(--texto-sec);
+      font-size:.78rem;
+      font-weight:850;
+      text-transform:uppercase;
+    }
+
+    .assessment-label{
+      position:absolute;
+      min-width:130px;
+      padding:10px 12px;
+      border-radius:15px;
+      color:var(--vino-oscuro);
+      background:#fff;
+      box-shadow:0 13px 28px rgba(20,38,46,.23);
+      text-align:center;
+      font-weight:900;
+      animation:float 4.3s ease-in-out infinite;
+    }
+
+    .assessment-label small{
+      display:block;
+      margin-top:3px;
+      color:var(--texto-sec);
+      font-size:.72rem;
+      font-weight:750;
+    }
+
+    .a1{top:0;left:8%;animation-delay:-.4s}
+    .a2{top:0;right:8%;animation-delay:-1.2s}
+    .a3{bottom:0;left:8%;animation-delay:-2s}
+    .a4{bottom:0;right:8%;animation-delay:-2.8s}
+
+    @keyframes float{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-8px)}
+    }
+
+    .section{
+      margin-top:24px;
+      scroll-margin-top:100px;
+    }
+
+    .panel{
+      overflow:hidden;
+      border:1px solid var(--gris-2);
+      border-radius:30px;
+      background:#fff;
+      box-shadow:var(--sombra);
+    }
+
+    .panel-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+      padding:30px 32px 22px;
+      border-bottom:1px solid var(--gris);
+      background:#fff;
+    }
+
+    .panel-head h2{
+      margin:0;
+      color:var(--vino);
+      font-size:clamp(1.55rem,3vw,2.45rem);
+      letter-spacing:-.03em;
+    }
+
+    .panel-head p{
+      margin:7px 0 0;
+      max-width:74ch;
+      color:var(--texto-sec);
+      line-height:1.6;
+    }
+
+    .moment-toolbar{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .moment-pill{
+      min-width:92px;
+      height:42px;
+      padding:0 13px;
+      border:1px solid var(--gris-2);
+      border-radius:13px;
+      color:var(--texto-sec);
+      background:#fff;
+      font-weight:900;
+      transition:.22s ease;
+    }
+
+    .moment-pill:hover{border-color:var(--vino);color:var(--vino)}
+    .moment-pill.active{
+      color:#fff;
+      border-color:var(--vino);
+      background:var(--vino);
+      box-shadow:0 8px 18px rgba(129,40,67,.22);
+    }
+
+    .explorer{
+      display:grid;
+      grid-template-columns:.7fr 1.3fr;
+      gap:24px;
+      padding:30px 32px 36px;
+      background:#fff;
+    }
+
+    .moment-menu{
+      display:grid;
+      gap:11px;
+    }
+
+    .moment-card{
+      width:100%;
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      align-items:center;
+      gap:13px;
+      padding:15px;
+      border:1px solid var(--gris-2);
+      border-radius:19px;
+      color:var(--texto);
+      background:#fff;
+      text-align:left;
+      transition:.24s ease;
+    }
+
+    .moment-card:hover{
+      transform:translateX(4px);
+      border-color:var(--vino);
+      box-shadow:var(--sombra-card);
+    }
+
+    .moment-card.active{
+      color:#fff;
+      border-color:var(--vino-oscuro);
+      background:linear-gradient(135deg,var(--vino-oscuro),var(--vino));
+      box-shadow:0 14px 28px rgba(79,16,38,.22);
+    }
+
+    .moment-index{
+      width:52px;
+      height:52px;
+      display:grid;
+      place-items:center;
+      border-radius:17px;
+      color:var(--vino);
+      background:var(--vino-suave);
+      border:1px solid #d5a3b6;
+      font-weight:950;
+    }
+
+    .moment-card.active .moment-index{
+      color:var(--vino-oscuro);
+      background:#fff;
+      border-color:#fff;
+    }
+
+    .moment-card strong{display:block;color:inherit;font-weight:900}
+    .moment-card small{
+      display:block;
+      margin-top:4px;
+      color:var(--texto-sec);
+      font-weight:650;
+    }
+    .moment-card.active small{color:#fff}
+
+    .assessment-detail{
+      position:relative;
+      overflow:hidden;
+      min-height:660px;
+      padding:30px;
+      border:1px solid var(--gris-2);
+      border-radius:26px;
+      background:
+        radial-gradient(circle at 92% 8%,rgba(199,55,101,.09),transparent 14rem),
+        linear-gradient(145deg,#fff,#f7f9fa);
+    }
+
+    .assessment-detail::after{
+      content:"";
+      position:absolute;
+      width:190px;
+      height:190px;
+      border-radius:50%;
+      right:-85px;
+      bottom:-85px;
+      background:rgba(115,149,162,.12);
+    }
+
+    .detail-top{
+      position:relative;
+      z-index:2;
+      display:flex;
+      justify-content:space-between;
+      gap:15px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+
+    .detail-icon{
+      width:68px;
+      height:68px;
+      display:grid;
+      place-items:center;
+      border-radius:21px;
+      color:#fff;
+      background:linear-gradient(145deg,var(--vino),var(--magenta));
+      box-shadow:0 12px 27px rgba(129,40,67,.23);
+      font-size:1.8rem;
+    }
+
+    .weight-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:9px 13px;
+      border-radius:999px;
+      color:#fff;
+      background:var(--azul-oscuro);
+      font-size:.8rem;
+      font-weight:950;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+
+    .assessment-detail h3{
+      position:relative;
+      z-index:2;
+      margin:20px 0 8px;
+      color:var(--vino-oscuro);
+      font-size:clamp(1.7rem,3vw,2.35rem);
+      line-height:1.12;
+      letter-spacing:-.03em;
+    }
+
+    .detail-intro{
+      position:relative;
+      z-index:2;
+      margin:0;
+      color:var(--texto-sec);
+      line-height:1.72;
+      font-size:1.02rem;
+    }
+
+    .detail-section-title{
+      position:relative;
+      z-index:2;
+      margin:24px 0 11px;
+      color:var(--azul-oscuro);
+      font-weight:900;
+    }
+
+    .evidence-grid{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:11px;
+    }
+
+    .evidence-card{
+      min-height:196px;
+      padding:17px;
+      border:1px solid var(--gris-2);
+      border-radius:18px;
+      background:#fff;
+      transition:.22s ease;
+    }
+
+    .evidence-card:hover{
+      transform:translateY(-3px);
+      border-color:var(--azul-oscuro);
+      box-shadow:var(--sombra-card);
+    }
+
+    .evidence-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      margin-bottom:12px;
+    }
+
+    .evidence-icon{
+      width:42px;
+      height:42px;
+      display:grid;
+      place-items:center;
+      border-radius:13px;
+      color:#fff;
+      background:var(--azul-oscuro);
+      font-size:1.1rem;
+    }
+
+    .evidence-value{
+      padding:7px 9px;
+      border-radius:999px;
+      color:var(--vino-oscuro);
+      background:var(--vino-suave);
+      font-size:.74rem;
+      font-weight:950;
+    }
+
+    .evidence-card strong{
+      display:block;
+      color:var(--vino-oscuro);
+    }
+
+    .evidence-card p{
+      margin:7px 0 0;
+      color:var(--texto-sec);
+      line-height:1.52;
+      font-size:.9rem;
+    }
+
+    .ai-box{
+      position:relative;
+      z-index:2;
+      margin-top:18px;
+      padding:18px;
+      border-radius:18px;
+      color:#fff;
+      background:linear-gradient(135deg,var(--azul-oscuro),var(--vino));
+    }
+
+    .ai-box strong{
+      display:block;
+      margin-bottom:6px;
+      color:#fff;
+    }
+
+    .ai-box p{
+      margin:0;
+      color:#fff;
+      line-height:1.58;
+    }
+
+    .criteria-grid{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .criterion{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:12px;
+      border:1px solid var(--gris-2);
+      border-radius:14px;
+      background:#fff;
+      color:var(--texto);
+      line-height:1.46;
+      font-size:.9rem;
+      font-weight:700;
+    }
+
+    .criterion::before{
+      content:"✓";
+      width:22px;
+      height:22px;
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      border-radius:7px;
+      color:#fff;
+      background:var(--verde);
+      font-size:.72rem;
+      font-weight:950;
+    }
+
+    .detail-controls{
+      position:relative;
+      z-index:2;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:22px;
+    }
+
+    .detail-btn{
+      padding:11px 14px;
+      border:2px solid var(--vino);
+      border-radius:13px;
+      color:var(--vino);
+      background:#fff;
+      font-weight:900;
+    }
+
+    .detail-btn:hover{color:#fff;background:var(--vino)}
+
+    .distribution{
+      padding:30px 32px 36px;
+      background:#fff;
+    }
+
+    .distribution-grid{
+      display:grid;
+      grid-template-columns:.8fr 1.2fr;
+      gap:24px;
+      align-items:center;
+    }
+
+    .distribution-ring{
+      position:relative;
+      width:min(330px,82vw);
+      aspect-ratio:1;
+      margin:0 auto;
+      border-radius:50%;
+      background:
+        conic-gradient(
+          var(--vino) 0 72deg,
+          var(--magenta) 72deg 144deg,
+          var(--azul-oscuro) 144deg 216deg,
+          var(--azul) 216deg 360deg
+        );
+      box-shadow:0 20px 42px rgba(31,47,55,.17);
+    }
+
+    .distribution-ring::after{
+      content:"100%";
+      position:absolute;
+      inset:25%;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      color:var(--vino);
+      background:#fff;
+      font-size:2.2rem;
+      font-weight:950;
+      box-shadow:inset 0 0 0 1px var(--gris);
+    }
+
+    .distribution-list{
+      display:grid;
+      gap:12px;
+    }
+
+    .distribution-item{
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      align-items:center;
+      gap:12px;
+      padding:15px;
+      border:1px solid var(--gris-2);
+      border-radius:17px;
+      background:#fff;
+    }
+
+    .distribution-color{
+      width:16px;
+      height:44px;
+      border-radius:999px;
+    }
+
+    .distribution-item strong{
+      display:block;
+      color:var(--vino-oscuro);
+    }
+
+    .distribution-item small{
+      display:block;
+      margin-top:3px;
+      color:var(--texto-sec);
+    }
+
+    .distribution-item span:last-child{
+      color:var(--vino);
+      font-size:1.25rem;
+      font-weight:950;
+    }
+
+    .matrix{
+      padding:30px 32px 36px;
+      background:#fff;
+    }
+
+    .matrix-wrap{
+      overflow-x:auto;
+      border:1px solid var(--gris-2);
+      border-radius:20px;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:780px;
+      background:#fff;
+    }
+
+    th,td{
+      padding:15px;
+      border-bottom:1px solid var(--gris);
+      text-align:left;
+      vertical-align:top;
+    }
+
+    th{
+      color:#fff;
+      background:var(--vino-oscuro);
+      font-size:.86rem;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+
+    td{
+      color:var(--texto-sec);
+      line-height:1.5;
+      font-size:.9rem;
+    }
+
+    tr:last-child td{border-bottom:0}
+    td strong{color:var(--vino-oscuro)}
+
+    .rubric{
+      padding:30px 32px 36px;
+      background:#fff;
+    }
+
+    .rubric-controls{
+      display:flex;
+      flex-wrap:wrap;
+      gap:9px;
+      margin-bottom:18px;
+    }
+
+    .rubric-btn{
+      padding:10px 13px;
+      border:1px solid var(--gris-2);
+      border-radius:12px;
+      color:var(--texto-sec);
+      background:#fff;
+      font-weight:850;
+    }
+
+    .rubric-btn.active{
+      color:#fff;
+      border-color:var(--vino);
+      background:var(--vino);
+    }
+
+    .rubric-panel{
+      display:grid;
+      grid-template-columns:.75fr 1.25fr;
+      gap:22px;
+      align-items:stretch;
+    }
+
+    .rubric-level{
+      padding:24px;
+      border-radius:22px;
+      color:#fff;
+      background:linear-gradient(145deg,var(--azul-oscuro),var(--vino));
+    }
+
+    .rubric-level span{
+      display:inline-block;
+      padding:7px 10px;
+      border-radius:999px;
+      color:var(--vino-oscuro);
+      background:#fff;
+      font-size:.74rem;
+      font-weight:950;
+    }
+
+    .rubric-level h3{
+      margin:16px 0 8px;
+      color:#fff;
+      font-size:1.8rem;
+    }
+
+    .rubric-level p{
+      margin:0;
+      color:#fff;
+      line-height:1.62;
+    }
+
+    .rubric-description{
+      padding:24px;
+      border:1px solid var(--gris-2);
+      border-radius:22px;
+      background:#f8fafb;
+    }
+
+    .rubric-description strong{
+      display:block;
+      color:var(--vino-oscuro);
+      font-size:1.1rem;
+    }
+
+    .rubric-description p{
+      margin:9px 0 0;
+      color:var(--texto-sec);
+      line-height:1.65;
+    }
+
+    .closing{
+      margin-top:24px;
+      padding:30px;
+      border-radius:30px;
+      color:#fff;
+      background:
+        radial-gradient(circle at 85% 20%,rgba(255,255,255,.12),transparent 15rem),
+        linear-gradient(120deg,var(--vino-oscuro),var(--vino),var(--magenta));
+      box-shadow:var(--sombra);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .closing strong{
+      display:block;
+      max-width:860px;
+      color:#fff;
+      font-size:clamp(1.35rem,2.8vw,2.05rem);
+      line-height:1.24;
+    }
+
+    .closing span{
+      display:block;
+      margin-top:7px;
+      color:#fff;
+    }
+
+    .closing-mark{
+      width:105px;
+      height:105px;
+      display:grid;
+      place-items:center;
+      border-radius:31px;
+      color:#fff;
+      background:rgba(255,255,255,.14);
+      border:2px solid rgba(255,255,255,.45);
+      font-size:2rem;
+      font-weight:950;
+      transform:rotate(5deg);
+    }
+
+    body.high{
+      --texto:#101719;
+      --texto-sec:#243136;
+      --gris:#aab8be;
+      --gris-2:#7f929a;
+      --fondo:#fff;
+    }
+
+    body.high .panel,
+    body.high .assessment-detail,
+    body.high .evidence-card,
+    body.high .moment-card,
+    body.high .distribution-item,
+    body.high .matrix-wrap,
+    body.high .rubric-description{
+      border-width:2px;
+    }
+
+    @media(max-width:1060px){
+      .hero{grid-template-columns:1fr}
+      .hero-visual{min-height:470px}
+      .explorer{grid-template-columns:1fr}
+      .distribution-grid{grid-template-columns:1fr}
+      .rubric-panel{grid-template-columns:1fr}
+    }
+
+    @media(max-width:720px){
+      .status{display:none}
+      .hero-copy{padding:48px 26px}
+      .hero-visual{min-height:420px}
+      .assessment-ring{width:315px}
+      .assessment-label{min-width:95px;padding:8px;font-size:.75rem}
+      .evidence-grid{grid-template-columns:1fr}
+      .criteria-grid{grid-template-columns:1fr}
+      .detail-controls{flex-direction:column}
+      .panel-head,
+      .explorer,
+      .distribution,
+      .matrix,
+      .rubric{
+        padding-left:18px;
+        padding-right:18px;
+      }
+      .closing{justify-content:center;text-align:center}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="frame"></div>
+
+  <main class="page">
+    <nav class="topbar" aria-label="Navegación del módulo">
+      <div class="brand">
+        <div class="brand-mark">UAF</div>
+        <div>
+          <strong>Módulo 5</strong>
+          <small>Evaluaciones</small>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <div class="status" id="statusText">Primer ordinario · 20%</div>
+        <button class="contrast" id="contrastBtn" type="button">Alto contraste</button>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="kicker">Educación 5.0</div>
+        <h1>Evaluaciones</h1>
+        <p class="hero-subtitle">Evidencias auténticas, proceso visible y retroalimentación continua</p>
+
+        <p class="hero-text">
+          La evaluación se organiza en cuatro momentos. Los tres ordinarios permiten valorar
+          comprensión, aplicación y avance del proyecto; la evaluación final integra la solución,
+          la defensa y la reflexión sobre el aprendizaje.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn-primary" id="exploreBtn" type="button">Explorar evaluaciones</button>
+          <button class="btn-secondary" id="distributionBtn" type="button">Ver ponderaciones</button>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="assessment-ring" aria-label="Distribución de los cuatro momentos de evaluación">
+          <div class="ring-track"></div>
+          <div class="ring-hole"><div><strong>100%</strong><span>Evaluación integral</span></div></div>
+          <div class="assessment-label a1">1.er ordinario<small>20%</small></div>
+          <div class="assessment-label a2">2.º ordinario<small>20%</small></div>
+          <div class="assessment-label a3">3.er ordinario<small>20%</small></div>
+          <div class="assessment-label a4">Evaluación final<small>40%</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section panel" id="explorer">
+      <div class="panel-head">
+        <div>
+          <h2>Explorador de momentos evaluativos</h2>
+          <p>Selecciona cada momento para conocer las evidencias, ponderaciones, criterios y regulación del uso de inteligencia artificial.</p>
+        </div>
+
+        <div class="moment-toolbar" aria-label="Selector rápido de evaluación">
+          <button class="moment-pill active" data-moment="0" type="button">1.er ordinario</button>
+          <button class="moment-pill" data-moment="1" type="button">2.º ordinario</button>
+          <button class="moment-pill" data-moment="2" type="button">3.er ordinario</button>
+          <button class="moment-pill" data-moment="3" type="button">Final</button>
+        </div>
+      </div>
+
+      <div class="explorer">
+        <div class="moment-menu">
+          <button class="moment-card active" data-moment="0" type="button">
+            <span class="moment-index">1</span>
+            <span><strong>Primer ordinario</strong><small>Semanas 1 y 2 · Diagnóstico y dimensión humana</small></span>
+            <span>→</span>
+          </button>
+
+          <button class="moment-card" data-moment="1" type="button">
+            <span class="moment-index">2</span>
+            <span><strong>Segundo ordinario</strong><small>Semanas 3 y 4 · Diseño e integración tecnológica</small></span>
+            <span>→</span>
+          </button>
+
+          <button class="moment-card" data-moment="2" type="button">
+            <span class="moment-index">3</span>
+            <span><strong>Tercer ordinario</strong><small>Semana 5 · Ética, evaluación y prototipo</small></span>
+            <span>→</span>
+          </button>
+
+          <button class="moment-card" data-moment="3" type="button">
+            <span class="moment-index">4</span>
+            <span><strong>Evaluación final</strong><small>Semana 6 · Integración, defensa y reflexión</small></span>
+            <span>→</span>
+          </button>
+        </div>
+
+        <article class="assessment-detail" aria-live="polite">
+          <div class="detail-top">
+            <div class="detail-icon" id="detailIcon">🧭</div>
+            <span class="weight-badge" id="weightBadge">20% de la materia</span>
+          </div>
+
+          <h3 id="detailTitle">Primer ordinario</h3>
+
+          <p class="detail-intro" id="detailIntro">
+            Valora la comprensión de los fundamentos de Educación 5.0 y la capacidad para analizar
+            necesidades, usuarios, barreras e inclusión en una experiencia educativa.
+          </p>
+
+          <div class="detail-section-title">Evidencias evaluadas</div>
+
+          <div class="evidence-grid" id="evidenceGrid">
+            <article class="evidence-card">
+              <div class="evidence-top">
+                <div class="evidence-icon">💬</div>
+                <span class="evidence-value">5%</span>
+              </div>
+              <strong>Foro argumentativo</strong>
+              <p>Análisis sobre tecnología, transformación e inclusión, con aportación principal y réplicas.</p>
+            </article>
+
+            <article class="evidence-card">
+              <div class="evidence-top">
+                <div class="evidence-icon">🧠</div>
+                <span class="evidence-value">10%</span>
+              </div>
+              <strong>Caso aplicativo</strong>
+              <p>Diagnóstico de una experiencia educativa y propuesta inicial de mejora.</p>
+            </article>
+
+            <article class="evidence-card">
+              <div class="evidence-top">
+                <div class="evidence-icon">📝</div>
+                <span class="evidence-value">5%</span>
+              </div>
+              <strong>Evaluación individual</strong>
+              <p>Cuestionario de comprensión, diferenciación conceptual y aplicación.</p>
+            </article>
+          </div>
+
+          <div class="detail-section-title">Criterios principales</div>
+
+          <div class="criteria-grid" id="criteriaGrid">
+            <div class="criterion">Diferenciación entre digitalización, innovación y transformación.</div>
+            <div class="criterion">Claridad del contexto, los usuarios y la necesidad educativa.</div>
+            <div class="criterion">Pensamiento crítico, argumentación y uso de fuentes.</div>
+            <div class="criterion">Identificación de barreras, inclusión y acompañamiento humano.</div>
+          </div>
+
+          <div class="ai-box">
+            <strong>Regulación de inteligencia artificial</strong>
+            <p id="aiText">
+              Foro y evaluación individual: uso no permitido. Caso aplicativo: uso limitado para generar ideas,
+              organizar información o mejorar redacción; debe declararse y verificarse.
+            </p>
+          </div>
+
+          <div class="detail-controls">
+            <button class="detail-btn" id="prevBtn" type="button">← Momento anterior</button>
+            <button class="detail-btn" id="nextBtn" type="button">Momento siguiente →</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section panel" id="distribution">
+      <div class="panel-head">
+        <div>
+          <h2>Distribución general</h2>
+          <p>La ponderación privilegia el proyecto integrador sin dejar de valorar el avance progresivo.</p>
+        </div>
+      </div>
+
+      <div class="distribution">
+        <div class="distribution-grid">
+          <div class="distribution-ring" aria-label="Primer ordinario 20%, segundo ordinario 20%, tercer ordinario 20%, evaluación final 40%"></div>
+
+          <div class="distribution-list">
+            <div class="distribution-item">
+              <span class="distribution-color" style="background:var(--vino)"></span>
+              <span><strong>Primer ordinario</strong><small>Fundamentos, análisis del contexto, usuarios e inclusión.</small></span>
+              <span>20%</span>
+            </div>
+
+            <div class="distribution-item">
+              <span class="distribution-color" style="background:var(--magenta)"></span>
+              <span><strong>Segundo ordinario</strong><small>Diseño pedagógico, metodologías, IA y selección tecnológica.</small></span>
+              <span>20%</span>
+            </div>
+
+            <div class="distribution-item">
+              <span class="distribution-color" style="background:var(--azul-oscuro)"></span>
+              <span><strong>Tercer ordinario</strong><small>Ética, privacidad, evaluación auténtica y prototipo inicial.</small></span>
+              <span>20%</span>
+            </div>
+
+            <div class="distribution-item">
+              <span class="distribution-color" style="background:var(--azul)"></span>
+              <span><strong>Evaluación final</strong><small>Proyecto integrador, defensa y reflexión del proceso.</small></span>
+              <span>40%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section panel">
+      <div class="panel-head">
+        <div>
+          <h2>Matriz de alineación evaluativa</h2>
+          <p>Cada evidencia debe demostrar una capacidad concreta y contar con un instrumento transparente.</p>
+        </div>
+      </div>
+
+      <div class="matrix">
+        <div class="matrix-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Momento</th>
+                <th>Capacidad evaluada</th>
+                <th>Evidencia</th>
+                <th>Instrumento</th>
+                <th>IA</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Primer ordinario</strong></td>
+                <td>Comprender y diagnosticar</td>
+                <td>Foro, caso aplicativo y evaluación</td>
+                <td>Rúbrica analítica y cuestionario</td>
+                <td>No permitida o limitada según la actividad</td>
+              </tr>
+              <tr>
+                <td><strong>Segundo ordinario</strong></td>
+                <td>Diseñar e integrar</td>
+                <td>Foro, diseño pedagógico y evaluación</td>
+                <td>Rúbrica de alineación y cuestionario</td>
+                <td>Uso documentado en el diseño</td>
+              </tr>
+              <tr>
+                <td><strong>Tercer ordinario</strong></td>
+                <td>Evaluar, proteger y prototipar</td>
+                <td>Foro ético, prototipo y evaluación</td>
+                <td>Rúbrica, lista de cotejo y cuestionario</td>
+                <td>Uso integrado y documentado en el prototipo</td>
+              </tr>
+              <tr>
+                <td><strong>Evaluación final</strong></td>
+                <td>Integrar, justificar y defender</td>
+                <td>Proyecto, defensa y reflexión</td>
+                <td>Rúbrica integral, guía de defensa y autoevaluación</td>
+                <td>Uso permitido, transparente y verificable</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section panel">
+      <div class="panel-head">
+        <div>
+          <h2>Escala de desempeño</h2>
+          <p>Selecciona un nivel para conocer la expectativa general aplicable a rúbricas y productos.</p>
+        </div>
+      </div>
+
+      <div class="rubric">
+        <div class="rubric-controls">
+          <button class="rubric-btn active" data-level="excellent" type="button">Excelente</button>
+          <button class="rubric-btn" data-level="satisfactory" type="button">Satisfactorio</button>
+          <button class="rubric-btn" data-level="developing" type="button">En desarrollo</button>
+          <button class="rubric-btn" data-level="insufficient" type="button">Insuficiente</button>
+        </div>
+
+        <div class="rubric-panel" aria-live="polite">
+          <article class="rubric-level">
+            <span id="rubricRange">90–100%</span>
+            <h3 id="rubricTitle">Excelente</h3>
+            <p id="rubricSummary">El desempeño supera los criterios esperados y demuestra integración, autonomía y profundidad.</p>
+          </article>
+
+          <article class="rubric-description">
+            <strong id="rubricCriterion">Descripción del desempeño</strong>
+            <p id="rubricDescription">
+              Analiza con profundidad, aplica los conceptos a un contexto real, justifica decisiones pedagógicas,
+              tecnológicas y éticas, utiliza evidencias confiables y presenta un producto viable, claro y original.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div>
+        <strong>Evaluar en Educación 5.0 significa observar lo que el estudiante comprende, aplica, crea, justifica y mejora.</strong>
+        <span>Módulo independiente: Evaluaciones.</span>
+      </div>
+
+      <div class="closing-mark">✓</div>
+    </section>
+  </main>
+
+  <script>
+    const moments = [
+      {
+        icon:"🧭",
+        title:"Primer ordinario",
+        weight:"20% de la materia",
+        intro:"Valora la comprensión de los fundamentos de Educación 5.0 y la capacidad para analizar necesidades, usuarios, barreras e inclusión en una experiencia educativa.",
+        evidences:[
+          {icon:"💬",value:"5%",title:"Foro argumentativo",text:"Análisis sobre tecnología, transformación e inclusión, con aportación principal y réplicas."},
+          {icon:"🧠",value:"10%",title:"Caso aplicativo",text:"Diagnóstico de una experiencia educativa y propuesta inicial de mejora."},
+          {icon:"📝",value:"5%",title:"Evaluación individual",text:"Cuestionario de comprensión, diferenciación conceptual y aplicación."}
+        ],
+        criteria:[
+          "Diferenciación entre digitalización, innovación y transformación.",
+          "Claridad del contexto, los usuarios y la necesidad educativa.",
+          "Pensamiento crítico, argumentación y uso de fuentes.",
+          "Identificación de barreras, inclusión y acompañamiento humano."
+        ],
+        ai:"Foro y evaluación individual: uso no permitido. Caso aplicativo: uso limitado para generar ideas, organizar información o mejorar redacción; debe declararse y verificarse."
+      },
+      {
+        icon:"🧩",
+        title:"Segundo ordinario",
+        weight:"20% de la materia",
+        intro:"Valora la capacidad para diseñar una experiencia alineada e integrar metodologías activas, recursos digitales e inteligencia artificial con propósito pedagógico.",
+        evidences:[
+          {icon:"💬",value:"5%",title:"Foro de análisis",text:"Discusión sobre decisiones humanas y límites de la automatización educativa."},
+          {icon:"🗺️",value:"10%",title:"Diseño pedagógico aplicado",text:"Objetivo, metodología, secuencia, recursos, herramientas y evidencias."},
+          {icon:"📝",value:"5%",title:"Evaluación individual",text:"Cuestionario sobre alineación, metodologías, IA y selección tecnológica."}
+        ],
+        criteria:[
+          "Coherencia entre objetivo, actividad, producto y evaluación.",
+          "Pertinencia de la metodología activa seleccionada.",
+          "Justificación pedagógica de las herramientas y la IA.",
+          "Accesibilidad, viabilidad, privacidad y valor educativo."
+        ],
+        ai:"Foro y evaluación individual: uso no permitido. Diseño pedagógico: uso permitido y documentado para comparar metodologías, generar alternativas, mejorar redacción y analizar herramientas."
+      },
+      {
+        icon:"🛡️",
+        title:"Tercer ordinario",
+        weight:"20% de la materia",
+        intro:"Valora la capacidad para identificar riesgos, proteger a los usuarios, diseñar una evaluación auténtica y construir una primera versión del prototipo.",
+        evidences:[
+          {icon:"⚖️",value:"5%",title:"Foro ético",text:"Análisis de un dilema sobre privacidad, sesgos, autoría o decisiones automatizadas."},
+          {icon:"🧪",value:"10%",title:"Prototipo inicial",text:"Primera versión de la experiencia con estrategia de evaluación y revisión ética."},
+          {icon:"📝",value:"5%",title:"Evaluación individual",text:"Cuestionario sobre ética, privacidad, integridad y evaluación auténtica."}
+        ],
+        criteria:[
+          "Identificación y tratamiento de riesgos éticos y de privacidad.",
+          "Calidad de la evaluación auténtica y sus evidencias.",
+          "Accesibilidad, claridad y funcionalidad del prototipo.",
+          "Uso responsable, transparente y verificable de IA."
+        ],
+        ai:"Foro y evaluación individual: uso no permitido. Prototipo: uso integrado y documentado; se deben entregar herramienta, prompts, modificaciones, fuentes de verificación y reflexión."
+      },
+      {
+        icon:"🚀",
+        title:"Evaluación final",
+        weight:"40% de la materia",
+        intro:"Valora la integración completa de la propuesta, la calidad del prototipo, la capacidad de defender decisiones y la reflexión crítica sobre el proceso de aprendizaje.",
+        evidences:[
+          {icon:"📦",value:"30%",title:"Proyecto integrador",text:"Experiencia educativa completa, prototipo, indicadores, viabilidad y referencias."},
+          {icon:"🎤",value:"5%",title:"Presentación y defensa",text:"Exposición ejecutiva y respuesta argumentada a preguntas académicas y profesionales."},
+          {icon:"🪞",value:"5%",title:"Reflexión y autoevaluación",text:"Análisis de aprendizajes, dificultades, decisiones, uso de IA y oportunidades de mejora."}
+        ],
+        criteria:[
+          "Integración de pedagogía, tecnología, ética e inclusión.",
+          "Coherencia, originalidad, viabilidad e impacto esperado.",
+          "Calidad del prototipo, evidencias e indicadores.",
+          "Argumentación, defensa profesional y reflexión crítica."
+        ],
+        ai:"Uso permitido e integrado, con documentación completa del proceso. El estudiante conserva la autoría, verifica la información y debe poder explicar y defender cada decisión."
+      }
+    ];
+
+    let currentMoment = 0;
+
+    const momentCards = [...document.querySelectorAll(".moment-card")];
+    const momentPills = [...document.querySelectorAll(".moment-pill")];
+    const detailIcon = document.getElementById("detailIcon");
+    const weightBadge = document.getElementById("weightBadge");
+    const detailTitle = document.getElementById("detailTitle");
+    const detailIntro = document.getElementById("detailIntro");
+    const evidenceGrid = document.getElementById("evidenceGrid");
+    const criteriaGrid = document.getElementById("criteriaGrid");
+    const aiText = document.getElementById("aiText");
+    const statusText = document.getElementById("statusText");
+
+    function renderMoment(index){
+      currentMoment = index;
+      const data = moments[index];
+
+      momentCards.forEach((button,i)=>button.classList.toggle("active",i===index));
+      momentPills.forEach((button,i)=>button.classList.toggle("active",i===index));
+
+      detailIcon.textContent = data.icon;
+      weightBadge.textContent = data.weight;
+      detailTitle.textContent = data.title;
+      detailIntro.textContent = data.intro;
+      aiText.textContent = data.ai;
+      statusText.textContent = `${data.title} · ${data.weight.replace(" de la materia","")}`;
+
+      evidenceGrid.innerHTML = data.evidences.map(item => `
+        <article class="evidence-card">
+          <div class="evidence-top">
+            <div class="evidence-icon">${item.icon}</div>
+            <span class="evidence-value">${item.value}</span>
+          </div>
+          <strong>${item.title}</strong>
+          <p>${item.text}</p>
+        </article>
+      `).join("");
+
+      criteriaGrid.innerHTML = data.criteria.map(item => `
+        <div class="criterion">${item}</div>
+      `).join("");
+
+      document.querySelector(".assessment-detail").animate(
+        [
+          {opacity:.45,transform:"translateX(12px)"},
+          {opacity:1,transform:"translateX(0)"}
+        ],
+        {duration:340,easing:"ease-out"}
+      );
+    }
+
+    momentCards.forEach((button,index)=>{
+      button.addEventListener("click",()=>renderMoment(index));
+    });
+
+    momentPills.forEach((button,index)=>{
+      button.addEventListener("click",()=>renderMoment(index));
+    });
+
+    document.getElementById("prevBtn").addEventListener("click",()=>{
+      renderMoment((currentMoment - 1 + moments.length) % moments.length);
+    });
+
+    document.getElementById("nextBtn").addEventListener("click",()=>{
+      renderMoment((currentMoment + 1) % moments.length);
+    });
+
+    document.getElementById("exploreBtn").addEventListener("click",()=>{
+      document.getElementById("explorer").scrollIntoView({behavior:"smooth",block:"start"});
+    });
+
+    document.getElementById("distributionBtn").addEventListener("click",()=>{
+      document.getElementById("distribution").scrollIntoView({behavior:"smooth",block:"start"});
+    });
+
+    const rubricData = {
+      excellent:{
+        range:"90–100%",
+        title:"Excelente",
+        summary:"El desempeño supera los criterios esperados y demuestra integración, autonomía y profundidad.",
+        description:"Analiza con profundidad, aplica los conceptos a un contexto real, justifica decisiones pedagógicas, tecnológicas y éticas, utiliza evidencias confiables y presenta un producto viable, claro y original."
+      },
+      satisfactory:{
+        range:"80–89%",
+        title:"Satisfactorio",
+        summary:"El desempeño cumple los criterios principales y presenta una aplicación coherente.",
+        description:"Comprende y aplica los conceptos, presenta una propuesta pertinente y organizada, justifica la mayoría de sus decisiones y atiende los criterios fundamentales, aunque algunos elementos requieren mayor profundidad o precisión."
+      },
+      developing:{
+        range:"70–79%",
+        title:"En desarrollo",
+        summary:"El desempeño muestra avances, pero todavía presenta inconsistencias o elementos incompletos.",
+        description:"Reconoce los conceptos principales, pero la aplicación es parcial. Existen debilidades en la alineación, la argumentación, la viabilidad, la evidencia o la integración ética y tecnológica."
+      },
+      insufficient:{
+        range:"Menos de 70%",
+        title:"Insuficiente",
+        summary:"El desempeño no demuestra todavía los aprendizajes esenciales ni una aplicación verificable.",
+        description:"La propuesta es principalmente descriptiva, no responde con claridad al objetivo, carece de evidencia suficiente, presenta errores conceptuales o no cumple los criterios mínimos de autoría, ética, aplicación y entrega."
+      }
+    };
+
+    const rubricButtons = [...document.querySelectorAll(".rubric-btn")];
+    const rubricRange = document.getElementById("rubricRange");
+    const rubricTitle = document.getElementById("rubricTitle");
+    const rubricSummary = document.getElementById("rubricSummary");
+    const rubricDescription = document.getElementById("rubricDescription");
+
+    rubricButtons.forEach(button=>{
+      button.addEventListener("click",()=>{
+        rubricButtons.forEach(item=>item.classList.remove("active"));
+        button.classList.add("active");
+
+        const data = rubricData[button.dataset.level];
+        rubricRange.textContent = data.range;
+        rubricTitle.textContent = data.title;
+        rubricSummary.textContent = data.summary;
+        rubricDescription.textContent = data.description;
+      });
+    });
+
+    const contrastBtn = document.getElementById("contrastBtn");
+    contrastBtn.addEventListener("click",()=>{
+      const active = document.body.classList.toggle("high");
+      contrastBtn.textContent = active ? "Contraste normal" : "Alto contraste";
+      contrastBtn.setAttribute("aria-pressed",String(active));
+    });
+  </script>
+</body>
+</html>
