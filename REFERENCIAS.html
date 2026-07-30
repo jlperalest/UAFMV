@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#812843">
+<title>Educación 5.0 | Referencias</title>
+<style>
+:root{
+  --vino:#812843;--vino2:#4f1026;--magenta:#c73765;--azul:#7395a2;
+  --azul2:#385d69;--azul-suave:#eaf1f4;--vino-suave:#f5e8ed;
+  --fondo:#f4f7f8;--gris:#d6dfe3;--gris2:#b8c6cc;--texto:#1e272c;
+  --texto2:#405058;--verde:#34745f;--oro:#8a6325;--sombra:0 24px 60px rgba(31,47,55,.14);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;overflow-x:hidden;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--texto);
+  background:
+    radial-gradient(circle at 7% 8%,rgba(115,149,162,.20),transparent 23rem),
+    radial-gradient(circle at 92% 16%,rgba(199,55,101,.11),transparent 26rem),
+    linear-gradient(180deg,#fff,var(--fondo));
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{
+  outline:4px solid rgba(199,55,101,.28);outline-offset:3px
+}
+.frame{
+  position:fixed;inset:0;pointer-events:none;z-index:100;border:10px solid transparent;
+  border-image:linear-gradient(135deg,var(--azul),var(--vino),var(--magenta),var(--azul)) 1;
+}
+.page{width:min(1240px,calc(100% - 30px));margin:auto;padding:38px 0 68px}
+.topbar{
+  position:sticky;top:14px;z-index:50;display:flex;justify-content:space-between;
+  align-items:center;gap:16px;padding:12px 14px;margin-bottom:18px;
+  border:1px solid rgba(56,93,105,.22);border-radius:20px;background:rgba(255,255,255,.95);
+  backdrop-filter:blur(18px);box-shadow:0 12px 30px rgba(31,47,55,.11)
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{
+  width:44px;height:44px;display:grid;place-items:center;border-radius:14px;color:#fff;
+  background:linear-gradient(145deg,var(--vino),var(--magenta));font-weight:950
+}
+.brand strong{display:block;color:var(--vino)}
+.brand small{display:block;margin-top:3px;color:var(--texto2);font-weight:650}
+.top-actions{display:flex;align-items:center;gap:10px}
+.counter{
+  padding:8px 11px;border-radius:999px;color:var(--azul2);background:var(--azul-suave);
+  font-size:.82rem;font-weight:850
+}
+.contrast{
+  border:1px solid var(--vino);border-radius:12px;padding:9px 11px;
+  color:var(--vino);background:#fff;font-weight:850
+}
+.contrast:hover{color:#fff;background:var(--vino)}
+.hero{
+  position:relative;overflow:hidden;display:grid;grid-template-columns:1.05fr .95fr;
+  min-height:560px;align-items:center;border:1px solid rgba(56,93,105,.25);
+  border-radius:34px;background:#fff;box-shadow:var(--sombra)
+}
+.hero:before{
+  content:"";position:absolute;inset:0 auto 0 0;width:9px;
+  background:linear-gradient(var(--vino),var(--magenta),var(--azul));z-index:4
+}
+.hero-copy{position:relative;z-index:3;padding:62px 54px}
+.kicker{
+  display:inline-flex;align-items:center;gap:9px;padding:9px 14px;border-radius:999px;
+  color:var(--vino2);background:var(--vino-suave);border:1px solid #d9a9ba;
+  font-size:.8rem;font-weight:900;letter-spacing:.055em;text-transform:uppercase
+}
+.kicker:before{
+  content:"";width:9px;height:9px;border-radius:50%;background:var(--magenta);
+  box-shadow:0 0 0 6px rgba(199,55,101,.13)
+}
+h1{
+  margin:22px 0 10px;color:var(--vino);font-size:clamp(3.1rem,6vw,6rem);
+  line-height:.92;letter-spacing:-.075em
+}
+.hero-sub{margin:0 0 18px;color:var(--azul2);font-size:clamp(1.1rem,2.1vw,1.55rem);font-weight:900}
+.hero-text{margin:0;max-width:700px;color:var(--texto2);line-height:1.75;font-size:1.05rem}
+.hero-actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:28px}
+.primary,.secondary{padding:13px 17px;border-radius:15px;font-weight:900}
+.primary{border:0;color:#fff;background:linear-gradient(135deg,var(--vino),var(--magenta))}
+.secondary{color:var(--vino);background:#fff;border:2px solid var(--vino)}
+.secondary:hover{color:#fff;background:var(--vino)}
+.hero-visual{
+  position:relative;height:100%;min-height:560px;display:grid;place-items:center;overflow:hidden;
+  background:radial-gradient(circle at 60% 30%,rgba(255,255,255,.24),transparent 15rem),
+  linear-gradient(145deg,var(--azul2),var(--azul))
+}
+.library{
+  position:relative;width:min(455px,88%);height:410px;display:grid;place-items:center
+}
+.book{
+  position:absolute;width:220px;height:285px;border-radius:20px 12px 12px 20px;
+  background:linear-gradient(145deg,#fff,#eef3f5);box-shadow:0 22px 45px rgba(20,38,46,.27);
+  border-left:18px solid var(--vino);transform-origin:center bottom
+}
+.book.b1{transform:rotate(-12deg) translateX(-85px)}
+.book.b2{transform:rotate(8deg) translateX(85px);border-left-color:var(--magenta)}
+.book.b3{transform:translateY(-25px);border-left-color:var(--azul2);z-index:3}
+.book-content{padding:34px 22px;text-align:center}
+.book-icon{font-size:2.5rem}
+.book-content strong{display:block;margin-top:18px;color:var(--vino2);font-size:1.3rem}
+.book-content small{display:block;margin-top:8px;color:var(--texto2);line-height:1.45;font-weight:700}
+.float-tag{
+  position:absolute;padding:10px 13px;border-radius:14px;color:var(--vino2);background:#fff;
+  box-shadow:0 13px 28px rgba(20,38,46,.23);font-weight:900;animation:float 4.5s ease-in-out infinite
+}
+.f1{top:4%;left:1%}.f2{top:8%;right:0;animation-delay:-1.2s}
+.f3{bottom:3%;left:4%;animation-delay:-2.4s}.f4{bottom:5%;right:2%;animation-delay:-3.1s}
+@keyframes float{50%{transform:translateY(-8px)}}
+.section{margin-top:24px;scroll-margin-top:100px}
+.panel{
+  overflow:hidden;border:1px solid var(--gris2);border-radius:30px;background:#fff;
+  box-shadow:var(--sombra)
+}
+.panel-head{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap;
+  padding:30px 32px 22px;border-bottom:1px solid var(--gris)
+}
+.panel-head h2{margin:0;color:var(--vino);font-size:clamp(1.55rem,3vw,2.45rem)}
+.panel-head p{margin:7px 0 0;max-width:78ch;color:var(--texto2);line-height:1.6}
+.guide{padding:30px 32px 36px}
+.guide-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.guide-card{
+  min-height:210px;padding:21px;border:1px solid var(--gris2);border-radius:21px;background:#fff
+}
+.guide-card:hover{transform:translateY(-4px);border-color:var(--vino);box-shadow:0 14px 30px rgba(31,47,55,.1)}
+.guide-icon{
+  width:48px;height:48px;display:grid;place-items:center;border-radius:15px;color:#fff;
+  background:var(--azul2);font-size:1.2rem
+}
+.guide-card strong{display:block;margin-top:15px;color:var(--vino2)}
+.guide-card p{margin:8px 0 0;color:var(--texto2);line-height:1.58;font-size:.91rem}
+.library-panel{padding:30px 32px 36px}
+.filters{
+  display:grid;grid-template-columns:1.5fr repeat(3,minmax(155px,.7fr));gap:10px;
+  margin-bottom:20px
+}
+.search,.select{
+  width:100%;height:48px;border:1px solid var(--gris2);border-radius:14px;
+  padding:0 14px;color:var(--texto);background:#fff;font-weight:700
+}
+.search::placeholder{color:#6b7b82}
+.active-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.filter-chip{
+  padding:7px 10px;border-radius:999px;background:var(--vino-suave);color:var(--vino2);
+  border:1px solid #d9a9ba;font-size:.76rem;font-weight:900
+}
+.resource-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.resource-card{
+  min-height:430px;display:flex;flex-direction:column;border:1px solid var(--gris2);
+  border-radius:23px;background:#fff;overflow:hidden;transition:.23s ease
+}
+.resource-card:hover{transform:translateY(-4px);border-color:var(--vino);box-shadow:0 16px 34px rgba(31,47,55,.12)}
+.resource-head{
+  min-height:116px;padding:18px;color:#fff;background:linear-gradient(135deg,var(--azul2),var(--vino))
+}
+.head-row{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.type-badge{
+  display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;
+  background:#fff;color:var(--vino2);font-size:.72rem;font-weight:950;text-transform:uppercase
+}
+.priority{
+  padding:7px 9px;border-radius:999px;background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.28);font-size:.7rem;font-weight:900
+}
+.resource-head h3{margin:14px 0 5px;color:#fff;font-size:1.16rem;line-height:1.32}
+.resource-head p{margin:0;color:#fff;font-size:.82rem;font-weight:700;line-height:1.4}
+.resource-body{display:flex;flex-direction:column;flex:1;padding:18px}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:13px}
+.tag{
+  padding:6px 8px;border-radius:999px;color:var(--azul2);background:var(--azul-suave);
+  font-size:.7rem;font-weight:900
+}
+.resource-use{margin:0;color:var(--texto2);line-height:1.58;font-size:.9rem}
+.apa{
+  margin-top:15px;padding:13px;border:1px solid var(--gris);border-radius:14px;
+  background:#f8fafb;color:var(--texto2);font-size:.78rem;line-height:1.52
+}
+.card-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:auto;padding-top:16px}
+.open-link,.copy-btn{
+  min-height:42px;display:grid;place-items:center;border-radius:12px;text-decoration:none;
+  font-size:.8rem;font-weight:900
+}
+.open-link{color:#fff;background:var(--vino)}
+.copy-btn{color:var(--vino);background:#fff;border:1px solid var(--vino)}
+.copy-btn.copied{color:#fff;background:var(--verde);border-color:var(--verde)}
+.empty{
+  display:none;padding:45px;border:1px dashed var(--gris2);border-radius:20px;text-align:center;
+  color:var(--texto2);font-weight:800
+}
+.summary{padding:30px 32px 36px}
+.summary-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:13px}
+.summary-card{
+  padding:20px;border:1px solid var(--gris2);border-radius:20px;background:#fff;text-align:center
+}
+.summary-card span{display:block;font-size:2rem}
+.summary-card strong{display:block;margin-top:10px;color:var(--vino2);font-size:1.55rem}
+.summary-card small{display:block;margin-top:5px;color:var(--texto2);font-weight:750}
+.note{
+  margin-top:18px;padding:18px;border-radius:18px;color:#fff;
+  background:linear-gradient(135deg,var(--vino2),var(--vino),var(--magenta));line-height:1.62
+}
+.closing{
+  margin-top:24px;padding:30px;border-radius:30px;color:#fff;
+  background:linear-gradient(120deg,var(--vino2),var(--vino),var(--magenta));
+  display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;
+  box-shadow:var(--sombra)
+}
+.closing strong{display:block;max-width:860px;font-size:clamp(1.35rem,2.8vw,2.05rem);line-height:1.24}
+.closing span{display:block;margin-top:7px}
+.closing-mark{
+  width:105px;height:105px;display:grid;place-items:center;border-radius:31px;
+  background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.45);
+  font-size:2rem;font-weight:950
+}
+body.high{--texto:#101719;--texto2:#243136;--gris:#aab8be;--gris2:#7f929a;--fondo:#fff}
+body.high .panel,body.high .resource-card,body.high .guide-card,body.high .summary-card{border-width:2px}
+@media(max-width:1080px){
+  .hero{grid-template-columns:1fr}.hero-visual{min-height:500px}
+  .resource-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .guide-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .summary-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .filters{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .counter{display:none}.hero-copy{padding:48px 26px}.hero-visual{min-height:440px}
+  .library{width:320px;height:350px}.book{width:170px;height:235px}
+  .book.b1{transform:rotate(-10deg) translateX(-62px)}.book.b2{transform:rotate(8deg) translateX(62px)}
+  .book-content{padding:26px 14px}.float-tag{font-size:.72rem;padding:8px}
+  .panel-head,.guide,.library-panel,.summary{padding-left:18px;padding-right:18px}
+  .guide-grid,.resource-grid,.summary-grid,.filters{grid-template-columns:1fr}
+  .card-actions{grid-template-columns:1fr}.closing{justify-content:center;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="frame"></div>
+<main class="page">
+<nav class="topbar" aria-label="Navegación de referencias">
+  <div class="brand">
+    <div class="brand-mark">UAF</div>
+    <div>
+      <strong>Referencias</strong>
+      <small>Educación 5.0: Innovación y Tecnología</small>
+    </div>
+  </div>
+  <div class="top-actions">
+    <div class="counter" id="counter">20 recursos disponibles</div>
+    <button class="contrast" id="contrastBtn">Alto contraste</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-copy">
+    <div class="kicker">Biblioteca académica y multimedia</div>
+    <h1>Referencias</h1>
+    <p class="hero-sub">Libros, revistas, videos, audios y recursos especializados</p>
+    <p class="hero-text">
+      Esta selección reúne fuentes académicas, institucionales y multimedia para ampliar,
+      contrastar y fundamentar los contenidos de la materia. Los recursos obligatorios
+      orientan las actividades centrales; los complementarios permiten profundizar según
+      los intereses y necesidades del estudiante.
+    </p>
+    <div class="hero-actions">
+      <button class="primary" id="exploreBtn">Explorar referencias</button>
+      <button class="secondary" id="requiredBtn">Ver recursos obligatorios</button>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="library">
+      <div class="book b1"><div class="book-content"><div class="book-icon">📘</div><strong>Libros</strong><small>Fundamentos y diseño educativo</small></div></div>
+      <div class="book b2"><div class="book-content"><div class="book-icon">🎧</div><strong>Multimedia</strong><small>Videos, conferencias y audios</small></div></div>
+      <div class="book b3"><div class="book-content"><div class="book-icon">📚</div><strong>Biblioteca Académica y Multimedia</strong><small>Fuentes para analizar, crear y transformar</small></div></div>
+      <div class="float-tag f1">📰 Revistas</div>
+      <div class="float-tag f2">📄 Informes</div>
+      <div class="float-tag f3">▶️ Videos</div>
+      <div class="float-tag f4">🌐 Observatorios</div>
+    </div>
+  </div>
+</section>
+
+<section class="section panel">
+  <div class="panel-head">
+    <div>
+      <h2>Cómo utilizar las referencias</h2>
+      <p>La consulta debe relacionarse con las actividades, productos y preguntas de cada semana.</p>
+    </div>
+  </div>
+  <div class="guide">
+    <div class="guide-grid">
+      <article class="guide-card">
+        <div class="guide-icon">1</div>
+        <strong>Consulta antes de participar</strong>
+        <p>Revisa los recursos obligatorios antes de responder foros, casos, evaluaciones o avances del proyecto.</p>
+      </article>
+      <article class="guide-card">
+        <div class="guide-icon">2</div>
+        <strong>Contrasta perspectivas</strong>
+        <p>No utilices una sola fuente. Compara documentos institucionales, investigaciones y materiales multimedia.</p>
+      </article>
+      <article class="guide-card">
+        <div class="guide-icon">3</div>
+        <strong>Cita en formato APA</strong>
+        <p>Reconoce la autoría de ideas, datos, conceptos y recursos. Cada tarjeta incluye una referencia sugerida.</p>
+      </article>
+      <article class="guide-card">
+        <div class="guide-icon">4</div>
+        <strong>Verifica y contextualiza</strong>
+        <p>Analiza la fecha, procedencia, propósito, evidencia y pertinencia de cada recurso para tu contexto.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section panel" id="biblioteca">
+  <div class="panel-head">
+    <div>
+      <h2>Biblioteca de referencias</h2>
+      <p>Utiliza el buscador y los filtros para localizar recursos por tipo, semana o nivel de prioridad.</p>
+    </div>
+  </div>
+  <div class="library-panel">
+    <div class="filters">
+      <input class="search" id="searchInput" type="search" placeholder="Buscar por título, autor, tema o palabra clave...">
+      <select class="select" id="typeFilter"><option value="">Todos los tipos</option></select>
+      <select class="select" id="weekFilter">
+        <option value="">Todas las semanas</option>
+        <option value="1">Semana 1</option><option value="2">Semana 2</option>
+        <option value="3">Semana 3</option><option value="4">Semana 4</option>
+        <option value="5">Semana 5</option><option value="6">Semana 6</option>
+      </select>
+      <select class="select" id="priorityFilter">
+        <option value="">Todas las prioridades</option>
+        <option value="Obligatorio">Obligatorios</option>
+        <option value="Complementario">Complementarios</option>
+      </select>
+    </div>
+    <div class="active-filters" id="activeFilters"></div>
+    <div class="resource-grid" id="resourceGrid"></div>
+    <div class="empty" id="emptyState">No se encontraron referencias con los criterios seleccionados.</div>
+  </div>
+</section>
+
+<section class="section panel">
+  <div class="panel-head">
+    <div>
+      <h2>Panorama de la colección</h2>
+      <p>La bibliografía combina fuentes académicas, institucionales y recursos de divulgación especializada.</p>
+    </div>
+  </div>
+  <div class="summary">
+    <div class="summary-grid" id="summaryGrid"></div>
+    <div class="note">
+      <strong>Actualización de consulta:</strong> julio de 2026. Los enlaces dirigen a sitios oficiales,
+      editoriales académicas, revistas científicas, organismos internacionales y plataformas reconocidas.
+      La disponibilidad externa puede cambiar; antes de entregar una actividad, verifica que el recurso siga accesible.
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div>
+    <strong>Las referencias no son un complemento decorativo: permiten fundamentar, contrastar, cuestionar y defender cada decisión educativa.</strong>
+    <span>Educación 5.0: Innovación y Tecnología.</span>
+  </div>
+  <div class="closing-mark">APA</div>
+</section>
+</main>
+
+<script>
+const resources = [{"id": 1, "type": "Libro", "icon": "📘", "priority": "Obligatorio", "weeks": ["1", "3"], "lang": "Inglés", "title": "Teaching in a Digital Age: Third Edition", "author": "Bates, A. W. (Tony)", "year": "2022", "apa": "Bates, A. W. (Tony). (2022). Teaching in a digital age: Third edition. BCcampus Open Education.", "use": "Fundamenta el diseño de experiencias, la selección de medios, la enseñanza en línea y la calidad educativa en entornos digitales.", "url": "https://pressbooks.bccampus.ca/teachinginadigitalagev3m/"}, {"id": 2, "type": "Libro", "icon": "📕", "priority": "Complementario", "weeks": ["1", "4"], "lang": "Inglés", "title": "Artificial Intelligence in Education: Promises and Implications for Teaching and Learning", "author": "Holmes, W., Bialik, M., & Fadel, C.", "year": "2019", "apa": "Holmes, W., Bialik, M., & Fadel, C. (2019). Artificial intelligence in education: Promises and implications for teaching and learning. Center for Curriculum Redesign.", "use": "Ofrece una visión crítica sobre las posibilidades, límites y consecuencias educativas de la inteligencia artificial.", "url": "https://curriculumredesign.org/wp-content/uploads/AI-in-Education.pdf"}, {"id": 3, "type": "Documento", "icon": "📄", "priority": "Obligatorio", "weeks": ["4", "5"], "lang": "Español", "title": "Guía para el uso de IA generativa en educación e investigación", "author": "UNESCO", "year": "2023", "apa": "UNESCO. (2023). Guía para el uso de IA generativa en educación e investigación.", "use": "Orienta el uso humano, seguro, ético y pedagógicamente pertinente de la inteligencia artificial generativa.", "url": "https://unesdoc.unesco.org/ark:/48223/pf0000389227.locale=es"}, {"id": 4, "type": "Documento", "icon": "🧑‍🏫", "priority": "Obligatorio", "weeks": ["4", "5"], "lang": "Inglés", "title": "AI Competency Framework for Teachers", "author": "UNESCO", "year": "2024", "apa": "UNESCO. (2024). AI competency framework for teachers.", "use": "Define conocimientos, habilidades y valores que el docente necesita para integrar IA con agencia humana y responsabilidad.", "url": "https://unesdoc.unesco.org/ark:/48223/pf0000391104"}, {"id": 5, "type": "Documento", "icon": "🎓", "priority": "Obligatorio", "weeks": ["2", "4", "5"], "lang": "Español", "title": "Marco de competencias para estudiantes en materia de IA", "author": "UNESCO", "year": "2024", "apa": "UNESCO. (2024). Marco de competencias para estudiantes en materia de inteligencia artificial.", "use": "Organiza competencias para comprender, utilizar, evaluar y cocrear con IA desde una perspectiva humana y ética.", "url": "https://unesdoc.unesco.org/ark:/48223/pf0000393812.locale=es"}, {"id": 6, "type": "Informe", "icon": "📊", "priority": "Obligatorio", "weeks": ["1", "2", "5"], "lang": "Multilingüe", "title": "Informe GEM 2023: Tecnología en la educación, ¿una herramienta en los términos de quién?", "author": "UNESCO", "year": "2023", "apa": "UNESCO. (2023). Informe de seguimiento de la educación en el mundo 2023: Tecnología en la educación, ¿una herramienta en los términos de quién?", "use": "Analiza acceso, equidad, gobernanza, evidencia y centralidad de docentes y estudiantes en el uso de tecnología educativa.", "url": "https://gem-report-2023.unesco.org/"}, {"id": 7, "type": "Marco", "icon": "🧭", "priority": "Obligatorio", "weeks": ["1", "2", "3", "6"], "lang": "Inglés", "title": "OECD Learning Compass 2030", "author": "OECD", "year": "2019", "apa": "OECD. (2019). OECD Learning Compass 2030.", "use": "Relaciona agencia, bienestar, conocimientos, habilidades, actitudes y valores con la formación para futuros complejos.", "url": "https://www.oecd.org/en/data/tools/oecd-learning-compass-2030.html"}, {"id": 8, "type": "Marco", "icon": "💻", "priority": "Obligatorio", "weeks": ["2", "3", "4"], "lang": "Inglés", "title": "European Framework for the Digital Competence of Educators: DigCompEdu", "author": "Redecker, C.", "year": "2017", "apa": "Redecker, C. (2017). European framework for the digital competence of educators: DigCompEdu. Publications Office of the European Union.", "use": "Permite analizar la competencia digital docente, la creación de recursos, la evaluación y el empoderamiento del estudiante.", "url": "https://education.ec.europa.eu/document/european-framework-for-the-digital-competence-of-educators-digcompedu"}, {"id": 9, "type": "Normativa", "icon": "⚖️", "priority": "Obligatorio", "weeks": ["4", "5"], "lang": "Multilingüe", "title": "Recomendación sobre la Ética de la Inteligencia Artificial", "author": "UNESCO", "year": "2021", "apa": "UNESCO. (2021). Recomendación sobre la ética de la inteligencia artificial.", "use": "Aporta principios sobre derechos humanos, transparencia, responsabilidad, seguridad, equidad y supervisión humana.", "url": "https://www.unesco.org/en/legal-affairs/recommendation-ethics-artificial-intelligence"}, {"id": 10, "type": "Artículo", "icon": "📰", "priority": "Obligatorio", "weeks": ["4"], "lang": "Inglés", "title": "Systematic Review of Research on Artificial Intelligence Applications in Higher Education: Where Are the Educators?", "author": "Zawacki-Richter, O., Marín, V. I., Bond, M., & Gouverneur, F.", "year": "2019", "apa": "Zawacki-Richter, O., Marín, V. I., Bond, M., & Gouverneur, F. (2019). Systematic review of research on artificial intelligence applications in higher education—Where are the educators? International Journal of Educational Technology in Higher Education, 16, Article 39. https://doi.org/10.1186/s41239-019-0171-0", "use": "Presenta una revisión sistemática de aplicaciones de IA en educación superior y cuestiona la limitada presencia de perspectivas docentes.", "url": "https://link.springer.com/article/10.1186/s41239-019-0171-0"}, {"id": 11, "type": "Artículo", "icon": "📰", "priority": "Obligatorio", "weeks": ["4", "5"], "lang": "Inglés", "title": "ChatGPT for Good? On Opportunities and Challenges of Large Language Models for Education", "author": "Kasneci, E., Seßler, K., Küchemann, S., et al.", "year": "2023", "apa": "Kasneci, E., Seßler, K., Küchemann, S., et al. (2023). ChatGPT for good? On opportunities and challenges of large language models for education. Learning and Individual Differences, 103, 102274. https://doi.org/10.1016/j.lindif.2023.102274", "use": "Examina oportunidades educativas y riesgos relacionados con precisión, sesgos, privacidad, evaluación e integridad académica.", "url": "https://www.sciencedirect.com/science/article/pii/S1041608023000195"}, {"id": 12, "type": "Artículo", "icon": "📰", "priority": "Complementario", "weeks": ["4", "5"], "lang": "Inglés", "title": "The Educational Affordances and Challenges of ChatGPT: State of the Field", "author": "Crompton, H., & Burke, D.", "year": "2024", "apa": "Crompton, H., & Burke, D. (2024). The educational affordances and challenges of ChatGPT: State of the field. TechTrends. https://doi.org/10.1007/s11528-024-00939-0", "use": "Sintetiza usos de ChatGPT para docentes y estudiantes, junto con limitaciones, riesgos y posibilidades de investigación.", "url": "https://link.springer.com/article/10.1007/s11528-024-00939-0"}, {"id": 13, "type": "Video", "icon": "▶️", "priority": "Complementario", "weeks": ["4"], "lang": "Inglés con subtítulos", "title": "How AI Could Save (Not Destroy) Education", "author": "Khan, S.", "year": "2023", "apa": "Khan, S. (2023). How AI could save (not destroy) education [Video]. TED.", "use": "Presenta posibilidades de tutores inteligentes y asistentes docentes, útil para discutir personalización y acompañamiento.", "url": "https://www.ted.com/talks/sal_khan_how_ai_could_save_not_destroy_education"}, {"id": 14, "type": "Video", "icon": "▶️", "priority": "Complementario", "weeks": ["3", "4"], "lang": "Inglés con subtítulos", "title": "This Is How Kids Should Be Learning with AI", "author": "Lakhani, P.", "year": "2025", "apa": "Lakhani, P. (2025). This is how kids should be learning with AI [Video]. TED.", "use": "Permite debatir la diferencia entre respuestas rápidas y aprendizaje profundo, desafío cognitivo y diseño responsable de IA.", "url": "https://www.ted.com/talks/priya_lakhani_this_is_how_kids_should_be_learning_with_ai"}, {"id": 15, "type": "Video", "icon": "🎬", "priority": "Complementario", "weeks": ["1", "4"], "lang": "Inglés con subtítulos", "title": "Is AI the Most Important Technology of the Century?", "author": "TED-Ed", "year": "2023", "apa": "TED-Ed. (2023). Is AI the most important technology of the century? [Video]. TED.", "use": "Introduce preguntas sobre alcance, impacto social y capacidad transformadora de la inteligencia artificial.", "url": "https://www.ted.com/talks/ted_ed_is_ai_the_most_important_technology_of_the_century"}, {"id": 16, "type": "Audio", "icon": "🎧", "priority": "Obligatorio", "weeks": ["4", "5"], "lang": "Inglés", "title": "Is Generative AI a Gamechanger for Education?", "author": "OECD, Top Class Podcast", "year": "2026", "apa": "OECD. (2026, febrero 9). Is generative AI a gamechanger for education? [Episodio de podcast]. Top Class.", "use": "Analiza evidencia reciente, riesgos, posibilidades y condiciones para integrar IA generativa en enseñanza y aprendizaje.", "url": "https://www.oecd.org/en/blogs/2026/02/podcast-is-generative-ai-a-gamechanger-for-education.html"}, {"id": 17, "type": "Audio", "icon": "🎙️", "priority": "Complementario", "weeks": ["4", "6"], "lang": "Inglés", "title": "Khan Academy Founder Sal Khan on AI and the Future of Education", "author": "Grant, A. (Host) & Khan, S. (Guest)", "year": "2023", "apa": "Grant, A. (Host). (2023, agosto 15). Khan Academy founder Sal Khan on AI and the future of education [Episodio de podcast]. Rethinking with Adam Grant. TED.", "use": "Profundiza en personalización, tutoría, transformación de la enseñanza y decisiones humanas alrededor de la IA.", "url": "https://www.ted.com/podcasts/rethinking-with-adam-grant/khan-academy-founder-sal-khan-on-ai-and-the-future-of-education-transcript"}, {"id": 18, "type": "Observatorio", "icon": "🔭", "priority": "Complementario", "weeks": ["4", "6"], "lang": "Inglés", "title": "AI Index", "author": "Stanford Institute for Human-Centered Artificial Intelligence", "year": "Actualización anual", "apa": "Stanford Institute for Human-Centered Artificial Intelligence. (s. f.). AI Index.", "use": "Proporciona datos y tendencias sobre capacidades, inversión, adopción, educación, políticas y efectos sociales de la IA.", "url": "https://hai.stanford.edu/ai-index"}, {"id": 19, "type": "Herramienta", "icon": "🪞", "priority": "Complementario", "weeks": ["2", "3", "6"], "lang": "Multilingüe", "title": "SELFIE for Teachers", "author": "Comisión Europea", "year": "Actualización continua", "apa": "Comisión Europea. (s. f.). SELFIE for Teachers.", "use": "Herramienta de autorreflexión para analizar la competencia digital docente con base en DigCompEdu.", "url": "https://education.ec.europa.eu/selfie-for-teachers"}, {"id": 20, "type": "Observatorio", "icon": "🌐", "priority": "Complementario", "weeks": ["4", "5", "6"], "lang": "Inglés", "title": "Global AI Ethics and Governance Observatory", "author": "UNESCO", "year": "Actualización continua", "apa": "UNESCO. (s. f.). Global AI Ethics and Governance Observatory.", "use": "Reúne recursos, herramientas y experiencias internacionales para la gobernanza ética y responsable de la inteligencia artificial.", "url": "https://www.unesco.org/ethics-ai/en"}];
+
+const grid = document.getElementById("resourceGrid");
+const searchInput = document.getElementById("searchInput");
+const typeFilter = document.getElementById("typeFilter");
+const weekFilter = document.getElementById("weekFilter");
+const priorityFilter = document.getElementById("priorityFilter");
+const activeFilters = document.getElementById("activeFilters");
+const emptyState = document.getElementById("emptyState");
+const counter = document.getElementById("counter");
+
+[...new Set(resources.map(r=>r.type))].sort().forEach(type=>{
+  const option=document.createElement("option");
+  option.value=type;option.textContent=type;typeFilter.appendChild(option);
+});
+
+function normalize(value){
+  return String(value).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+}
+
+function render(){
+  const query=normalize(searchInput.value);
+  const type=typeFilter.value;
+  const week=weekFilter.value;
+  const priority=priorityFilter.value;
+
+  const filtered=resources.filter(r=>{
+    const text=normalize([r.title,r.author,r.type,r.use,r.apa,r.lang,r.year].join(" "));
+    return (!query || text.includes(query))
+      && (!type || r.type===type)
+      && (!week || r.weeks.includes(week))
+      && (!priority || r.priority===priority);
+  });
+
+  grid.innerHTML=filtered.map(r=>`
+    <article class="resource-card">
+      <div class="resource-head">
+        <div class="head-row">
+          <span class="type-badge">${r.icon} ${r.type}</span>
+          <span class="priority">${r.priority}</span>
+        </div>
+        <h3>${r.title}</h3>
+        <p>${r.author} · ${r.year}</p>
+      </div>
+      <div class="resource-body">
+        <div class="tags">
+          ${r.weeks.map(w=>`<span class="tag">Semana ${w}</span>`).join("")}
+          <span class="tag">${r.lang}</span>
+        </div>
+        <p class="resource-use">${r.use}</p>
+        <div class="apa">${r.apa}</div>
+        <div class="card-actions">
+          <a class="open-link" href="${r.url}" target="_blank" rel="noopener noreferrer">Abrir recurso ↗</a>
+          <button class="copy-btn" data-id="${r.id}">Copiar APA</button>
+        </div>
+      </div>
+    </article>
+  `).join("");
+
+  emptyState.style.display=filtered.length ? "none" : "block";
+  counter.textContent=`${filtered.length} de ${resources.length} recursos`;
+
+  const labels=[];
+  if(query) labels.push(`Búsqueda: ${searchInput.value}`);
+  if(type) labels.push(`Tipo: ${type}`);
+  if(week) labels.push(`Semana ${week}`);
+  if(priority) labels.push(priority);
+  activeFilters.innerHTML=labels.map(x=>`<span class="filter-chip">${x}</span>`).join("");
+
+  document.querySelectorAll(".copy-btn").forEach(button=>{
+    button.addEventListener("click",async()=>{
+      const item=resources.find(r=>r.id===Number(button.dataset.id));
+      try{
+        await navigator.clipboard.writeText(item.apa);
+        button.textContent="Referencia copiada";
+        button.classList.add("copied");
+        setTimeout(()=>{button.textContent="Copiar APA";button.classList.remove("copied")},1800);
+      }catch{
+        button.textContent="Selecciona y copia";
+      }
+    });
+  });
+}
+
+[searchInput,typeFilter,weekFilter,priorityFilter].forEach(el=>el.addEventListener("input",render));
+
+const summaryTypes=[
+  ["📘","Libros y documentos",resources.filter(r=>["Libro","Documento","Informe","Marco","Normativa"].includes(r.type)).length],
+  ["📰","Artículos",resources.filter(r=>r.type==="Artículo").length],
+  ["▶️","Videos",resources.filter(r=>r.type==="Video").length],
+  ["🎧","Audios",resources.filter(r=>r.type==="Audio").length],
+  ["🌐","Otros recursos",resources.filter(r=>["Observatorio","Herramienta"].includes(r.type)).length]
+];
+document.getElementById("summaryGrid").innerHTML=summaryTypes.map(s=>`
+  <article class="summary-card"><span>${s[0]}</span><strong>${s[2]}</strong><small>${s[1]}</small></article>
+`).join("");
+
+document.getElementById("exploreBtn").onclick=()=>document.getElementById("biblioteca").scrollIntoView({behavior:"smooth"});
+document.getElementById("requiredBtn").onclick=()=>{
+  priorityFilter.value="Obligatorio";render();
+  document.getElementById("biblioteca").scrollIntoView({behavior:"smooth"});
+};
+document.getElementById("contrastBtn").onclick=()=>{
+  const active=document.body.classList.toggle("high");
+  contrastBtn.textContent=active?"Contraste normal":"Alto contraste";
+};
+render();
+</script>
+</body>
+</html>
