@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#812843">
+<title>Educación 5.0 | Semana 3</title>
+<style>
+:root{
+  --vino:#812843;--vino2:#4f1026;--magenta:#c73765;--azul:#7395a2;--azul2:#385d69;
+  --vino-suave:#f5e8ed;--azul-suave:#eaf1f4;--verde:#34745f;--verde-suave:#e9f5f0;
+  --rojo:#a6414f;--rojo-suave:#faecef;--fondo:#f4f7f8;--gris:#d6dfe3;--gris2:#b8c6cc;
+  --texto:#1e272c;--texto2:#405058;--sombra:0 24px 60px rgba(31,47,55,.14);--sombra2:0 14px 34px rgba(31,47,55,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;overflow-x:hidden;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--texto);
+  background:
+    radial-gradient(circle at 7% 8%,rgba(115,149,162,.20),transparent 23rem),
+    radial-gradient(circle at 92% 16%,rgba(199,55,101,.11),transparent 26rem),
+    linear-gradient(180deg,#fff,var(--fondo));
+}
+button,input{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible{outline:4px solid rgba(199,55,101,.28);outline-offset:3px}
+.frame{position:fixed;inset:0;pointer-events:none;z-index:100;border:10px solid transparent;border-image:linear-gradient(135deg,var(--azul),var(--vino),var(--magenta),var(--azul)) 1}
+.page{width:min(1260px,calc(100% - 30px));margin:auto;padding:38px 0 68px}
+.topbar{position:sticky;top:14px;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 14px;margin-bottom:18px;border:1px solid rgba(56,93,105,.22);border-radius:20px;background:rgba(255,255,255,.95);backdrop-filter:blur(18px);box-shadow:0 12px 30px rgba(31,47,55,.11)}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;color:#fff;background:linear-gradient(145deg,var(--vino),var(--magenta));font-weight:950}
+.brand strong{display:block;color:var(--vino)}
+.brand small{display:block;margin-top:3px;color:var(--texto2);font-weight:650}
+.top-actions{display:flex;align-items:center;gap:10px}
+.status{padding:8px 11px;border-radius:999px;color:var(--azul2);background:var(--azul-suave);font-size:.82rem;font-weight:850}
+.contrast{border:1px solid var(--vino);border-radius:12px;padding:9px 11px;color:var(--vino);background:#fff;font-weight:850}
+.contrast:hover{color:#fff;background:var(--vino)}
+
+.hero{position:relative;overflow:hidden;display:grid;grid-template-columns:1.04fr .96fr;align-items:center;min-height:560px;border:1px solid rgba(56,93,105,.25);border-radius:34px;background:#fff;box-shadow:var(--sombra)}
+.hero::before{content:"";position:absolute;inset:0 auto 0 0;width:9px;background:linear-gradient(var(--vino),var(--magenta),var(--azul))}
+.hero-copy{position:relative;z-index:3;padding:60px 54px}
+.kicker{display:inline-flex;align-items:center;gap:9px;padding:9px 14px;border-radius:999px;color:var(--vino2);background:var(--vino-suave);border:1px solid #d9a9ba;font-size:.8rem;font-weight:900;letter-spacing:.055em;text-transform:uppercase}
+.kicker::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--magenta);box-shadow:0 0 0 6px rgba(199,55,101,.13)}
+h1{margin:22px 0 10px;color:var(--vino);font-size:clamp(3.2rem,6vw,6rem);line-height:.92;letter-spacing:-.075em}
+.hero-sub{margin:0 0 17px;color:var(--azul2);font-size:clamp(1.1rem,2.1vw,1.55rem);font-weight:900}
+.hero-text{margin:0;max-width:700px;color:var(--texto2);line-height:1.76;font-size:1.05rem}
+.hero-actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:28px}
+.primary,.secondary{padding:13px 17px;border-radius:15px;font-weight:900}
+.primary{border:0;color:#fff;background:linear-gradient(135deg,var(--vino),var(--magenta))}
+.secondary{color:var(--vino);background:#fff;border:2px solid var(--vino)}
+.secondary:hover{color:#fff;background:var(--vino)}
+.hero-visual{position:relative;height:100%;min-height:560px;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 60% 30%,rgba(255,255,255,.24),transparent 15rem),linear-gradient(145deg,var(--azul2),var(--azul))}
+.visual{position:relative;width:min(450px,88%);aspect-ratio:1}
+.ring{position:absolute;inset:7%;border:1px dashed rgba(255,255,255,.58);border-radius:50%;animation:spin 27s linear infinite}
+.ring.two{inset:23%;animation-duration:18s;animation-direction:reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.center{position:absolute;inset:31%;display:grid;place-items:center;border-radius:35%;background:#fff;color:var(--vino);font-size:1.75rem;font-weight:950;text-align:center;line-height:1.05;box-shadow:0 24px 55px rgba(20,38,46,.27);transform:rotate(7deg)}
+.center span{transform:rotate(-7deg)}
+.node{position:absolute;width:84px;height:84px;display:grid;place-items:center;border-radius:24px;background:#fff;color:var(--vino2);font-size:1.55rem;box-shadow:0 14px 30px rgba(20,38,46,.24)}
+.node small{position:absolute;top:92px;left:50%;transform:translateX(-50%);width:125px;padding:6px 8px;border-radius:9px;color:#fff;background:rgba(35,64,74,.94);font-size:.65rem;text-align:center;font-weight:850}
+.n1{top:2%;left:41%}.n2{right:2%;top:36%}.n3{bottom:2%;left:41%}.n4{left:2%;top:36%}
+
+.section{margin-top:24px;scroll-margin-top:100px}
+.panel{overflow:hidden;border:1px solid var(--gris2);border-radius:30px;background:#fff;box-shadow:var(--sombra)}
+.panel-head{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap;padding:30px 32px 22px;border-bottom:1px solid var(--gris)}
+.panel-head h2{margin:0;color:var(--vino);font-size:clamp(1.55rem,3vw,2.45rem)}
+.panel-head p{margin:7px 0 0;max-width:80ch;color:var(--texto2);line-height:1.6}
+
+.intro-grid{display:grid;grid-template-columns:.78fr 1.22fr;gap:24px;padding:30px 32px 36px}
+.objective{padding:25px;border-radius:24px;color:#fff;background:linear-gradient(145deg,var(--azul2),var(--vino))}
+.objective h3{margin:0 0 10px;color:#fff;font-size:1.7rem}
+.objective p{margin:0;color:#fff;line-height:1.7}
+.objective-box{margin-top:18px;padding:16px;border-radius:17px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.27)}
+.meta-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.meta-card{padding:18px;border:1px solid var(--gris2);border-radius:20px;background:#fff;min-height:155px}
+.meta-card:hover{transform:translateY(-3px);border-color:var(--vino);box-shadow:var(--sombra2)}
+.meta-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;background:var(--azul2);color:#fff}
+.meta-card strong{display:block;margin-top:13px;color:var(--vino2)}
+.meta-card p{margin:7px 0 0;color:var(--texto2);line-height:1.55;font-size:.92rem}
+
+.theory{display:grid;grid-template-columns:.86fr 1.14fr;gap:24px;padding:30px 32px 36px}
+.topic-menu{display:grid;gap:10px}
+.topic-btn{width:100%;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:15px;border:1px solid var(--gris2);border-radius:18px;background:#fff;color:var(--texto);text-align:left}
+.topic-btn:hover{transform:translateX(4px);border-color:var(--vino)}
+.topic-btn.active{color:#fff;background:linear-gradient(135deg,var(--vino2),var(--vino));border-color:var(--vino2)}
+.topic-num{width:45px;height:45px;display:grid;place-items:center;border-radius:14px;background:var(--vino-suave);color:var(--vino);font-weight:950}
+.topic-btn.active .topic-num{background:#fff;color:var(--vino2)}
+.topic-btn strong{display:block;color:inherit}
+.topic-btn small{display:block;margin-top:3px;color:var(--texto2)}
+.topic-btn.active small{color:#fff}
+.theory-detail{min-height:570px;padding:28px;border:1px solid var(--gris2);border-radius:24px;background:radial-gradient(circle at 90% 10%,rgba(199,55,101,.09),transparent 13rem),linear-gradient(145deg,#fff,#f7f9fa)}
+.detail-icon{width:64px;height:64px;display:grid;place-items:center;border-radius:20px;background:linear-gradient(145deg,var(--vino),var(--magenta));color:#fff;font-size:1.65rem}
+.theory-detail h3{margin:19px 0 8px;color:var(--vino2);font-size:1.9rem}
+.theory-detail>p{margin:0;color:var(--texto2);line-height:1.74}
+.theory-points{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:20px}
+.point{padding:14px;border:1px solid var(--gris2);border-radius:16px;background:#fff;color:var(--texto2);line-height:1.55}
+.point strong{display:block;color:var(--vino2);margin-bottom:5px}
+.example{margin-top:18px;padding:17px;border-radius:17px;color:#fff;background:linear-gradient(135deg,var(--azul2),var(--vino));line-height:1.65}
+
+.journey-wrap{padding:30px 32px 36px}
+.journey-controls{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+.journey-btn{min-width:110px;padding:11px 14px;border:1px solid var(--gris2);border-radius:14px;background:#fff;color:var(--texto2);font-weight:900}
+.journey-btn.active{background:var(--vino);border-color:var(--vino);color:#fff}
+.journey-content{display:grid;grid-template-columns:.78fr 1.22fr;gap:24px}
+.journey-visual{position:relative;min-height:370px;padding:24px;border-radius:24px;color:#fff;background:linear-gradient(145deg,var(--azul2),var(--vino));overflow:hidden}
+.journey-visual::after{content:"";position:absolute;width:210px;height:210px;border-radius:50%;right:-90px;bottom:-90px;background:rgba(255,255,255,.10)}
+.journey-number{font-size:4.8rem;font-weight:1000;line-height:.9;letter-spacing:-.08em}
+.journey-visual h3{margin:20px 0 8px;color:#fff;font-size:1.8rem}
+.journey-visual p{margin:0;color:#fff;line-height:1.7}
+.journey-detail{padding:25px;border:1px solid var(--gris2);border-radius:24px;background:#fff}
+.journey-detail h3{margin:0;color:var(--vino2);font-size:1.7rem}
+.journey-detail p{margin:12px 0 0;color:var(--texto2);line-height:1.7}
+.journey-example{margin-top:18px;padding:16px;border-radius:16px;background:var(--azul-suave);border:1px solid #c8dae2;color:var(--azul2);line-height:1.6;font-weight:800}
+.design-questions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-top:22px}
+.design-card{padding:17px;border:1px solid var(--gris2);border-radius:18px;background:#fff}
+.design-card strong{display:block;color:var(--vino2)}
+.design-card p{margin:8px 0 0;color:var(--texto2);line-height:1.55;font-size:.9rem}
+
+.cases{padding:30px 32px 36px}
+.case-tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+.case-btn{padding:11px 14px;border:1px solid var(--gris2);border-radius:14px;background:#fff;color:var(--texto2);font-weight:900}
+.case-btn.active{background:var(--vino);border-color:var(--vino);color:#fff}
+.case-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:24px}
+.case-story{padding:25px;border-radius:24px;color:#fff;background:linear-gradient(145deg,var(--vino2),var(--vino),var(--magenta))}
+.case-story h3{margin:0 0 10px;color:#fff;font-size:1.7rem}
+.case-story p{margin:0;color:#fff;line-height:1.7}
+.case-question{margin-top:18px;padding:16px;border-radius:16px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);font-weight:850}
+.case-analysis{padding:24px;border:1px solid var(--gris2);border-radius:24px;background:#fff}
+.case-analysis h3{margin:0;color:var(--vino2);font-size:1.55rem}
+.case-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:15px}
+.case-item{padding:14px;border:1px solid var(--gris2);border-radius:16px;background:#f8fafb}
+.case-item strong{display:block;color:var(--vino2)}
+.case-item p{margin:6px 0 0;color:var(--texto2);line-height:1.5;font-size:.9rem}
+
+.activities{padding:30px 32px 36px}
+.activity-grid{display:grid;gap:16px}
+.activity-card{border:1px solid var(--gris2);border-radius:24px;background:#fff;overflow:hidden}
+.activity-head{display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap;padding:18px 20px;background:linear-gradient(135deg,var(--azul2),var(--vino));color:#fff}
+.activity-head h3{margin:0;color:#fff;font-size:1.3rem}
+.activity-badge{padding:7px 10px;border-radius:999px;background:#fff;color:var(--vino2);font-size:.72rem;font-weight:950}
+.activity-body{padding:20px}
+.activity-body>p{margin:0;color:var(--texto2);line-height:1.68}
+.activity-detail-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:18px}
+.activity-detail{padding:13px;border:1px solid var(--gris2);border-radius:15px;background:#f8fafb}
+.activity-detail strong{display:block;color:var(--vino2);font-size:.82rem;text-transform:uppercase}
+.activity-detail p{margin:6px 0 0;color:var(--texto2);line-height:1.5;font-size:.87rem}
+.steps{margin:18px 0 0;padding-left:22px;color:var(--texto2);line-height:1.75}
+.criteria{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.criterion{padding:7px 10px;border-radius:999px;background:var(--azul-suave);color:var(--azul2);font-size:.75rem;font-weight:900}
+
+.products{padding:30px 32px 36px}
+.product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.product-card{display:flex;flex-direction:column;min-height:430px;border:1px solid var(--gris2);border-radius:23px;background:#fff;overflow:hidden}
+.product-top{padding:18px;color:#fff;background:linear-gradient(135deg,var(--vino2),var(--vino),var(--magenta))}
+.product-top span{display:inline-block;padding:7px 10px;border-radius:999px;background:#fff;color:var(--vino2);font-size:.72rem;font-weight:950}
+.product-top h3{margin:13px 0 0;color:#fff;font-size:1.27rem}
+.product-body{display:flex;flex-direction:column;flex:1;padding:19px}
+.product-body>p{margin:0;color:var(--texto2);line-height:1.62}
+.specs{display:grid;gap:9px;margin-top:15px}
+.spec{padding:12px;border:1px solid var(--gris2);border-radius:14px;background:#f8fafb}
+.spec strong{display:block;color:var(--vino2);font-size:.79rem}
+.spec span{display:block;margin-top:4px;color:var(--texto2);font-size:.86rem;line-height:1.45}
+.product-note{margin-top:auto;padding-top:16px;color:var(--azul2);font-size:.82rem;font-weight:850;line-height:1.5}
+
+.quiz{padding:30px 32px 36px}
+.quiz-dashboard{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:22px}
+.quiz-stat{padding:18px;border:1px solid var(--gris2);border-radius:19px;background:#fff;text-align:center}
+.quiz-stat strong{display:block;color:var(--vino);font-size:1.65rem}
+.quiz-stat span{display:block;margin-top:5px;color:var(--texto2);font-size:.82rem;font-weight:800}
+.quiz-instructions{padding:18px;border-radius:18px;background:var(--azul-suave);border:1px solid #c9dce4;color:var(--azul2);line-height:1.65}
+.quiz-actions{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+.quiz-btn{padding:12px 15px;border-radius:13px;font-weight:900}
+.start-quiz{color:#fff;background:var(--vino);border:1px solid var(--vino)}
+.submit-quiz{color:#fff;background:var(--verde);border:1px solid var(--verde)}
+.submit-quiz:disabled,.start-quiz:disabled{opacity:.45;cursor:not-allowed}
+.quiz-form{display:none}
+.quiz-form.active{display:block}
+.question-card{margin-top:16px;padding:20px;border:1px solid var(--gris2);border-radius:21px;background:#fff}
+.question-card h3{margin:0;color:var(--vino2);font-size:1.08rem;line-height:1.48}
+.option-list{display:grid;gap:9px;margin-top:14px}
+.option-label{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid var(--gris2);border-radius:14px;background:#fff;color:var(--texto2);line-height:1.5}
+.option-label:hover{border-color:var(--vino);background:#fffafb}
+.option-label input{margin-top:4px;accent-color:var(--vino)}
+.question-feedback{display:none;margin-top:13px;padding:13px;border-radius:14px;line-height:1.55;font-weight:750}
+.question-feedback.show{display:block}
+.question-feedback.correct{color:var(--verde);background:var(--verde-suave);border:1px solid #acd3c3}
+.question-feedback.incorrect{color:var(--rojo);background:var(--rojo-suave);border:1px solid #e0b5bd}
+.quiz-result{display:none;margin-top:20px;padding:22px;border-radius:22px;color:#fff;background:linear-gradient(135deg,var(--azul2),var(--vino))}
+.quiz-result.show{display:block}
+.quiz-result strong{font-size:1.7rem}
+.quiz-result p{margin:8px 0 0;line-height:1.6}
+
+.closing{margin-top:24px;padding:30px;border-radius:30px;color:#fff;background:linear-gradient(120deg,var(--vino2),var(--vino),var(--magenta));display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;box-shadow:var(--sombra)}
+.closing strong{display:block;max-width:880px;font-size:clamp(1.35rem,2.8vw,2.05rem);line-height:1.24}
+.closing span{display:block;margin-top:7px}
+.closing-mark{width:105px;height:105px;display:grid;place-items:center;border-radius:31px;background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.45);font-size:2rem;font-weight:950}
+
+body.high{--texto:#101719;--texto2:#243136;--gris:#aab8be;--gris2:#7f929a;--fondo:#fff}
+body.high .panel,body.high .meta-card,body.high .topic-btn,body.high .theory-detail,body.high .journey-detail,
+body.high .design-card,body.high .case-analysis,body.high .case-item,body.high .activity-card,body.high .product-card,
+body.high .quiz-stat,body.high .question-card{border-width:2px}
+
+@media(max-width:1100px){
+  .hero{grid-template-columns:1fr}.hero-visual{min-height:460px}
+  .intro-grid,.theory,.journey-content,.case-layout{grid-template-columns:1fr}
+  .design-questions,.activity-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .product-grid{grid-template-columns:1fr 1fr}
+  .quiz-dashboard{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  .status{display:none}.hero-copy{padding:48px 26px}.hero-visual{min-height:410px}
+  .panel-head,.intro-grid,.theory,.journey-wrap,.cases,.activities,.products,.quiz{padding-left:18px;padding-right:18px}
+  .meta-grid,.theory-points,.design-questions,.case-grid,.activity-detail-grid,.product-grid,.quiz-dashboard{grid-template-columns:1fr}
+  .node{width:68px;height:68px;border-radius:18px;font-size:1.2rem}
+  .node small{top:74px;width:100px;font-size:.6rem}
+  .closing{justify-content:center;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="frame"></div>
+<main class="page">
+<nav class="topbar" aria-label="Navegación de la semana 3">
+  <div class="brand">
+    <div class="brand-mark">UAF</div>
+    <div>
+      <strong>Semana 3</strong>
+      <small>Educación 5.0: Innovación y Tecnología</small>
+    </div>
+  </div>
+  <div class="top-actions">
+    <div class="status">Desarrollo de la materia</div>
+    <button class="contrast" id="contrastBtn" type="button">Alto contraste</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-copy">
+    <div class="kicker">Desarrollo de la materia</div>
+    <h1>Semana 3</h1>
+    <p class="hero-sub">Tecnologías emergentes e inteligencia artificial en Educación 5.0</p>
+    <p class="hero-text">
+      En esta semana analizarás cómo integrar inteligencia artificial, aprendizaje adaptativo,
+      analítica del aprendizaje, automatización y tecnologías emergentes desde una visión educativa,
+      ética y centrada en las personas.
+    </p>
+    <div class="hero-actions">
+      <button class="primary" id="theoryBtn" type="button">Explorar la teoría</button>
+      <button class="secondary" id="quizBtn" type="button">Ir al cuestionario</button>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="visual">
+      <div class="ring"></div><div class="ring two"></div>
+      <div class="center"><span>IA +<br>EdTech</span></div>
+      <div class="node n1">🤖<small>IA</small></div>
+      <div class="node n2">📊<small>Analítica</small></div>
+      <div class="node n3">🥽<small>Emergentes</small></div>
+      <div class="node n4">🎯<small>Personalización</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="section panel">
+  <div class="panel-head">
+    <div>
+      <h2>Propósito y ruta de aprendizaje</h2>
+      <p>La semana avanza desde la comprensión conceptual hasta el diseño preliminar de una propuesta tecnológica para tu proyecto.</p>
+    </div>
+  </div>
+  <div class="intro-grid">
+    <article class="objective">
+      <h3>Objetivo de la semana</h3>
+      <p>
+        Analizar el potencial pedagógico de la inteligencia artificial y de las tecnologías emergentes
+        para diseñar experiencias de aprendizaje más personalizadas, pertinentes y éticamente responsables.
+      </p>
+      <div class="objective-box">
+        <strong>Pregunta detonadora</strong><br>
+        ¿Qué debe cumplirse para que una tecnología emergente o una herramienta de IA realmente mejore la experiencia de aprendizaje?
+      </div>
+    </article>
+    <div class="meta-grid">
+      <article class="meta-card"><div class="meta-icon">🏁</div><strong>Resultado esperado</strong><p>Diseñar una propuesta preliminar que integre IA o una tecnología emergente para atender una necesidad educativa real.</p></article>
+      <article class="meta-card"><div class="meta-icon">📚</div><strong>Temas centrales</strong><p>IA, personalización, aprendizaje adaptativo, analítica, automatización, tecnologías emergentes y ética.</p></article>
+      <article class="meta-card"><div class="meta-icon">🧠</div><strong>Habilidad principal</strong><p>Diseño pedagógico con criterio tecnológico y pensamiento crítico sobre su uso educativo.</p></article>
+      <article class="meta-card"><div class="meta-icon">📦</div><strong>Evidencias</strong><p>Mapa comparativo, análisis de caso y avance del proyecto final.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section panel" id="theorySection">
+  <div class="panel-head">
+    <div>
+      <h2>Desarrollo teórico</h2>
+      <p>Selecciona cada tema para revisar explicaciones amplias, conceptos clave y ejemplos aplicados.</p>
+    </div>
+  </div>
+  <div class="theory">
+    <div class="topic-menu">
+      <button class="topic-btn active" data-topic="0" type="button"><span class="topic-num">1</span><span><strong>Inteligencia artificial en Educación 5.0</strong><small>Valor pedagógico y supervisión humana</small></span><span>→</span></button>
+      <button class="topic-btn" data-topic="1" type="button"><span class="topic-num">2</span><span><strong>Aprendizaje adaptativo y personalización</strong><small>Rutas y apoyos diferenciados</small></span><span>→</span></button>
+      <button class="topic-btn" data-topic="2" type="button"><span class="topic-num">3</span><span><strong>Analítica del aprendizaje</strong><small>Datos para comprender y mejorar</small></span><span>→</span></button>
+      <button class="topic-btn" data-topic="3" type="button"><span class="topic-num">4</span><span><strong>Automatización y retroalimentación inteligente</strong><small>Eficiencia con criterio</small></span><span>→</span></button>
+      <button class="topic-btn" data-topic="4" type="button"><span class="topic-num">5</span><span><strong>Tecnologías emergentes para el aprendizaje</strong><small>Simulación, inmersión y práctica</small></span><span>→</span></button>
+      <button class="topic-btn" data-topic="5" type="button"><span class="topic-num">6</span><span><strong>Criterios éticos para integrar IA</strong><small>Transparencia, protección y pertinencia</small></span><span>→</span></button>
+    </div>
+    <article class="theory-detail" aria-live="polite">
+      <div class="detail-icon" id="theoryIcon">🤖</div>
+      <h3 id="theoryTitle">Inteligencia artificial en Educación 5.0</h3>
+      <p id="theoryText"></p>
+      <div class="theory-points" id="theoryPoints"></div>
+      <div class="example" id="theoryExample"></div>
+    </article>
+  </div>
+</section>
+
+<section class="section panel">
+  <div class="panel-head">
+    <div>
+      <h2>Ruta de integración pedagógica</h2>
+      <p>Explora el proceso para decidir si una tecnología emergente o una herramienta de IA debe incorporarse a tu proyecto.</p>
+    </div>
+  </div>
+  <div class="journey-wrap">
+    <div class="journey-controls">
+      <button class="journey-btn active" data-journey="0" type="button">1. Necesidad</button>
+      <button class="journey-btn" data-journey="1" type="button">2. Selección</button>
+      <button class="journey-btn" data-journey="2" type="button">3. Diseño</button>
+      <button class="journey-btn" data-journey="3" type="button">4. Ética</button>
+      <button class="journey-btn" data-journey="4" type="button">5. Iteración</button>
+    </div>
+
+    <div class="journey-content">
+      <article class="journey-visual">
+        <div class="journey-number" id="journeyLabel">1</div>
+        <h3 id="journeyTitle">Identificar la necesidad</h3>
+        <p id="journeySummary"></p>
+      </article>
+      <article class="journey-detail">
+        <h3>¿Qué implica?</h3>
+        <p id="journeyDetail"></p>
+        <div class="journey-example" id="journeyExample"></div>
+      </article>
+    </div>
+
+    <div class="design-questions">
+      <article class="design-card"><strong>¿Qué problema resolverá?</strong><p>La tecnología debe responder a una necesidad real, no solo a una tendencia.</p></article>
+      <article class="design-card"><strong>¿Por qué esta tecnología?</strong><p>La selección debe justificarse por su pertinencia pedagógica y viabilidad.</p></article>
+      <article class="design-card"><strong>¿Qué cuidados requiere?</strong><p>Accesibilidad, ética, transparencia, privacidad y acompañamiento docente.</p></article>
+      <article class="design-card"><strong>¿Cómo sabremos si funciona?</strong><p>Mediante indicadores, evidencia de mejora y retroalimentación de usuarios.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section panel">
+  <div class="panel-head">
+    <div>
+      <h2>Casos y ejemplos aplicados</h2>
+      <p>Selecciona cada caso para identificar diferencias entre incorporación superficial, uso crítico e integración pedagógica pertinente.</p>
+    </div>
+  </div>
+  <div class="cases">
+    <div class="case-tabs">
+      <button class="case-btn active" data-case="0" type="button">Caso 1: personalización aparente</button>
+      <button class="case-btn" data-case="1" type="button">Caso 2: analítica sin acción</button>
+      <button class="case-btn" data-case="2" type="button">Caso 3: IA sin supervisión</button>
+    </div>
+    <div class="case-layout">
+      <article class="case-story">
+        <h3 id="caseTitle"></h3>
+        <p id="caseStory"></p>
+        <div class="case-question" id="caseQuestion"></div>
+      </article>
+      <article class="case-analysis">
+        <h3>Análisis orientador</h3>
+        <div class="case-grid" id="caseGrid"></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section panel">
+  <div class="panel-head">
+    <div>
+      <h2>Actividades de la semana</h2>
+      <p>Cada actividad incluye propósito, procedimiento, evidencia, criterios y condiciones de entrega.</p>
+    </div>
+  </div>
+  <div class="activities">
+    <div class="activity-grid" id="activityGrid"></div>
+  </div>
+</section>
+
+<section class="section panel">
+  <div class="panel-head">
+    <div>
+      <h2>Productos y especificaciones de entrega</h2>
+      <p>Los productos de la semana integran comparación tecnológica, análisis de caso y un avance verificable del proyecto final.</p>
+    </div>
+  </div>
+  <div class="products">
+    <div class="product-grid" id="productGrid"></div>
+  </div>
+</section>
+
+<section class="section panel" id="quizSection">
+  <div class="panel-head">
+    <div>
+      <h2>Cuestionario de la Semana 3</h2>
+      <p>Dispones de dos oportunidades. Se conservará automáticamente la calificación más alta obtenida.</p>
+    </div>
+  </div>
+  <div class="quiz">
+    <div class="quiz-dashboard">
+      <article class="quiz-stat"><strong id="attemptsUsed">0</strong><span>Intentos utilizados</span></article>
+      <article class="quiz-stat"><strong>2</strong><span>Intentos disponibles</span></article>
+      <article class="quiz-stat"><strong id="bestScore">0</strong><span>Mejor calificación</span></article>
+      <article class="quiz-stat"><strong id="lastScore">—</strong><span>Última calificación</span></article>
+    </div>
+
+    <div class="quiz-instructions">
+      <strong>Indicaciones:</strong> selecciona una respuesta por pregunta. Al enviar el intento,
+      recibirás retroalimentación individual en cada reactivo. Después del primer intento podrás
+      realizar una segunda oportunidad. La plataforma conservará la calificación más alta.
+    </div>
+
+    <div class="quiz-actions">
+      <button class="quiz-btn start-quiz" id="startQuizBtn" type="button">Iniciar primer intento</button>
+      <button class="quiz-btn submit-quiz" id="submitQuizBtn" type="button" disabled>Enviar intento</button>
+    </div>
+
+    <form class="quiz-form" id="quizForm"></form>
+
+    <div class="quiz-result" id="quizResult">
+      <strong id="resultTitle">Resultado</strong>
+      <p id="resultText"></p>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div>
+    <strong>En Educación 5.0, integrar IA y tecnologías emergentes exige criterio pedagógico, responsabilidad ética y claridad sobre el valor real que aportan al aprendizaje.</strong>
+    <span>Semana 3 · Educación 5.0: Innovación y Tecnología.</span>
+  </div>
+  <div class="closing-mark">3</div>
+</section>
+</main>
+
+<script>
+const theoryData = [{"icon": "🤖", "title": "Inteligencia artificial en Educación 5.0", "text": "La inteligencia artificial en Educación 5.0 no se entiende como una simple automatización de tareas, sino como un conjunto de herramientas, sistemas y enfoques que pueden ampliar las posibilidades de aprendizaje, apoyo, retroalimentación y toma de decisiones pedagógicas. Su valor educativo depende de cómo se integre al diseño didáctico, qué necesidad resuelve, qué evidencias genera y cómo se supervisa su uso. Una IA puede personalizar rutas, sugerir recursos, detectar patrones de desempeño o apoyar la generación de materiales, pero siempre debe estar orientada por criterios pedagógicos, éticos y humanos.", "points": [["Apoyo, no sustitución", "La IA debe complementar el juicio pedagógico del docente y la agencia del estudiante."], ["Valor educativo", "Su pertinencia depende de la necesidad atendida y del impacto real en el aprendizaje."], ["Supervisión humana", "Los resultados deben revisarse, explicarse y ajustarse cuando sea necesario."], ["Uso crítico", "No toda respuesta generada por IA es válida, precisa o contextualizada."]], "example": "Ejemplo: un sistema de IA puede recomendar materiales distintos según el desempeño del estudiante, pero el docente debe validar la pertinencia de esas recomendaciones y el estudiante debe comprender por qué las recibe."}, {"icon": "🎯", "title": "Aprendizaje adaptativo y personalización", "text": "El aprendizaje adaptativo busca ajustar contenidos, actividades, secuencias o apoyos a partir del desempeño, las necesidades y el avance de cada estudiante. La personalización, por su parte, implica reconocer diferencias individuales y ofrecer experiencias más pertinentes. Aunque ambos conceptos se relacionan, no son idénticos: una plataforma adaptativa puede automatizar decisiones en función de respuestas y patrones, mientras que la personalización también puede ocurrir mediante decisiones pedagógicas humanas, opciones de producto, acompañamiento diferenciado o rutas flexibles.", "points": [["Adaptación", "El sistema ajusta recursos, rutas o niveles según evidencias de desempeño."], ["Personalización", "El diseño reconoce intereses, contexto, ritmo y necesidades del estudiante."], ["Flexibilidad", "Se pueden ofrecer diferentes trayectorias para alcanzar un mismo resultado de aprendizaje."], ["Riesgos", "Una personalización mal diseñada puede fragmentar el aprendizaje o reproducir sesgos."]], "example": "Ejemplo: una actividad puede ofrecer tres rutas de profundización: una guiada, una intermedia y una de aplicación avanzada, manteniendo el mismo objetivo de aprendizaje."}, {"icon": "📊", "title": "Analítica del aprendizaje", "text": "La analítica del aprendizaje consiste en recopilar, medir, analizar e interpretar datos sobre estudiantes y contextos de aprendizaje con el fin de comprender y optimizar la experiencia educativa. No se trata solo de observar calificaciones; también incluye patrones de participación, tiempo dedicado, recursos consultados, interacciones y puntos críticos del trayecto formativo. En Educación 5.0, la analítica tiene sentido cuando se utiliza para apoyar la mejora, prevenir abandono, personalizar intervenciones y fortalecer la toma de decisiones con un enfoque ético y transparente.", "points": [["Datos relevantes", "Participación, desempeño, interacción, permanencia, secuencia y dificultades."], ["Toma de decisiones", "La información debe traducirse en acciones pedagógicas concretas."], ["Prevención", "Permite identificar señales tempranas de desmotivación, rezago o abandono."], ["Ética y privacidad", "Los datos no deben utilizarse sin propósito claro ni sin protección adecuada."]], "example": "Ejemplo: si la plataforma muestra que la mayoría de estudiantes abandona un recurso a los tres minutos, puede ser necesario rediseñar el formato, segmentar el contenido o añadir apoyos."}, {"icon": "⚙️", "title": "Automatización y retroalimentación inteligente", "text": "La automatización educativa puede facilitar procesos como la clasificación inicial de respuestas, la organización de tareas, la generación de rúbricas base, la detección de patrones y la entrega de retroalimentación preliminar. Sin embargo, la retroalimentación inteligente solo es valiosa cuando es específica, comprensible, accionable y alineada con los objetivos de aprendizaje. Automatizar sin criterio puede producir mensajes genéricos o confusos; por ello, la revisión humana sigue siendo esencial, especialmente cuando se trata de decisiones académicas importantes.", "points": [["Eficiencia", "Permite ahorrar tiempo en tareas repetitivas y de bajo valor estratégico."], ["Retroalimentación oportuna", "Puede ofrecer comentarios iniciales más rápidos."], ["Límites", "No sustituye la interpretación humana ni la comprensión del contexto."], ["Calidad", "La retroalimentación debe orientar la mejora y no solo señalar errores."]], "example": "Ejemplo: una herramienta puede marcar patrones de redacción o estructura en un texto, pero el docente debe complementar con observaciones sobre argumentación, profundidad y pertinencia."}, {"icon": "🥽", "title": "Tecnologías emergentes para el aprendizaje", "text": "Las tecnologías emergentes incluyen herramientas y entornos como realidad aumentada, realidad virtual, simuladores, asistentes conversacionales, entornos inmersivos, laboratorios remotos, gemelos digitales, sistemas de recomendación y recursos basados en IA generativa. Su valor en Educación 5.0 no está en su novedad, sino en su capacidad para ofrecer experiencias más significativas, seguras, prácticas, visuales o contextualizadas. El criterio clave es preguntarse qué aprendizaje posibilitan que de otra manera sería difícil, riesgoso, costoso o poco accesible.", "points": [["Experiencia ampliada", "Permiten visualizar, simular, interactuar y practicar en contextos complejos."], ["Aprendizaje situado", "Acercan al estudiante a situaciones auténticas o inmersivas."], ["Acceso ampliado", "Pueden democratizar experiencias antes restringidas por costo o infraestructura."], ["Criterio de selección", "No toda materia necesita realidad virtual o IA; la decisión depende del objetivo."]], "example": "Ejemplo: un simulador puede permitir practicar decisiones clínicas, de ingeniería o de seguridad antes de enfrentarlas en un entorno real."}, {"icon": "🛡️", "title": "Criterios éticos para integrar IA y tecnologías emergentes", "text": "Toda integración de inteligencia artificial y tecnologías emergentes debe considerar transparencia, supervisión humana, protección de datos, accesibilidad, no discriminación, explicabilidad y pertinencia pedagógica. Un uso tecnológicamente sofisticado puede seguir siendo inadecuado si no informa al estudiante, si reproduce sesgos, si excluye a ciertos grupos o si toma decisiones opacas. Educación 5.0 exige que la innovación tecnológica esté acompañada de responsabilidad y gobernanza pedagógica.", "points": [["Transparencia", "Las personas deben saber cuándo interactúan con IA y para qué se usa."], ["Protección de datos", "Deben minimizarse, resguardarse y utilizarse con propósito legítimo."], ["No discriminación", "Los sistemas no deben favorecer ni perjudicar injustamente a ciertos grupos."], ["Pertinencia", "La tecnología debe justificarse por su valor educativo, no por moda."]], "example": "Ejemplo: si una plataforma recomienda actividades diferentes según desempeño, es importante explicar cómo lo hace y permitir revisión del docente."}];
+const journeyData = [{"label": "1", "title": "Identificar la necesidad", "summary": "Definir qué problema educativo real se busca atender con IA o con una tecnología emergente.", "detail": "Antes de elegir una herramienta, es necesario reconocer la necesidad: rezago, poca participación, dificultades para practicar, retroalimentación tardía, rutas poco flexibles o falta de visualización de procesos complejos.", "example": "Ejemplo: estudiantes abandonan una unidad porque no reciben orientación oportuna y los recursos son iguales para todos."}, {"label": "2", "title": "Seleccionar la tecnología pertinente", "summary": "Elegir la herramienta o estrategia tecnológica más adecuada para responder a la necesidad.", "detail": "La selección debe considerar objetivos de aprendizaje, accesibilidad, costos, infraestructura, facilidad de uso, privacidad y valor pedagógico. No siempre la mejor solución es la más compleja.", "example": "Ejemplo: para mejorar retroalimentación puede bastar una rúbrica con comentarios guiados y no necesariamente un sistema inmersivo."}, {"label": "3", "title": "Diseñar la experiencia", "summary": "Alinear tecnología, actividad, acompañamiento, evaluación y evidencias.", "detail": "La herramienta debe integrarse a una experiencia completa que defina qué hará el estudiante, cómo recibirá apoyo, qué producto generará y cómo se evaluará.", "example": "Ejemplo: un chatbot puede servir como tutor inicial, pero debe incluir preguntas orientadoras, rutas de apoyo y seguimiento docente."}, {"label": "4", "title": "Definir criterios éticos y de uso", "summary": "Establecer reglas, límites, transparencia y supervisión del uso tecnológico.", "detail": "Se deben definir permisos, restricciones, declaración de uso de IA, protección de datos, revisión de resultados y responsabilidad académica.", "example": "Ejemplo: se permite usar IA para explorar ideas, pero se exige declarar prompts, revisar contenido y justificar decisiones finales."}, {"label": "5", "title": "Evaluar e iterar", "summary": "Revisar el impacto de la experiencia y ajustar la propuesta.", "detail": "Toda innovación debe someterse a observación, retroalimentación y análisis de resultados para identificar qué funcionó, qué barreras aparecieron y qué debe mejorarse.", "example": "Ejemplo: si la solución favorece rapidez, pero genera dependencia o confusión, se requiere rediseño."}];
+const cases = [{"title": "Caso 1. Personalización aparente", "story": "Una plataforma afirma ofrecer aprendizaje personalizado. Sin embargo, todos los estudiantes reciben las mismas actividades, y el único cambio es el orden de los contenidos. El sistema no considera desempeño, contexto, intereses ni necesidades de apoyo.", "question": "¿Puede considerarse una personalización auténtica? ¿Qué faltaría para que sí lo fuera?", "analysis": [["Problema central", "La experiencia cambia el orden, pero no la pertinencia real del aprendizaje."], ["Riesgo", "Presentar flexibilidad superficial como personalización pedagógica."], ["Evidencia", "No existen decisiones diferenciadas por desempeño, necesidad o contexto."], ["Mejora", "Incorporar rutas, apoyos y recursos distintos según evidencias claras."]]}, {"title": "Caso 2. Analítica sin acción pedagógica", "story": "Una institución genera reportes detallados sobre acceso, permanencia, tiempos y participación. A pesar de ello, docentes y coordinadores no utilizan la información para rediseñar actividades ni acompañar a estudiantes en riesgo.", "question": "¿Qué limita el valor de la analítica del aprendizaje en este caso?", "analysis": [["Problema central", "Los datos existen, pero no se convierten en decisiones educativas."], ["Riesgo", "Acumular información sin impacto en la experiencia del estudiante."], ["Necesidad", "Traducir reportes en acciones de apoyo, ajuste o prevención."], ["Mejora", "Definir indicadores accionables, alertas y protocolos de intervención."]]}, {"title": "Caso 3. IA generativa sin supervisión", "story": "En una materia, el docente solicita a sus estudiantes usar IA generativa para resolver un caso. No les pide verificar fuentes, ni justificar decisiones, ni declarar el uso de la herramienta. El producto final es uniforme y poco reflexivo.", "question": "¿Qué riesgos pedagógicos y éticos aparecen cuando la IA se usa sin criterios claros?", "analysis": [["Problema central", "La herramienta sustituye procesos cognitivos que debían desarrollarse."], ["Riesgo", "Dependencia, superficialidad, errores, falta de autoría y escasa reflexión."], ["Dimensión ética", "No hay claridad sobre trazabilidad, transparencia ni responsabilidad."], ["Mejora", "Solicitar bitácora de prompts, verificación, ajustes y defensa del producto."]]}];
+const activities = [{"title": "Actividad 1. Mapa comparativo de tecnologías emergentes e IA en educación", "badge": "Análisis comparativo · 30%", "description": "Elaborar un recurso visual comparativo que analice tecnologías emergentes y herramientas de inteligencia artificial con base en su valor pedagógico, su aplicabilidad y sus condiciones de uso.", "purpose": "Comprender que el valor de una tecnología no depende de su novedad, sino de su relación con necesidades y objetivos educativos.", "duration": "120 a 150 minutos.", "format": "Infografía, tablero comparativo, matriz visual o presentación de 8 a 10 diapositivas.", "ai": "Permitido para recopilar ejemplos o clasificar ideas, siempre que la información sea verificada, reescrita y declarada.", "steps": ["Selecciona al menos cinco tecnologías o recursos: IA generativa, aprendizaje adaptativo, analítica, realidad aumentada, realidad virtual, simuladores o asistentes conversacionales.", "Describe qué es cada recurso y cómo podría utilizarse en un contexto educativo.", "Compara ventajas, limitaciones, riesgos, requerimientos y posibilidades de uso.", "Relaciona cada tecnología con una necesidad educativa concreta.", "Concluye cuál o cuáles serían más pertinentes para el contexto de tu proyecto final y explica por qué."], "criteria": ["Claridad conceptual", "Comparación pertinente", "Aplicación educativa", "Calidad visual", "Justificación"]}, {"title": "Actividad 2. Análisis de caso: personalización y analítica con responsabilidad", "badge": "Caso aplicado · 30%", "description": "Analizar un caso de una institución que implementa aprendizaje adaptativo, analítica e inteligencia artificial, pero enfrenta problemas de privacidad, sesgos, poca transparencia y escasa intervención docente.", "purpose": "Aplicar los conceptos de la semana para identificar decisiones pedagógicas, tecnológicas y éticas dentro de una situación compleja.", "duration": "120 a 160 minutos.", "format": "Reporte argumentado de 3 a 5 páginas o presentación analítica de 8 a 10 diapositivas.", "ai": "Permitido únicamente para organizar categorías o contrastar alternativas. El análisis, la postura y las recomendaciones deben ser propias.", "steps": ["Lee el caso completo e identifica a los actores, el problema y las decisiones tomadas.", "Distingue qué elementos corresponden a personalización, aprendizaje adaptativo, analítica y automatización.", "Identifica al menos cinco riesgos pedagógicos, éticos, de privacidad o accesibilidad.", "Analiza qué decisiones deberían conservarse, modificarse o eliminarse.", "Propón una ruta de mejora con al menos cinco acciones concretas.", "Cierra con una postura argumentada sobre el papel de la supervisión humana."], "criteria": ["Comprensión del caso", "Aplicación conceptual", "Identificación de riesgos", "Calidad de recomendaciones", "Argumentación"]}, {"title": "Actividad 3. Avance del proyecto final: integración tecnológica preliminar", "badge": "Proyecto final · 40%", "description": "Desarrollar el avance de la semana del proyecto final, definiendo cómo se integrará una herramienta de inteligencia artificial o una tecnología emergente a la experiencia educativa diseñada.", "purpose": "Transformar el diagnóstico y el perfil de usuarios en una decisión tecnológica pedagógicamente justificada, ética y viable.", "duration": "180 a 240 minutos.", "format": "Documento de 5 a 7 páginas o presentación de 10 a 14 diapositivas.", "ai": "Permitido para explorar alternativas, comparar herramientas o generar borradores. Se debe entregar un anexo de uso con herramienta, prompts, resultados, verificación y modificaciones.", "steps": ["Retoma la necesidad educativa, el contexto y el perfil de usuarios definidos en semanas anteriores.", "Selecciona una función tecnológica principal: personalización, adaptación, retroalimentación inteligente, analítica, simulación, inmersión o acompañamiento.", "Justifica por qué esa función responde a la necesidad detectada.", "Describe la herramienta o tecnología seleccionada, sus requerimientos y sus limitaciones.", "Diseña una secuencia preliminar de interacción: qué hará el estudiante, qué hará el docente y qué hará la tecnología.", "Define criterios de accesibilidad, privacidad, transparencia, supervisión humana y uso responsable.", "Establece al menos cuatro indicadores iniciales para evaluar si la integración genera valor educativo."], "criteria": ["Coherencia con el diagnóstico", "Pertinencia tecnológica", "Diseño pedagógico", "Ética y accesibilidad", "Indicadores de evaluación"]}];
+const products = [{"label": "Producto 1", "title": "Mapa comparativo de tecnologías emergentes", "description": "Recurso visual que compara tecnologías y enfoques relevantes para Educación 5.0.", "specs": [["Contenido mínimo", "Cinco tecnologías, definición, aplicación, ventajas, límites, riesgos y necesidad atendida."], ["Extensión", "Una infografía amplia o una presentación de 8 a 10 diapositivas."], ["Criterio central", "Justificar el valor pedagógico y no solo describir características técnicas."], ["Entrega", "PDF o enlace público accesible."]], "note": "El producto debe mostrar capacidad de comparación y selección tecnológica."}, {"label": "Producto 2", "title": "Reporte de análisis de caso", "description": "Análisis argumentado de una situación de personalización, analítica e IA con riesgos pedagógicos y éticos.", "specs": [["Estructura", "Problema, actores, conceptos aplicados, riesgos, decisiones y propuesta de mejora."], ["Extensión", "3 a 5 páginas o 8 a 10 diapositivas."], ["Fundamentación", "Al menos dos referencias de la semana correctamente citadas."], ["Conclusión", "Postura sobre supervisión humana y responsabilidad institucional."]], "note": "No se evalúa solo la descripción del caso, sino la calidad del análisis y las recomendaciones."}, {"label": "Producto 3", "title": "Avance del proyecto final: integración tecnológica", "description": "Documento que define y justifica la incorporación preliminar de IA o tecnología emergente en el proyecto final.", "specs": [["Estructura", "Necesidad, usuario, función tecnológica, herramienta, secuencia, ética e indicadores."], ["Extensión", "5 a 7 páginas o 10 a 14 diapositivas."], ["Uso de IA", "Anexo con herramienta, prompts, resultados, verificación y modificaciones."], ["Continuidad", "Debe integrarse al documento acumulativo del proyecto final."]], "note": "Este avance será retomado y refinado durante las siguientes semanas."}];
+const questions = [{"question": "¿Cuál es la función más importante de la inteligencia artificial en Educación 5.0?", "options": ["Sustituir por completo al docente.", "Ampliar las posibilidades de aprendizaje con criterio pedagógico y supervisión humana.", "Automatizar todas las decisiones académicas.", "Reducir al mínimo la participación del estudiante."], "correct": 1, "feedback_correct": "Correcto. En Educación 5.0 la IA debe ampliar capacidades y apoyar decisiones, siempre con orientación pedagógica y supervisión humana.", "feedback_incorrect": "La IA no debe sustituir al docente ni automatizar sin criterio. Su función es apoyar el aprendizaje con sentido pedagógico."}, {"question": "¿Qué diferencia existe entre aprendizaje adaptativo y personalización?", "options": ["Son exactamente lo mismo.", "La personalización solo ocurre con robots.", "El aprendizaje adaptativo suele basarse en ajustes del sistema, mientras que la personalización también puede surgir de decisiones pedagógicas humanas.", "La personalización siempre elimina los objetivos comunes."], "correct": 2, "feedback_correct": "Correcto. El aprendizaje adaptativo suele ajustar rutas con base en datos, mientras que la personalización también puede lograrse con decisiones didácticas humanas.", "feedback_incorrect": "Aunque están relacionados, no son idénticos. La personalización no depende únicamente del sistema."}, {"question": "¿Qué caracteriza a la analítica del aprendizaje?", "options": ["Solo mide calificaciones finales.", "Analiza datos para comprender y mejorar la experiencia educativa.", "Sirve únicamente para vigilar estudiantes.", "Funciona sin necesidad de decisiones pedagógicas."], "correct": 1, "feedback_correct": "Correcto. La analítica del aprendizaje permite interpretar datos para optimizar experiencias educativas.", "feedback_incorrect": "La analítica va más allá de las calificaciones y cobra sentido cuando orienta decisiones pedagógicas."}, {"question": "¿Cuál es un riesgo de automatizar retroalimentación sin supervisión?", "options": ["Que el proceso sea demasiado humano.", "Que se generen mensajes genéricos, poco pertinentes o descontextualizados.", "Que se mejore automáticamente toda la argumentación.", "Que desaparezca toda necesidad de evaluar."], "correct": 1, "feedback_correct": "Correcto. La retroalimentación automatizada puede ser genérica o poco útil si no se revisa críticamente.", "feedback_incorrect": "Automatizar sin supervisión puede producir mensajes poco accionables o descontextualizados."}, {"question": "¿Qué criterio debe guiar la selección de una tecnología emergente?", "options": ["Que sea la más novedosa del mercado.", "Que utilice gráficos llamativos.", "Que responda a un objetivo y a una necesidad educativa concreta.", "Que sustituya todas las actividades previas."], "correct": 2, "feedback_correct": "Correcto. El criterio principal debe ser su pertinencia educativa y su valor para resolver una necesidad concreta.", "feedback_incorrect": "La novedad por sí sola no justifica el uso de una tecnología. Debe responder a una necesidad educativa."}, {"question": "¿Cuál es un uso pedagógicamente pertinente de la analítica del aprendizaje?", "options": ["Recolectar datos sin informar para qué servirán.", "Usar patrones de participación para intervenir tempranamente y apoyar estudiantes.", "Tomar decisiones opacas sin revisión humana.", "Sancionar automáticamente cualquier comportamiento."], "correct": 1, "feedback_correct": "Correcto. La analítica puede ayudar a detectar necesidades y activar apoyos oportunos.", "feedback_incorrect": "La analítica del aprendizaje debe traducirse en acciones de apoyo y mejora, no en vigilancia sin propósito."}, {"question": "¿Qué debe incluir un uso ético de IA en educación?", "options": ["Solo eficiencia y rapidez.", "Transparencia, protección de datos, supervisión humana y pertinencia pedagógica.", "Automatización total del curso.", "Ocultar al estudiante que está interactuando con IA."], "correct": 1, "feedback_correct": "Correcto. La integración ética exige transparencia, protección de datos, no discriminación y supervisión humana.", "feedback_incorrect": "La ética en IA no se limita a la eficiencia; implica transparencia, protección de datos y responsabilidad pedagógica."}, {"question": "¿Qué evidencia sugiere que una plataforma no es realmente personalizada?", "options": ["Todos los estudiantes reciben exactamente las mismas actividades sin apoyos diferenciados.", "El estudiante puede elegir entre distintos productos.", "Existen apoyos según necesidades.", "La ruta cambia con base en desempeño."], "correct": 0, "feedback_correct": "Correcto. Si todos reciben la misma experiencia sin diferenciación, difícilmente existe personalización real.", "feedback_incorrect": "La personalización requiere ajustes, apoyos o decisiones diferenciadas según necesidades o desempeño."}, {"question": "¿Cuál es un beneficio educativo de los simuladores o entornos inmersivos?", "options": ["Eliminar toda necesidad de acompañamiento.", "Practicar situaciones complejas o riesgosas en condiciones controladas.", "Sustituir el pensamiento crítico.", "Evitar cualquier forma de evaluación."], "correct": 1, "feedback_correct": "Correcto. Los simuladores permiten practicar, explorar y tomar decisiones en entornos complejos de manera segura.", "feedback_incorrect": "Uno de sus beneficios es posibilitar experiencias prácticas y seguras, no eliminar el acompañamiento ni la evaluación."}, {"question": "¿Qué debe ocurrir después de implementar una experiencia con IA o tecnología emergente?", "options": ["Nada, porque la tecnología garantiza el éxito.", "Evaluar resultados, identificar barreras y ajustar la propuesta.", "Mantenerla sin cambios por varias generaciones.", "Eliminar la retroalimentación de estudiantes."], "correct": 1, "feedback_correct": "Correcto. Toda innovación requiere evaluación e iteración para mejorar su pertinencia e impacto.", "feedback_incorrect": "La implementación no es el final. Es necesario valorar su impacto y ajustar la experiencia."}];
+
+const topicButtons=[...document.querySelectorAll(".topic-btn")];
+function renderTheory(index){
+  topicButtons.forEach((btn,i)=>btn.classList.toggle("active",i===index));
+  const d=theoryData[index];
+  theoryIcon.textContent=d.icon;
+  theoryTitle.textContent=d.title;
+  theoryText.textContent=d.text;
+  theoryPoints.innerHTML=d.points.map(p=>`<div class="point"><strong>${p[0]}</strong>${p[1]}</div>`).join("");
+  theoryExample.textContent=d.example;
+}
+topicButtons.forEach((btn,index)=>btn.addEventListener("click",()=>renderTheory(index)));
+renderTheory(0);
+
+const journeyButtons=[...document.querySelectorAll(".journey-btn")];
+function renderJourney(index){
+  journeyButtons.forEach((btn,i)=>btn.classList.toggle("active",i===index));
+  const d=journeyData[index];
+  journeyLabel.textContent=d.label;
+  journeyTitle.textContent=d.title;
+  journeySummary.textContent=d.summary;
+  journeyDetail.textContent=d.detail;
+  journeyExample.textContent=d.example;
+}
+journeyButtons.forEach((btn,index)=>btn.addEventListener("click",()=>renderJourney(index)));
+renderJourney(0);
+
+const caseButtons=[...document.querySelectorAll(".case-btn")];
+function renderCase(index){
+  caseButtons.forEach((btn,i)=>btn.classList.toggle("active",i===index));
+  const d=cases[index];
+  caseTitle.textContent=d.title;
+  caseStory.textContent=d.story;
+  caseQuestion.textContent=d.question;
+  caseGrid.innerHTML=d.analysis.map(i=>`<div class="case-item"><strong>${i[0]}</strong><p>${i[1]}</p></div>`).join("");
+}
+caseButtons.forEach((btn,index)=>btn.addEventListener("click",()=>renderCase(index)));
+renderCase(0);
+
+activityGrid.innerHTML=activities.map(a=>`
+  <article class="activity-card">
+    <div class="activity-head">
+      <h3>${a.title}</h3>
+      <span class="activity-badge">${a.badge}</span>
+    </div>
+    <div class="activity-body">
+      <p>${a.description}</p>
+      <div class="activity-detail-grid">
+        <div class="activity-detail"><strong>Propósito</strong><p>${a.purpose}</p></div>
+        <div class="activity-detail"><strong>Duración estimada</strong><p>${a.duration}</p></div>
+        <div class="activity-detail"><strong>Formato</strong><p>${a.format}</p></div>
+        <div class="activity-detail"><strong>Uso de IA</strong><p>${a.ai}</p></div>
+      </div>
+      <ol class="steps">${a.steps.map(s=>`<li>${s}</li>`).join("")}</ol>
+      <div class="criteria">${a.criteria.map(c=>`<span class="criterion">${c}</span>`).join("")}</div>
+    </div>
+  </article>
+`).join("");
+
+productGrid.innerHTML=products.map(p=>`
+  <article class="product-card">
+    <div class="product-top">
+      <span>${p.label}</span>
+      <h3>${p.title}</h3>
+    </div>
+    <div class="product-body">
+      <p>${p.description}</p>
+      <div class="specs">
+        ${p.specs.map(s=>`<div class="spec"><strong>${s[0]}</strong><span>${s[1]}</span></div>`).join("")}
+      </div>
+      <div class="product-note">${p.note}</div>
+    </div>
+  </article>
+`).join("");
+
+theoryBtn.onclick=()=>theorySection.scrollIntoView({behavior:"smooth"});
+quizBtn.onclick=()=>quizSection.scrollIntoView({behavior:"smooth"});
+contrastBtn.onclick=()=>{
+  const active=document.body.classList.toggle("high");
+  contrastBtn.textContent=active?"Contraste normal":"Alto contraste";
+};
+
+const storageKey="uaf_educacion5_semana3_quiz_v1";
+let state={attempts:0,best:0,last:null};
+try{
+  const stored=JSON.parse(localStorage.getItem(storageKey));
+  if(stored && typeof stored.attempts==="number") state=stored;
+}catch(e){}
+
+let quizActive=false;
+let quizSubmitted=false;
+
+function saveState(){
+  try{localStorage.setItem(storageKey,JSON.stringify(state));}catch(e){}
+}
+
+function updateDashboard(){
+  attemptsUsed.textContent=state.attempts;
+  bestScore.textContent=state.best;
+  lastScore.textContent=state.last===null?"—":state.last;
+  if(state.attempts>=2){
+    startQuizBtn.disabled=true;
+    startQuizBtn.textContent="Intentos agotados";
+  }else if(state.attempts===1){
+    startQuizBtn.textContent="Iniciar segundo intento";
+  }else{
+    startQuizBtn.textContent="Iniciar primer intento";
+  }
+}
+
+function buildQuiz(){
+  quizForm.innerHTML=questions.map((q,index)=>`
+    <article class="question-card">
+      <h3>${index+1}. ${q.question}</h3>
+      <div class="option-list">
+        ${q.options.map((option,optIndex)=>`
+          <label class="option-label">
+            <input type="radio" name="q${index}" value="${optIndex}">
+            <span>${option}</span>
+          </label>
+        `).join("")}
+      </div>
+      <div class="question-feedback" id="feedback${index}"></div>
+    </article>
+  `).join("");
+}
+
+startQuizBtn.addEventListener("click",()=>{
+  if(state.attempts>=2) return;
+  buildQuiz();
+  quizForm.classList.add("active");
+  quizResult.classList.remove("show");
+  submitQuizBtn.disabled=false;
+  startQuizBtn.disabled=true;
+  quizActive=true;
+  quizSubmitted=false;
+  quizSection.scrollIntoView({behavior:"smooth",block:"start"});
+});
+
+submitQuizBtn.addEventListener("click",()=>{
+  if(!quizActive || quizSubmitted) return;
+
+  const unanswered=[];
+  questions.forEach((q,index)=>{
+    if(!quizForm.querySelector(`input[name="q${index}"]:checked`)) unanswered.push(index+1);
+  });
+
+  if(unanswered.length){
+    alert("Responde todas las preguntas antes de enviar. Faltan: "+unanswered.join(", "));
+    return;
+  }
+
+  let correctCount=0;
+  questions.forEach((q,index)=>{
+    const selected=Number(quizForm.querySelector(`input[name="q${index}"]:checked`).value);
+    const feedback=document.getElementById(`feedback${index}`);
+    feedback.classList.add("show");
+
+    if(selected===q.correct){
+      correctCount++;
+      feedback.classList.add("correct");
+      feedback.classList.remove("incorrect");
+      feedback.textContent=q.feedback_correct;
+    }else{
+      feedback.classList.add("incorrect");
+      feedback.classList.remove("correct");
+      feedback.textContent=q.feedback_incorrect;
+    }
+
+    quizForm.querySelectorAll(`input[name="q${index}"]`).forEach(input=>input.disabled=true);
+  });
+
+  const score=Math.round((correctCount/questions.length)*100);
+  state.attempts++;
+  state.last=score;
+  state.best=Math.max(state.best,score);
+  saveState();
+
+  quizSubmitted=true;
+  quizActive=false;
+  submitQuizBtn.disabled=true;
+
+  resultTitle.textContent=`Calificación del intento: ${score}/100`;
+  resultText.textContent=`Respuestas correctas: ${correctCount} de ${questions.length}. Mejor calificación registrada: ${state.best}/100. ${state.attempts<2 ? "Todavía dispones de una oportunidad adicional." : "Has utilizado las dos oportunidades disponibles."}`;
+  quizResult.classList.add("show");
+
+  updateDashboard();
+  if(state.attempts<2) startQuizBtn.disabled=false;
+});
+
+updateDashboard();
+</script>
+</body>
+</html>
