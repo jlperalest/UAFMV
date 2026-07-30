@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#812843">
+<title>Agenda de la Semana 3 | Educación 5.0</title>
+<style>
+:root{
+  --vino:#812843;--vino2:#4f1026;--magenta:#c73765;--azul:#7395a2;--azul2:#385d69;
+  --vino-suave:#f5e8ed;--azul-suave:#eaf1f4;--verde:#34745f;--verde-suave:#eaf4f0;
+  --fondo:#f4f7f8;--gris:#d6dfe3;--gris2:#b8c6cc;--texto:#1e272c;--texto2:#405058;
+  --sombra:0 24px 60px rgba(31,47,55,.14);--sombra2:0 14px 32px rgba(31,47,55,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;overflow-x:hidden;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--texto);
+  background:
+    radial-gradient(circle at 7% 8%,rgba(115,149,162,.20),transparent 23rem),
+    radial-gradient(circle at 92% 16%,rgba(199,55,101,.11),transparent 26rem),
+    linear-gradient(180deg,#fff,var(--fondo));
+}
+button{font:inherit;cursor:pointer}
+button:focus-visible{outline:4px solid rgba(199,55,101,.28);outline-offset:3px}
+.frame{position:fixed;inset:0;pointer-events:none;z-index:100;border:10px solid transparent;border-image:linear-gradient(135deg,var(--azul),var(--vino),var(--magenta),var(--azul)) 1}
+.page{width:min(1220px,calc(100% - 30px));margin:auto;padding:38px 0 68px}
+.topbar{position:sticky;top:14px;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 14px;margin-bottom:18px;border:1px solid rgba(56,93,105,.22);border-radius:20px;background:rgba(255,255,255,.95);backdrop-filter:blur(18px);box-shadow:0 12px 30px rgba(31,47,55,.11)}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;color:#fff;background:linear-gradient(145deg,var(--vino),var(--magenta));font-weight:950}
+.brand strong{display:block;color:var(--vino)}
+.brand small{display:block;margin-top:3px;color:var(--texto2);font-weight:650}
+.top-actions{display:flex;align-items:center;gap:10px}
+.progress-label{padding:8px 11px;border-radius:999px;color:var(--azul2);background:var(--azul-suave);font-size:.82rem;font-weight:850}
+.contrast{border:1px solid var(--vino);border-radius:12px;padding:9px 11px;color:var(--vino);background:#fff;font-weight:850}
+.contrast:hover{color:#fff;background:var(--vino)}
+
+.hero{position:relative;overflow:hidden;display:grid;grid-template-columns:1.04fr .96fr;align-items:center;min-height:500px;border:1px solid rgba(56,93,105,.25);border-radius:34px;background:#fff;box-shadow:var(--sombra)}
+.hero::before{content:"";position:absolute;inset:0 auto 0 0;width:9px;background:linear-gradient(var(--vino),var(--magenta),var(--azul))}
+.hero-copy{position:relative;z-index:3;padding:58px 54px}
+.kicker{display:inline-flex;align-items:center;gap:9px;padding:9px 14px;border-radius:999px;color:var(--vino2);background:var(--vino-suave);border:1px solid #d9a9ba;font-size:.8rem;font-weight:900;letter-spacing:.055em;text-transform:uppercase}
+.kicker::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--magenta);box-shadow:0 0 0 6px rgba(199,55,101,.13)}
+h1{margin:22px 0 10px;color:var(--vino);font-size:clamp(3.1rem,6vw,5.7rem);line-height:.92;letter-spacing:-.07em}
+.hero-sub{margin:0 0 17px;color:var(--azul2);font-size:clamp(1.08rem,2.1vw,1.5rem);font-weight:900}
+.hero-text{margin:0;max-width:700px;color:var(--texto2);line-height:1.76;font-size:1.04rem}
+.hero-actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:28px}
+.primary,.secondary{padding:13px 17px;border-radius:15px;font-weight:900}
+.primary{border:0;color:#fff;background:linear-gradient(135deg,var(--vino),var(--magenta))}
+.secondary{color:var(--vino);background:#fff;border:2px solid var(--vino)}
+.secondary:hover{color:#fff;background:var(--vino)}
+
+.hero-visual{position:relative;height:100%;min-height:500px;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 60% 30%,rgba(255,255,255,.24),transparent 15rem),linear-gradient(145deg,var(--azul2),var(--azul))}
+.clock{position:relative;width:min(390px,84%);aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.11);border:2px solid rgba(255,255,255,.35);box-shadow:0 24px 55px rgba(20,38,46,.27)}
+.clock::before{content:"";position:absolute;inset:12%;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 1px var(--gris)}
+.clock-core{position:absolute;inset:31%;display:grid;place-items:center;border-radius:32%;background:linear-gradient(145deg,var(--vino),var(--magenta));color:#fff;font-size:1.55rem;font-weight:950;text-align:center;line-height:1.08;transform:rotate(7deg);box-shadow:0 15px 32px rgba(129,40,67,.25)}
+.clock-core span{transform:rotate(-7deg)}
+.clock-node{position:absolute;width:70px;height:70px;display:grid;place-items:center;border-radius:21px;background:#fff;color:var(--vino2);font-weight:950;box-shadow:0 12px 26px rgba(20,38,46,.23)}
+.clock-node small{position:absolute;top:78px;left:50%;transform:translateX(-50%);width:110px;padding:5px 7px;border-radius:8px;color:#fff;background:rgba(35,64,74,.94);font-size:.62rem;text-align:center}
+.c1{top:1%;left:41%}.c2{right:1%;top:36%}.c3{bottom:1%;left:41%}.c4{left:1%;top:36%}
+
+.section{margin-top:24px;scroll-margin-top:100px}
+.panel{overflow:hidden;border:1px solid var(--gris2);border-radius:30px;background:#fff;box-shadow:var(--sombra)}
+.panel-head{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap;padding:30px 32px 22px;border-bottom:1px solid var(--gris)}
+.panel-head h2{margin:0;color:var(--vino);font-size:clamp(1.55rem,3vw,2.4rem)}
+.panel-head p{margin:7px 0 0;max-width:78ch;color:var(--texto2);line-height:1.6}
+
+.summary{display:grid;grid-template-columns:.78fr 1.22fr;gap:24px;padding:30px 32px 36px}
+.objective{padding:25px;border-radius:24px;color:#fff;background:linear-gradient(145deg,var(--azul2),var(--vino))}
+.objective h3{margin:0 0 10px;color:#fff;font-size:1.65rem}
+.objective p{margin:0;color:#fff;line-height:1.7}
+.objective-callout{margin-top:16px;padding:15px;border-radius:16px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.27);line-height:1.55;font-weight:850}
+.summary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.summary-card{padding:18px;border:1px solid var(--gris2);border-radius:20px;background:#fff}
+.summary-card span{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:var(--azul2);color:#fff}
+.summary-card strong{display:block;margin-top:13px;color:var(--vino2)}
+.summary-card p{margin:7px 0 0;color:var(--texto2);line-height:1.55;font-size:.9rem}
+
+.agenda{padding:30px 32px 36px}
+.agenda-layout{display:grid;grid-template-columns:.72fr 1.28fr;gap:24px}
+.agenda-menu{display:grid;gap:10px}
+.agenda-btn{width:100%;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:15px;border:1px solid var(--gris2);border-radius:18px;background:#fff;text-align:left}
+.agenda-btn:hover{transform:translateX(4px);border-color:var(--vino)}
+.agenda-btn.active{color:#fff;background:linear-gradient(135deg,var(--vino2),var(--vino));border-color:var(--vino2)}
+.agenda-num{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;background:var(--vino-suave);color:var(--vino);font-weight:950}
+.agenda-btn.active .agenda-num{background:#fff;color:var(--vino2)}
+.agenda-btn strong{display:block;color:inherit}
+.agenda-btn small{display:block;margin-top:3px;color:var(--texto2)}
+.agenda-btn.active small{color:#fff}
+.agenda-detail{min-height:550px;padding:28px;border:1px solid var(--gris2);border-radius:24px;background:radial-gradient(circle at 90% 10%,rgba(199,55,101,.09),transparent 13rem),linear-gradient(145deg,#fff,#f7f9fa)}
+.detail-icon{width:64px;height:64px;display:grid;place-items:center;border-radius:20px;background:linear-gradient(145deg,var(--vino),var(--magenta));color:#fff;font-size:1.65rem}
+.agenda-detail h3{margin:19px 0 8px;color:var(--vino2);font-size:1.9rem}
+.agenda-detail>p{margin:0;color:var(--texto2);line-height:1.7}
+.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:20px}
+.detail-card{padding:14px;border:1px solid var(--gris2);border-radius:16px;background:#fff}
+.detail-card strong{display:block;color:var(--vino2);font-size:.82rem;text-transform:uppercase}
+.detail-card p{margin:6px 0 0;color:var(--texto2);line-height:1.5;font-size:.9rem}
+.steps{margin:18px 0 0;padding-left:22px;color:var(--texto2);line-height:1.75}
+.agenda-note{margin-top:18px;padding:16px;border-radius:16px;color:#fff;background:linear-gradient(135deg,var(--azul2),var(--vino));line-height:1.58;font-weight:850}
+
+.checklist{padding:30px 32px 36px}
+.check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.check-item{display:flex;align-items:flex-start;gap:12px;padding:15px;border:1px solid var(--gris2);border-radius:17px;background:#fff}
+.check-item input{margin-top:3px;accent-color:var(--vino);transform:scale(1.18)}
+.check-item strong{display:block;color:var(--vino2)}
+.check-item small{display:block;margin-top:4px;color:var(--texto2);line-height:1.45}
+.progress-box{margin-top:18px;padding:18px;border-radius:18px;background:#f8fafb;border:1px solid var(--gris2)}
+.progress-top{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.progress-top strong{color:var(--vino2)}
+.progress-track{height:12px;margin-top:12px;border-radius:999px;background:var(--gris);overflow:hidden}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--vino),var(--magenta),var(--azul));transition:.3s ease}
+
+.products{padding:30px 32px 36px}
+.product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.product-card{min-height:290px;border:1px solid var(--gris2);border-radius:22px;background:#fff;overflow:hidden}
+.product-head{padding:16px;color:#fff;background:linear-gradient(135deg,var(--azul2),var(--vino))}
+.product-head strong{display:block;color:#fff;font-size:1.08rem}
+.product-body{padding:18px}
+.product-body p{margin:0;color:var(--texto2);line-height:1.58;font-size:.91rem}
+.product-meta{display:grid;gap:8px;margin-top:13px}
+.product-meta div{padding:10px;border-radius:13px;background:#f8fafb;border:1px solid var(--gris)}
+.product-meta strong{display:block;color:var(--vino2);font-size:.76rem}
+.product-meta span{display:block;margin-top:3px;color:var(--texto2);font-size:.84rem;line-height:1.4}
+
+.resources{padding:30px 32px 36px}
+.resource-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.resource-card{padding:19px;border:1px solid var(--gris2);border-radius:21px;background:#fff}
+.resource-icon{width:46px;height:46px;display:grid;place-items:center;border-radius:14px;background:var(--magenta);color:#fff}
+.resource-card strong{display:block;margin-top:14px;color:var(--vino2)}
+.resource-card p{margin:7px 0 0;color:var(--texto2);line-height:1.55;font-size:.9rem}
+.resource-links{display:grid;gap:9px;margin-top:16px}
+.resource-link{min-height:42px;display:flex;align-items:center;justify-content:center;padding:10px 13px;border-radius:12px;color:#fff;background:var(--vino);text-decoration:none;font-size:.82rem;font-weight:900;text-align:center;transition:.2s ease}
+.resource-link:hover{transform:translateY(-2px);background:var(--vino2);box-shadow:0 10px 20px rgba(129,40,67,.20)}
+.resource-link::after{content:" ↗";margin-left:5px}
+
+.closing{margin-top:24px;padding:30px;border-radius:30px;color:#fff;background:linear-gradient(120deg,var(--vino2),var(--vino),var(--magenta));display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;box-shadow:var(--sombra)}
+.closing strong{display:block;max-width:860px;font-size:clamp(1.35rem,2.8vw,2.05rem);line-height:1.24}
+.closing span{display:block;margin-top:7px}
+.closing-mark{width:105px;height:105px;display:grid;place-items:center;border-radius:31px;background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.45);font-size:2rem;font-weight:950}
+
+body.high{--texto:#101719;--texto2:#243136;--gris:#aab8be;--gris2:#7f929a;--fondo:#fff}
+body.high .panel,body.high .summary-card,body.high .agenda-btn,body.high .agenda-detail,body.high .detail-card,body.high .check-item,body.high .product-card,body.high .resource-card{border-width:2px}
+
+@media(max-width:1050px){
+  .hero{grid-template-columns:1fr}.hero-visual{min-height:440px}
+  .summary,.agenda-layout{grid-template-columns:1fr}
+  .product-grid,.resource-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:720px){
+  .progress-label{display:none}.hero-copy{padding:46px 26px}.hero-visual{min-height:390px}
+  .panel-head,.summary,.agenda,.checklist,.products,.resources{padding-left:18px;padding-right:18px}
+  .summary-grid,.detail-grid,.check-grid,.product-grid,.resource-grid{grid-template-columns:1fr}
+  .clock{width:300px}.clock-node{width:58px;height:58px;border-radius:18px}
+  .clock-node small{top:64px;width:92px;font-size:.57rem}
+  .closing{justify-content:center;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="frame"></div>
+<main class="page">
+<nav class="topbar" aria-label="Navegación de la agenda">
+  <div class="brand">
+    <div class="brand-mark">UAF</div>
+    <div>
+      <strong>Agenda de la Semana 3</strong>
+      <small>Educación 5.0: Innovación y Tecnología</small>
+    </div>
+  </div>
+  <div class="top-actions">
+    <div class="progress-label" id="progressLabel">0% completado</div>
+    <button class="contrast" id="contrastBtn" type="button">Alto contraste</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-copy">
+    <div class="kicker">Agenda semanal</div>
+    <h1>Semana 3</h1>
+    <p class="hero-sub">Tecnologías emergentes e inteligencia artificial en Educación 5.0</p>
+    <p class="hero-text">Organiza tu trabajo para analizar tecnologías emergentes, inteligencia artificial, personalización, analítica del aprendizaje y su integración pedagógica en tu proyecto.</p>
+    <div class="hero-actions">
+      <button class="primary" id="agendaBtn" type="button">Revisar agenda</button>
+      <button class="secondary" id="checkBtn" type="button">Ver checklist</button>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="clock">
+      <div class="clock-core"><span>Agenda<br>Semana 3</span></div>
+      <div class="clock-node c1">📚<small>Teoría</small></div>
+      <div class="clock-node c2">🧠<small>Análisis</small></div>
+      <div class="clock-node c3">📦<small>Productos</small></div>
+      <div class="clock-node c4">✅<small>Cierre</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="section panel">
+  <div class="panel-head">
+    <div>
+      <h2>Organización general de la semana</h2>
+      <p>Revisa el propósito, la carga estimada, las evidencias y los puntos de atención antes de iniciar.</p>
+    </div>
+  </div>
+  <div class="summary">
+    <article class="objective">
+      <h3>Objetivo</h3>
+      <p>Analizar el potencial pedagógico de la inteligencia artificial y de las tecnologías emergentes para diseñar experiencias de aprendizaje más personalizadas, pertinentes y éticamente responsables.</p>
+      <div class="objective-callout"><strong>Resultado esperado:</strong><br>Diseñar una propuesta preliminar que integre IA o una tecnología emergente para atender una necesidad educativa real.</div>
+    </article>
+    <div class="summary-grid">
+      <article class="summary-card"><span>⏱️</span><strong>Tiempo estimado</strong><p>Entre 8 y 10 horas de trabajo distribuido durante la semana.</p></article>
+      <article class="summary-card"><span>📚</span><strong>Temas centrales</strong><p>IA, aprendizaje adaptativo, personalización, analítica, automatización, tecnologías emergentes y ética.</p></article>
+      <article class="summary-card"><span>📦</span><strong>Entregables</strong><p>Mapa comparativo, diseño preliminar de experiencia y participación en foro.</p></article>
+      <article class="summary-card"><span>🗓️</span><strong>Organización</strong><p>Trabajo asincrónico con seguimiento mediante plataforma y acompañamiento institucional.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section panel" id="agendaSection">
+  <div class="panel-head">
+    <div>
+      <h2>Ruta de trabajo</h2>
+      <p>Selecciona cada momento para consultar actividades, tiempos, evidencias y recomendaciones.</p>
+    </div>
+  </div>
+  <div class="agenda">
+    <div class="agenda-layout">
+      <div class="agenda-menu" id="agendaMenu"></div>
+      <article class="agenda-detail" aria-live="polite">
+        <div class="detail-icon" id="detailIcon">📌</div>
+        <h3 id="detailTitle">Momento de la semana</h3>
+        <p id="detailDescription"></p>
+        <div class="detail-grid" id="detailGrid"></div>
+        <ol class="steps" id="detailSteps"></ol>
+        <div class="agenda-note" id="detailNote"></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section panel" id="checkSection">
+  <div class="panel-head">
+    <div>
+      <h2>Checklist de seguimiento</h2>
+      <p>Marca cada acción conforme la completes. El avance se conserva en este navegador.</p>
+    </div>
+  </div>
+  <div class="checklist">
+    <div class="check-grid" id="checkGrid"></div>
+    <div class="progress-box">
+      <div class="progress-top"><strong>Avance semanal</strong><span id="progressText">0 de 0 actividades</span></div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section panel">
+  <div class="panel-head">
+    <div>
+      <h2>Productos de la semana</h2>
+      <p>Revisa qué debes entregar y qué características mínimas debe contener cada evidencia.</p>
+    </div>
+  </div>
+  <div class="products"><div class="product-grid" id="productGrid"></div></div>
+</section>
+
+<section class="section panel">
+  <div class="panel-head">
+    <div>
+      <h2>Recursos de apoyo</h2>
+      <p>Consulta estos materiales antes de realizar las actividades y productos.</p>
+    </div>
+  </div>
+  <div class="resources"><div class="resource-grid" id="resourceGrid"></div></div>
+</section>
+
+<section class="closing">
+  <div>
+    <strong>La agenda de la Semana 3 te ayuda a transformar el análisis de tecnologías emergentes en una propuesta pedagógica concreta, ética y viable.</strong>
+    <span>Semana 3 · Educación 5.0: Innovación y Tecnología.</span>
+  </div>
+  <div class="closing-mark">3</div>
+</section>
+</main>
+
+<script>
+const agenda = [{"icon": "🚀", "title": "Inicio y enfoque de la semana", "moment": "Inicio de la semana", "time": "30 a 45 minutos", "description": "Revisar el objetivo, los resultados esperados, las actividades, los productos y la relación de la semana con el proyecto que se ha venido construyendo.", "evidence": "Planeación personal de trabajo y notas iniciales.", "tools": "Plataforma, agenda, proyecto previo y sección de avisos.", "steps": ["Lee el objetivo y el resultado esperado de la Semana 3.", "Ubica las actividades, productos y criterios de evaluación.", "Relaciona esta semana con el diagnóstico y perfil trabajados antes.", "Organiza tiempos para lectura, análisis, diseño y foro."], "note": "Esta semana marca el paso del diagnóstico hacia el diseño preliminar de una propuesta tecnológica educativa.", "checks": ["Revisé el objetivo y los productos de la semana.", "Organicé mis tiempos de trabajo.", "Relacioné la semana con mi proyecto."]}, {"icon": "📚", "title": "Estudio teórico", "moment": "Primera parte de la semana", "time": "2 a 2.5 horas", "description": "Estudiar inteligencia artificial en educación, aprendizaje adaptativo, personalización, analítica, automatización y tecnologías emergentes.", "evidence": "Notas, conceptos clave y ejemplos relacionados con el proyecto.", "tools": "Contenido interactivo, lecturas, casos y ruta de integración pedagógica.", "steps": ["Explora los seis temas del desarrollo teórico.", "Diferencia personalización, adaptación, analítica y automatización.", "Recorre la ruta de integración pedagógica.", "Registra aplicaciones posibles en tu contexto."], "note": "No te enfoques solo en herramientas; analiza su valor pedagógico y los riesgos de uso.", "checks": ["Estudié los seis temas teóricos.", "Exploré la ruta de integración.", "Relacioné la teoría con mi proyecto."]}, {"icon": "🧠", "title": "Análisis comparativo y casos", "moment": "Mitad de la semana", "time": "2 a 3 horas", "description": "Analizar casos y desarrollar el mapa comparativo de tecnologías emergentes e IA aplicadas a educación.", "evidence": "Recurso comparativo con tecnologías, ventajas, límites y aplicaciones.", "tools": "Canva, PowerPoint, Genially, notas del curso y referencias.", "steps": ["Revisa los tres casos presentados en la semana.", "Selecciona al menos cinco tecnologías o enfoques a comparar.", "Describe qué resuelve cada una, sus ventajas y limitaciones.", "Relaciona cada tecnología con una necesidad educativa."], "note": "El objetivo no es hacer una lista técnica, sino mostrar criterio de selección y pertinencia pedagógica.", "checks": ["Analicé los tres casos.", "Seleccioné cinco tecnologías para comparar.", "Relacioné cada una con una necesidad educativa."]}, {"icon": "⚙️", "title": "Diseño preliminar de la propuesta", "moment": "Segunda parte de la semana", "time": "3 a 4 horas", "description": "Diseñar una propuesta inicial que integre IA o una tecnología emergente en el proyecto educativo que se ha venido construyendo.", "evidence": "Documento o presentación con propuesta pedagógica preliminar.", "tools": "Plantilla del proyecto, recursos del curso y herramienta elegida para diseño.", "steps": ["Retoma la necesidad educativa del proyecto.", "Justifica qué tecnología o recurso integrarás.", "Describe cómo funcionará la experiencia, para quién y con qué propósito.", "Define interacciones, apoyos, producto esperado e indicadores.", "Incluye criterios éticos: privacidad, supervisión, transparencia y accesibilidad."], "note": "La propuesta debe ser viable, ética y claramente relacionada con un problema educativo real.", "checks": ["Definí la tecnología o recurso que integraré.", "Diseñé la secuencia preliminar de la experiencia.", "Incorporé criterios éticos y de evaluación."]}, {"icon": "💬", "title": "Foro y cierre", "moment": "Cierre de la semana", "time": "90 a 120 minutos", "description": "Participar en el foro académico y realizar el cuestionario de la semana para consolidar aprendizajes.", "evidence": "Aportación principal, dos réplicas y calificación del cuestionario.", "tools": "Foro de la plataforma y cuestionario interactivo.", "steps": ["Redacta tu respuesta a la pregunta detonadora del foro.", "Integra un ejemplo o situación de uso de IA o analítica.", "Plantea tres criterios indispensables para su integración.", "Realiza dos réplicas con argumentación académica.", "Completa el cuestionario y revisa la retroalimentación."], "note": "El foro debe mostrar postura crítica y no solo una opinión general sobre la tecnología.", "checks": ["Publiqué mi aportación en el foro.", "Realicé dos réplicas argumentadas.", "Contesté el cuestionario."]}];
+const products = [{"title": "Mapa comparativo de tecnologías emergentes", "description": "Comparación visual de tecnologías o enfoques relevantes para Educación 5.0.", "format": "Infografía o presentación.", "length": "Una infografía amplia o 8–10 diapositivas.", "criteria": "Claridad, comparación, aplicación y reflexión final."}, {"title": "Diseño preliminar de experiencia", "description": "Propuesta pedagógica con integración de IA o tecnología emergente.", "format": "Documento o presentación.", "length": "4–6 páginas o 10–12 diapositivas.", "criteria": "Coherencia, pertinencia, ética, viabilidad e indicadores."}, {"title": "Participación argumentada en foro", "description": "Postura crítica sobre IA, analítica y personalización en Educación 5.0.", "format": "Aportación y dos réplicas.", "length": "400–550 palabras más dos réplicas.", "criteria": "Fundamentación, ejemplo, criterios e interacción."}];
+const resources = [{"icon": "🤖", "title": "Guía de IA generativa – UNESCO", "description": "Principios para un uso pedagógico, ético y responsable de IA en educación.", "links": [{"label": "Abrir guía", "url": "https://www.unesco.org/es/articles/guia-para-el-uso-de-ia-generativa-en-educacion-e-investigacion"}]}, {"icon": "📘", "title": "AI Competency Framework for Students – UNESCO", "description": "Marco para comprender, usar y evaluar IA con responsabilidad.", "links": [{"label": "Abrir marco", "url": "https://unesdoc.unesco.org/ark:/48223/pf0000393812.locale=es"}]}, {"icon": "📊", "title": "OECD Learning Compass 2030", "description": "Referencia sobre agencia, competencias, valores y formación para futuros complejos.", "links": [{"label": "Abrir recurso", "url": "https://www.oecd.org/en/data/tools/oecd-learning-compass-2030.html"}]}];
+const storageKey = "agenda_semana3_educacion5_v1";
+
+let current = 0;
+let completed = {};
+try{ completed = JSON.parse(localStorage.getItem(storageKey)) || {}; }catch(e){}
+
+const agendaMenu = document.getElementById("agendaMenu");
+const detailIcon = document.getElementById("detailIcon");
+const detailTitle = document.getElementById("detailTitle");
+const detailDescription = document.getElementById("detailDescription");
+const detailGrid = document.getElementById("detailGrid");
+const detailSteps = document.getElementById("detailSteps");
+const detailNote = document.getElementById("detailNote");
+
+function renderAgenda(){
+  agendaMenu.innerHTML = agenda.map((item,index)=>`
+    <button class="agenda-btn ${index===current ? "active" : ""}" data-index="${index}" type="button">
+      <span class="agenda-num">${index+1}</span>
+      <span><strong>${item.title}</strong><small>${item.time}</small></span>
+      <span>→</span>
+    </button>
+  `).join("");
+
+  const item=agenda[current];
+  detailIcon.textContent=item.icon;
+  detailTitle.textContent=item.title;
+  detailDescription.textContent=item.description;
+  detailGrid.innerHTML=`
+    <div class="detail-card"><strong>Momento</strong><p>${item.moment}</p></div>
+    <div class="detail-card"><strong>Tiempo</strong><p>${item.time}</p></div>
+    <div class="detail-card"><strong>Evidencia</strong><p>${item.evidence}</p></div>
+    <div class="detail-card"><strong>Herramientas</strong><p>${item.tools}</p></div>
+  `;
+  detailSteps.innerHTML=item.steps.map(step=>`<li>${step}</li>`).join("");
+  detailNote.textContent=item.note;
+
+  document.querySelectorAll(".agenda-btn").forEach(btn=>btn.addEventListener("click",()=>{
+    current=Number(btn.dataset.index);
+    renderAgenda();
+  }));
+}
+
+const checklistItems = agenda.flatMap((item,index)=>item.checks.map((text,sub)=>({
+  id:`${index}-${sub}`, text, group:item.title
+})));
+
+function saveCompleted(){
+  try{ localStorage.setItem(storageKey,JSON.stringify(completed)); }catch(e){}
+}
+
+function renderChecklist(){
+  checkGrid.innerHTML=checklistItems.map(item=>`
+    <label class="check-item">
+      <input type="checkbox" data-id="${item.id}" ${completed[item.id] ? "checked" : ""}>
+      <span><strong>${item.text}</strong><small>${item.group}</small></span>
+    </label>
+  `).join("");
+
+  document.querySelectorAll(".check-item input").forEach(input=>input.addEventListener("change",()=>{
+    completed[input.dataset.id]=input.checked;
+    saveCompleted();
+    updateProgress();
+  }));
+  updateProgress();
+}
+
+function updateProgress(){
+  const total=checklistItems.length;
+  const done=checklistItems.filter(item=>completed[item.id]).length;
+  const percent=total ? Math.round((done/total)*100) : 0;
+  progressFill.style.width=percent+"%";
+  progressText.textContent=`${done} de ${total} actividades`;
+  progressLabel.textContent=percent+"% completado";
+}
+
+productGrid.innerHTML=products.map(p=>`
+  <article class="product-card">
+    <div class="product-head"><strong>${p.title}</strong></div>
+    <div class="product-body">
+      <p>${p.description}</p>
+      <div class="product-meta">
+        <div><strong>Formato</strong><span>${p.format}</span></div>
+        <div><strong>Extensión</strong><span>${p.length}</span></div>
+        <div><strong>Criterios</strong><span>${p.criteria}</span></div>
+      </div>
+    </div>
+  </article>
+`).join("");
+
+resourceGrid.innerHTML=resources.map(r=>`
+  <article class="resource-card">
+    <div class="resource-icon">${r.icon}</div>
+    <strong>${r.title}</strong>
+    <p>${r.description}</p>
+    <div class="resource-links">
+      ${r.links.map(link=>`
+        <a class="resource-link" href="${link.url}" target="_blank" rel="noopener noreferrer">
+          ${link.label}
+        </a>
+      `).join("")}
+    </div>
+  </article>
+`).join("");
+
+agendaBtn.onclick=()=>agendaSection.scrollIntoView({behavior:"smooth"});
+checkBtn.onclick=()=>checkSection.scrollIntoView({behavior:"smooth"});
+contrastBtn.onclick=()=>{
+  const active=document.body.classList.toggle("high");
+  contrastBtn.textContent=active?"Contraste normal":"Alto contraste";
+};
+
+renderAgenda();
+renderChecklist();
+</script>
+</body>
+</html>
