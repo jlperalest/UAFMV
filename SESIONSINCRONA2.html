@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#812843">
+<title>Sesión síncrona por Zoom 2 · Semana 3</title>
+<style>
+:root{--wine:#812843;--wine-dark:#4f1026;--magenta:#c73765;--blue:#7395a2;--blue-dark:#385d69;--bg:#f4f7f8;--line:#b8c6cc;--text:#1e272c;--muted:#405058;--shadow:0 24px 60px rgba(31,47,55,.14)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:radial-gradient(circle at 8% 8%,rgba(115,149,162,.18),transparent 24rem),radial-gradient(circle at 92% 12%,rgba(199,55,101,.10),transparent 26rem),linear-gradient(180deg,#fff,var(--bg))}
+.page{width:min(1180px,calc(100% - 28px));margin:auto;padding:34px 0 60px}
+.hero{display:grid;grid-template-columns:1.08fr .92fr;border:1px solid var(--line);border-radius:32px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
+.copy{padding:54px}.eyebrow{display:inline-flex;padding:9px 14px;border-radius:999px;background:#f5e8ed;color:var(--wine-dark);border:1px solid #d9a9ba;font-weight:900;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em}
+h1{margin:20px 0 10px;color:var(--wine);font-size:clamp(2.8rem,5.5vw,5.2rem);line-height:.95;letter-spacing:-.06em}.copy h2{margin:0;color:var(--blue-dark);font-size:1.35rem}.copy p{color:var(--muted);line-height:1.7}
+.visual{display:grid;place-items:center;padding:36px;color:#fff;background:linear-gradient(145deg,var(--blue-dark),#527783,var(--wine-dark))}
+.visual-core{width:340px;height:340px;border-radius:50%;display:grid;place-items:center;text-align:center;border:2px solid rgba(255,255,255,.42);background:rgba(255,255,255,.10);box-shadow:0 24px 55px rgba(0,0,0,.20)}
+.visual-core strong{font-size:2.5rem}.visual-core span{display:block;margin-top:9px;font-weight:800;line-height:1.5}
+.section{margin-top:22px;border:1px solid var(--line);border-radius:26px;background:#fff;box-shadow:var(--shadow);overflow:hidden}
+.head{padding:27px 30px 19px;border-bottom:1px solid #d6dfe3}.head h2{margin:0;color:var(--wine);font-size:2rem}.head p{margin:6px 0 0;color:var(--muted);line-height:1.55}
+.body{padding:28px 30px 34px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+.card{padding:18px;border:1px solid var(--line);border-radius:18px;background:#fff}.card strong{color:var(--wine-dark)}.card p,.card li{color:var(--muted);line-height:1.6}
+.lab-note{padding:18px;border-radius:18px;color:#fff;background:linear-gradient(135deg,var(--wine-dark),var(--wine),var(--blue-dark));line-height:1.6}
+.timeline{display:grid;gap:11px}.block{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:17px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,#fff,#f8fafb)}
+.time{display:grid;place-items:center;min-height:64px;border-radius:14px;color:#fff;background:var(--wine);font-weight:950}.block strong{color:var(--wine-dark);font-size:1.05rem}.block p{margin:5px 0;color:var(--muted);line-height:1.55}.block small{display:inline-block;margin-top:4px;color:var(--blue-dark);font-weight:850}
+.footer{margin-top:22px;padding:24px;border-radius:24px;color:#fff;background:linear-gradient(120deg,var(--wine-dark),var(--wine),var(--magenta));font-weight:850;line-height:1.55}
+@media(max-width:850px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.copy{padding:40px 28px}.block{grid-template-columns:1fr}}
+
+.sync-visual{position:relative;width:min(430px,92%);aspect-ratio:1;display:grid;place-items:center}
+.sync-orbit{position:absolute;inset:4%;border:1px dashed rgba(255,255,255,.48);border-radius:50%;animation:syncSpin 24s linear infinite}
+.sync-orbit.two{inset:17%;animation-duration:17s;animation-direction:reverse}
+.sync-core{position:absolute;inset:27%;display:grid;place-items:center;text-align:center;border-radius:38%;background:rgba(255,255,255,.97);color:var(--wine);box-shadow:0 24px 55px rgba(0,0,0,.25);animation:syncPulse 4.5s ease-in-out infinite}
+.sync-core strong{font-size:1.85rem;line-height:1.05}
+.sync-core small{display:block;margin-top:8px;color:var(--blue-dark);font-size:.72rem;font-weight:850;line-height:1.45}
+.sync-node{position:absolute;width:94px;height:94px;display:grid;place-items:center;text-align:center;border-radius:24px;background:#fff;color:var(--wine-dark);box-shadow:0 14px 30px rgba(0,0,0,.22);font-weight:900;font-size:.72rem;animation:syncFloat 5.4s ease-in-out infinite}
+.sync-node b{display:block;font-size:1.55rem;margin-bottom:4px}
+.sn1{top:0;left:39%;animation-delay:0s}.sn2{right:0;top:37%;animation-delay:.8s}.sn3{bottom:0;left:39%;animation-delay:1.6s}.sn4{left:0;top:37%;animation-delay:2.4s}
+.sync-chip{position:absolute;padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:.68rem;font-weight:900}
+.sc1{top:14%;left:6%}.sc2{top:18%;right:5%}.sc3{bottom:16%;left:8%}.sc4{bottom:12%;right:8%}
+@keyframes syncSpin{to{transform:rotate(360deg)}}@keyframes syncPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}@keyframes syncFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+
+</style>
+</head>
+<body>
+<main class="page">
+<section class="hero">
+  <div class="copy">
+    <div class="eyebrow">Semana 3 · Sesión síncrona por Zoom 2</div>
+    <h1>Selección tecnológica con criterio pedagógico</h1>
+    <h2>Duración: 90 minutos</h2>
+    <p>Comparar alternativas tecnológicas, analizar casos, resolver dudas y validar la integración tecnológica preliminar del proyecto final.</p>
+  <div style="margin-top:22px">
+<a href="https://us02web.zoom.us/j/83084758448?pwd=xlt2Yyv4xfFWIOKuBUCm4ov5oXKNna.1" target="_blank" rel="noopener noreferrer"
+style="display:inline-flex;align-items:center;justify-content:center;gap:8px;
+padding:13px 18px;border-radius:14px;background:#812843;color:#ffffff;
+text-decoration:none;font-weight:900;box-shadow:0 10px 22px rgba(79,16,38,.18);">
+Ingresar a la sesión por Zoom
+</a>
+</div></div>
+  <div class="visual">
+<div class="sync-visual">
+  <div class="sync-orbit"></div><div class="sync-orbit two"></div>
+  <div class="sync-core"><div><strong>SESIÓN<br>SÍNCRONA</strong><small>Análisis · interacción · proyectos<br>dudas · decisiones</small></div></div>
+  <div class="sync-node sn1"><div><b>🔎</b>Análisis</div></div>
+  <div class="sync-node sn2"><div><b>💬</b>Dudas</div></div>
+  <div class="sync-node sn3"><div><b>🚀</b>Proyectos</div></div>
+  <div class="sync-node sn4"><div><b>🧩</b>Interacción</div></div>
+  <span class="sync-chip sc1">Casos</span><span class="sync-chip sc2">Zoom</span>
+  <span class="sync-chip sc3">Retroalimentación</span><span class="sync-chip sc4">Decisiones</span>
+</div>
+</div></section>
+
+<section class="section">
+  <div class="head"><h2>Enfoque de la sesión</h2><p>Es una experiencia participativa por Zoom, no una clase tradicional ni una exposición magistral.</p></div>
+  <div class="body">
+    <div class="lab-note">
+      La sesión funciona como un espacio de trabajo colaborativo para analizar temas y casos, contrastar decisiones, revisar avances del proyecto, resolver dudas y desarrollar actividades interactivas. La participación del estudiante es el eje central.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="head"><h2>Acceso mediante Zoom</h2><p>Condiciones técnicas para participar adecuadamente.</p></div>
+  <div class="body"><div class="grid">
+    <article class="card"><strong>Acceso</strong><p>Utiliza el siguiente enlace institucional para ingresar a la sesión:<br><br>
+<a href="https://us02web.zoom.us/j/83084758448?pwd=xlt2Yyv4xfFWIOKuBUCm4ov5oXKNna.1" target="_blank" rel="noopener noreferrer"
+style="display:inline-flex;align-items:center;justify-content:center;gap:8px;
+padding:13px 18px;border-radius:14px;background:#812843;color:#ffffff;
+text-decoration:none;font-weight:900;box-shadow:0 10px 22px rgba(79,16,38,.18);">
+Ingresar a la sesión por Zoom
+</a>
+</p></article>
+    <article class="card"><strong>Equipo recomendado</strong><p>Computadora o dispositivo móvil, conexión estable, audífonos o bocinas y micrófono funcional.</p></article>
+    <article class="card"><strong>Identificación</strong><p>Ingresa con tu nombre completo para registrar correctamente la participación.</p></article>
+    <article class="card"><strong>Participación</strong><p>La cámara podrá utilizarse durante dinámicas específicas, conforme a las indicaciones del docente y las condiciones de cada estudiante.</p></article>
+  </div></div>
+</section>
+
+<section class="section">
+  <div class="head"><h2>Preparación previa</h2><p>Material que debes llevar listo para aprovechar el encuentro.</p></div>
+  <div class="body"><div class="card"><ul><li>Revisar los contenidos de la Semana 3.</li><li>Llevar diagnóstico y perfil de usuario.</li><li>Seleccionar al menos dos alternativas tecnológicas.</li><li>Preparar dudas sobre viabilidad, ética, accesibilidad o integración.</li></ul></div></div>
+</section>
+
+<section class="section">
+  <div class="head"><h2>Ruta participativa de 90 minutos</h2><p>Cada bloque implica intervención, análisis o producción.</p></div>
+  <div class="body"><div class="timeline">
+        <article class="block">
+          <div class="time">0–10 min</div>
+          <div>
+            <strong>Activación y mapa de decisiones</strong>
+            <p>Identificación de los factores que suelen influir al elegir una tecnología educativa.</p>
+            <small>Dinámica: votación rápida y contraste de criterios.</small>
+          </div>
+        </article>
+        
+        <article class="block">
+          <div class="time">10–25 min</div>
+          <div>
+            <strong>Análisis temático guiado</strong>
+            <p>Comparación de valor pedagógico, accesibilidad, viabilidad, riesgos y supervisión humana.</p>
+            <small>Dinámica: tarjetas de criterios y priorización grupal.</small>
+          </div>
+        </article>
+        
+        <article class="block">
+          <div class="time">25–45 min</div>
+          <div>
+            <strong>Caso de personalización y analítica</strong>
+            <p>El grupo analiza una solución adaptativa con beneficios, riesgos y posibles sesgos.</p>
+            <small>Dinámica: sala de decisión con postura a favor, en contra o condicionada.</small>
+          </div>
+        </article>
+        
+        <article class="block">
+          <div class="time">45–70 min</div>
+          <div>
+            <strong>Taller de decisión tecnológica</strong>
+            <p>Cada estudiante compara dos alternativas para su proyecto y construye una matriz de decisión preliminar.</p>
+            <small>Dinámica: trabajo individual con revisión entre pares.</small>
+          </div>
+        </article>
+        
+        <article class="block">
+          <div class="time">70–82 min</div>
+          <div>
+            <strong>Clínica de proyectos y dudas</strong>
+            <p>Revisión de decisiones tecnológicas, problemas de integración y preguntas sobre las actividades de la semana.</p>
+            <small>Dinámica: consultoría rápida en pequeños grupos.</small>
+          </div>
+        </article>
+        
+        <article class="block">
+          <div class="time">82–90 min</div>
+          <div>
+            <strong>Cierre y acuerdo de mejora</strong>
+            <p>Cada participante registra la alternativa seleccionada y un ajuste que deberá realizar.</p>
+            <small>Dinámica: compromiso final y retroalimentación instantánea.</small>
+          </div>
+        </article>
+        </div></div>
+</section>
+
+<section class="section">
+  <div class="head"><h2>Evidencia de participación</h2><p>Producto breve generado durante el encuentro.</p></div>
+  <div class="body"><div class="grid">
+    <article class="card"><strong>Evidencia</strong><p>Matriz de decisión tecnológica con criterios, alternativa seleccionada, riesgos identificados y retroalimentación recibida.</p></article>
+    <article class="card"><strong>Relación con el proyecto final</strong><p>La matriz se incorpora al avance de integración tecnológica preliminar y orienta la secuencia de uso de la herramienta seleccionada.</p></article>
+  </div></div>
+</section>
+
+<section class="section">
+  <div class="head"><h2>Criterios de participación</h2><p>Aspectos que se observarán durante la sesión.</p></div>
+  <div class="body"><div class="card"><ul><li>Participación en el análisis del caso y las actividades interactivas.</li><li>Uso de criterios pedagógicos, técnicos y éticos.</li><li>Capacidad para justificar una decisión.</li><li>Apertura a la retroalimentación y ajuste del proyecto.</li><li>Registro del acuerdo final de integración.</li></ul></div></div>
+</section>
+
+<div class="footer">Las sesiones síncronas de la materia se realizan mediante Zoom en las semanas 1, 3, 5 y 7. Todas se conciben como sesiones síncronas participativas de al menos 90 minutos.</div>
+</main>
+</body>
+</html>
