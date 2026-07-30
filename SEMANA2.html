@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#812843">
+<title>Educación 5.0 | Semana 2</title>
+<style>
+:root{
+  --vino:#812843;--vino2:#4f1026;--magenta:#c73765;--azul:#7395a2;--azul2:#385d69;
+  --vino-suave:#f5e8ed;--azul-suave:#eaf1f4;--verde:#34745f;--verde-suave:#e9f5f0;
+  --rojo:#a6414f;--rojo-suave:#faecef;--fondo:#f4f7f8;--gris:#d6dfe3;--gris2:#b8c6cc;
+  --texto:#1e272c;--texto2:#405058;--sombra:0 24px 60px rgba(31,47,55,.14);
+  --sombra2:0 14px 34px rgba(31,47,55,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;overflow-x:hidden;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--texto);
+  background:
+    radial-gradient(circle at 7% 8%,rgba(115,149,162,.20),transparent 23rem),
+    radial-gradient(circle at 92% 16%,rgba(199,55,101,.11),transparent 26rem),
+    linear-gradient(180deg,#fff,var(--fondo));
+}
+button,input{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible{outline:4px solid rgba(199,55,101,.28);outline-offset:3px}
+.frame{
+  position:fixed;inset:0;pointer-events:none;z-index:100;border:10px solid transparent;
+  border-image:linear-gradient(135deg,var(--azul),var(--vino),var(--magenta),var(--azul)) 1
+}
+.page{width:min(1260px,calc(100% - 30px));margin:auto;padding:38px 0 68px}
+.topbar{
+  position:sticky;top:14px;z-index:50;display:flex;justify-content:space-between;align-items:center;
+  gap:16px;padding:12px 14px;margin-bottom:18px;border:1px solid rgba(56,93,105,.22);
+  border-radius:20px;background:rgba(255,255,255,.95);backdrop-filter:blur(18px);
+  box-shadow:0 12px 30px rgba(31,47,55,.11)
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{
+  width:44px;height:44px;display:grid;place-items:center;border-radius:14px;color:#fff;
+  background:linear-gradient(145deg,var(--vino),var(--magenta));font-weight:950
+}
+.brand strong{display:block;color:var(--vino)}
+.brand small{display:block;margin-top:3px;color:var(--texto2);font-weight:650}
+.top-actions{display:flex;align-items:center;gap:10px}
+.status{padding:8px 11px;border-radius:999px;color:var(--azul2);background:var(--azul-suave);font-size:.82rem;font-weight:850}
+.contrast{border:1px solid var(--vino);border-radius:12px;padding:9px 11px;color:var(--vino);background:#fff;font-weight:850}
+.contrast:hover{color:#fff;background:var(--vino)}
+
+.hero{
+  position:relative;overflow:hidden;display:grid;grid-template-columns:1.04fr .96fr;align-items:center;
+  min-height:560px;border:1px solid rgba(56,93,105,.25);border-radius:34px;background:#fff;
+  box-shadow:var(--sombra)
+}
+.hero::before{content:"";position:absolute;inset:0 auto 0 0;width:9px;background:linear-gradient(var(--vino),var(--magenta),var(--azul))}
+.hero-copy{position:relative;z-index:3;padding:60px 54px}
+.kicker{
+  display:inline-flex;align-items:center;gap:9px;padding:9px 14px;border-radius:999px;color:var(--vino2);
+  background:var(--vino-suave);border:1px solid #d9a9ba;font-size:.8rem;font-weight:900;
+  letter-spacing:.055em;text-transform:uppercase
+}
+.kicker::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--magenta);box-shadow:0 0 0 6px rgba(199,55,101,.13)}
+h1{margin:22px 0 10px;color:var(--vino);font-size:clamp(3.2rem,6vw,6rem);line-height:.92;letter-spacing:-.075em}
+.hero-sub{margin:0 0 17px;color:var(--azul2);font-size:clamp(1.1rem,2.1vw,1.55rem);font-weight:900}
+.hero-text{margin:0;max-width:700px;color:var(--texto2);line-height:1.76;font-size:1.05rem}
+.hero-actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:28px}
+.primary,.secondary{padding:13px 17px;border-radius:15px;font-weight:900}
+.primary{border:0;color:#fff;background:linear-gradient(135deg,var(--vino),var(--magenta))}
+.secondary{color:var(--vino);background:#fff;border:2px solid var(--vino)}
+.secondary:hover{color:#fff;background:var(--vino)}
+.hero-visual{
+  position:relative;height:100%;min-height:560px;display:grid;place-items:center;overflow:hidden;
+  background:radial-gradient(circle at 60% 30%,rgba(255,255,255,.24),transparent 15rem),
+  linear-gradient(145deg,var(--azul2),var(--azul))
+}
+.visual{position:relative;width:min(450px,88%);aspect-ratio:1}
+.ring{position:absolute;inset:7%;border:1px dashed rgba(255,255,255,.58);border-radius:50%;animation:spin 27s linear infinite}
+.ring.two{inset:23%;animation-duration:18s;animation-direction:reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.center{
+  position:absolute;inset:31%;display:grid;place-items:center;border-radius:35%;background:#fff;color:var(--vino);
+  font-size:1.8rem;font-weight:950;text-align:center;line-height:1.05;box-shadow:0 24px 55px rgba(20,38,46,.27);
+  transform:rotate(7deg)
+}
+.center span{transform:rotate(-7deg)}
+.node{
+  position:absolute;width:84px;height:84px;display:grid;place-items:center;border-radius:24px;
+  background:#fff;color:var(--vino2);font-size:1.55rem;box-shadow:0 14px 30px rgba(20,38,46,.24)
+}
+.node small{
+  position:absolute;top:92px;left:50%;transform:translateX(-50%);width:125px;padding:6px 8px;
+  border-radius:9px;color:#fff;background:rgba(35,64,74,.94);font-size:.65rem;text-align:center;font-weight:850
+}
+.n1{top:2%;left:41%}.n2{right:2%;top:36%}.n3{bottom:2%;left:41%}.n4{left:2%;top:36%}
+
+.section{margin-top:24px;scroll-margin-top:100px}
+.panel{overflow:hidden;border:1px solid var(--gris2);border-radius:30px;background:#fff;box-shadow:var(--sombra)}
+.panel-head{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap;
+  padding:30px 32px 22px;border-bottom:1px solid var(--gris)
+}
+.panel-head h2{margin:0;color:var(--vino);font-size:clamp(1.55rem,3vw,2.45rem)}
+.panel-head p{margin:7px 0 0;max-width:80ch;color:var(--texto2);line-height:1.6}
+
+.intro-grid{display:grid;grid-template-columns:.78fr 1.22fr;gap:24px;padding:30px 32px 36px}
+.objective{padding:25px;border-radius:24px;color:#fff;background:linear-gradient(145deg,var(--azul2),var(--vino))}
+.objective h3{margin:0 0 10px;color:#fff;font-size:1.7rem}
+.objective p{margin:0;color:#fff;line-height:1.7}
+.objective-box{margin-top:18px;padding:16px;border-radius:17px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.27)}
+.meta-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.meta-card{padding:18px;border:1px solid var(--gris2);border-radius:20px;background:#fff;min-height:155px}
+.meta-card:hover{transform:translateY(-3px);border-color:var(--vino);box-shadow:var(--sombra2)}
+.meta-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;background:var(--azul2);color:#fff}
+.meta-card strong{display:block;margin-top:13px;color:var(--vino2)}
+.meta-card p{margin:7px 0 0;color:var(--texto2);line-height:1.55;font-size:.92rem}
+
+.theory{display:grid;grid-template-columns:.86fr 1.14fr;gap:24px;padding:30px 32px 36px}
+.topic-menu{display:grid;gap:10px}
+.topic-btn{
+  width:100%;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:15px;
+  border:1px solid var(--gris2);border-radius:18px;background:#fff;color:var(--texto);text-align:left
+}
+.topic-btn:hover{transform:translateX(4px);border-color:var(--vino)}
+.topic-btn.active{color:#fff;background:linear-gradient(135deg,var(--vino2),var(--vino));border-color:var(--vino2)}
+.topic-num{width:45px;height:45px;display:grid;place-items:center;border-radius:14px;background:var(--vino-suave);color:var(--vino);font-weight:950}
+.topic-btn.active .topic-num{background:#fff;color:var(--vino2)}
+.topic-btn strong{display:block;color:inherit}
+.topic-btn small{display:block;margin-top:3px;color:var(--texto2)}
+.topic-btn.active small{color:#fff}
+.theory-detail{
+  min-height:570px;padding:28px;border:1px solid var(--gris2);border-radius:24px;
+  background:radial-gradient(circle at 90% 10%,rgba(199,55,101,.09),transparent 13rem),
+  linear-gradient(145deg,#fff,#f7f9fa)
+}
+.detail-icon{width:64px;height:64px;display:grid;place-items:center;border-radius:20px;background:linear-gradient(145deg,var(--vino),var(--magenta));color:#fff;font-size:1.65rem}
+.theory-detail h3{margin:19px 0 8px;color:var(--vino2);font-size:1.9rem}
+.theory-detail>p{margin:0;color:var(--texto2);line-height:1.74}
+.theory-points{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:20px}
+.point{padding:14px;border:1px solid var(--gris2);border-radius:16px;background:#fff;color:var(--texto2);line-height:1.55}
+.point strong{display:block;color:var(--vino2);margin-bottom:5px}
+.example{margin-top:18px;padding:17px;border-radius:17px;color:#fff;background:linear-gradient(135deg,var(--azul2),var(--vino));line-height:1.65}
+
+.journey-wrap{padding:30px 32px 36px}
+.journey-controls{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+.journey-btn{min-width:110px;padding:11px 14px;border:1px solid var(--gris2);border-radius:14px;background:#fff;color:var(--texto2);font-weight:900}
+.journey-btn.active{background:var(--vino);border-color:var(--vino);color:#fff}
+.journey-content{display:grid;grid-template-columns:.78fr 1.22fr;gap:24px}
+.journey-visual{position:relative;min-height:370px;padding:24px;border-radius:24px;color:#fff;background:linear-gradient(145deg,var(--azul2),var(--vino));overflow:hidden}
+.journey-visual::after{content:"";position:absolute;width:210px;height:210px;border-radius:50%;right:-90px;bottom:-90px;background:rgba(255,255,255,.10)}
+.journey-number{font-size:4.8rem;font-weight:1000;line-height:.9;letter-spacing:-.08em}
+.journey-visual h3{margin:20px 0 8px;color:#fff;font-size:1.8rem}
+.journey-visual p{margin:0;color:#fff;line-height:1.7}
+.journey-detail{padding:25px;border:1px solid var(--gris2);border-radius:24px;background:#fff}
+.journey-detail h3{margin:0;color:var(--vino2);font-size:1.7rem}
+.journey-detail p{margin:12px 0 0;color:var(--texto2);line-height:1.7}
+.journey-example{margin-top:18px;padding:16px;border-radius:16px;background:var(--azul-suave);border:1px solid #c8dae2;color:var(--azul2);line-height:1.6;font-weight:800}
+.design-questions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-top:22px}
+.design-card{padding:17px;border:1px solid var(--gris2);border-radius:18px;background:#fff}
+.design-card strong{display:block;color:var(--vino2)}
+.design-card p{margin:8px 0 0;color:var(--texto2);line-height:1.55;font-size:.9rem}
+
+.cases{padding:30px 32px 36px}
+.case-tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+.case-btn{padding:11px 14px;border:1px solid var(--gris2);border-radius:14px;background:#fff;color:var(--texto2);font-weight:900}
+.case-btn.active{background:var(--vino);border-color:var(--vino);color:#fff}
+.case-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:24px}
+.case-story{padding:25px;border-radius:24px;color:#fff;background:linear-gradient(145deg,var(--vino2),var(--vino),var(--magenta))}
+.case-story h3{margin:0 0 10px;color:#fff;font-size:1.7rem}
+.case-story p{margin:0;color:#fff;line-height:1.7}
+.case-question{margin-top:18px;padding:16px;border-radius:16px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);font-weight:850}
+.case-analysis{padding:24px;border:1px solid var(--gris2);border-radius:24px;background:#fff}
+.case-analysis h3{margin:0;color:var(--vino2);font-size:1.55rem}
+.case-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:15px}
+.case-item{padding:14px;border:1px solid var(--gris2);border-radius:16px;background:#f8fafb}
+.case-item strong{display:block;color:var(--vino2)}
+.case-item p{margin:6px 0 0;color:var(--texto2);line-height:1.5;font-size:.9rem}
+
+.activities{padding:30px 32px 36px}
+.activity-grid{display:grid;gap:16px}
+.activity-card{border:1px solid var(--gris2);border-radius:24px;background:#fff;overflow:hidden}
+.activity-head{display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap;padding:18px 20px;background:linear-gradient(135deg,var(--azul2),var(--vino));color:#fff}
+.activity-head h3{margin:0;color:#fff;font-size:1.3rem}
+.activity-badge{padding:7px 10px;border-radius:999px;background:#fff;color:var(--vino2);font-size:.72rem;font-weight:950}
+.activity-body{padding:20px}
+.activity-body>p{margin:0;color:var(--texto2);line-height:1.68}
+.activity-detail-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:18px}
+.activity-detail{padding:13px;border:1px solid var(--gris2);border-radius:15px;background:#f8fafb}
+.activity-detail strong{display:block;color:var(--vino2);font-size:.82rem;text-transform:uppercase}
+.activity-detail p{margin:6px 0 0;color:var(--texto2);line-height:1.5;font-size:.87rem}
+.steps{margin:18px 0 0;padding-left:22px;color:var(--texto2);line-height:1.75}
+.criteria{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.criterion{padding:7px 10px;border-radius:999px;background:var(--azul-suave);color:var(--azul2);font-size:.75rem;font-weight:900}
+
+.products{padding:30px 32px 36px}
+.product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.product-card{display:flex;flex-direction:column;min-height:430px;border:1px solid var(--gris2);border-radius:23px;background:#fff;overflow:hidden}
+.product-top{padding:18px;color:#fff;background:linear-gradient(135deg,var(--vino2),var(--vino),var(--magenta))}
+.product-top span{display:inline-block;padding:7px 10px;border-radius:999px;background:#fff;color:var(--vino2);font-size:.72rem;font-weight:950}
+.product-top h3{margin:13px 0 0;color:#fff;font-size:1.27rem}
+.product-body{display:flex;flex-direction:column;flex:1;padding:19px}
+.product-body>p{margin:0;color:var(--texto2);line-height:1.62}
+.specs{display:grid;gap:9px;margin-top:15px}
+.spec{padding:12px;border:1px solid var(--gris2);border-radius:14px;background:#f8fafb}
+.spec strong{display:block;color:var(--vino2);font-size:.79rem}
+.spec span{display:block;margin-top:4px;color:var(--texto2);font-size:.86rem;line-height:1.45}
+.product-note{margin-top:auto;padding-top:16px;color:var(--azul2);font-size:.82rem;font-weight:850;line-height:1.5}
+
+.quiz{padding:30px 32px 36px}
+.quiz-dashboard{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:22px}
+.quiz-stat{padding:18px;border:1px solid var(--gris2);border-radius:19px;background:#fff;text-align:center}
+.quiz-stat strong{display:block;color:var(--vino);font-size:1.65rem}
+.quiz-stat span{display:block;margin-top:5px;color:var(--texto2);font-size:.82rem;font-weight:800}
+.quiz-instructions{padding:18px;border-radius:18px;background:var(--azul-suave);border:1px solid #c9dce4;color:var(--azul2);line-height:1.65}
+.quiz-actions{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+.quiz-btn{padding:12px 15px;border-radius:13px;font-weight:900}
+.start-quiz{color:#fff;background:var(--vino);border:1px solid var(--vino)}
+.submit-quiz{color:#fff;background:var(--verde);border:1px solid var(--verde)}
+.submit-quiz:disabled,.start-quiz:disabled{opacity:.45;cursor:not-allowed}
+.quiz-form{display:none}
+.quiz-form.active{display:block}
+.question-card{margin-top:16px;padding:20px;border:1px solid var(--gris2);border-radius:21px;background:#fff}
+.question-card h3{margin:0;color:var(--vino2);font-size:1.08rem;line-height:1.48}
+.option-list{display:grid;gap:9px;margin-top:14px}
+.option-label{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid var(--gris2);border-radius:14px;background:#fff;color:var(--texto2);line-height:1.5}
+.option-label:hover{border-color:var(--vino);background:#fffafb}
+.option-label input{margin-top:4px;accent-color:var(--vino)}
+.question-feedback{display:none;margin-top:13px;padding:13px;border-radius:14px;line-height:1.55;font-weight:750}
+.question-feedback.show{display:block}
+.question-feedback.correct{color:var(--verde);background:var(--verde-suave);border:1px solid #acd3c3}
+.question-feedback.incorrect{color:var(--rojo);background:var(--rojo-suave);border:1px solid #e0b5bd}
+.quiz-result{display:none;margin-top:20px;padding:22px;border-radius:22px;color:#fff;background:linear-gradient(135deg,var(--azul2),var(--vino))}
+.quiz-result.show{display:block}
+.quiz-result strong{font-size:1.7rem}
+.quiz-result p{margin:8px 0 0;line-height:1.6}
+
+.closing{margin-top:24px;padding:30px;border-radius:30px;color:#fff;background:linear-gradient(120deg,var(--vino2),var(--vino),var(--magenta));display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;box-shadow:var(--sombra)}
+.closing strong{display:block;max-width:880px;font-size:clamp(1.35rem,2.8vw,2.05rem);line-height:1.24}
+.closing span{display:block;margin-top:7px}
+.closing-mark{width:105px;height:105px;display:grid;place-items:center;border-radius:31px;background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.45);font-size:2rem;font-weight:950}
+
+body.high{--texto:#101719;--texto2:#243136;--gris:#aab8be;--gris2:#7f929a;--fondo:#fff}
+body.high .panel,body.high .meta-card,body.high .topic-btn,body.high .theory-detail,body.high .journey-detail,
+body.high .design-card,body.high .case-analysis,body.high .case-item,body.high .activity-card,body.high .product-card,
+body.high .quiz-stat,body.high .question-card{border-width:2px}
+
+@media(max-width:1100px){
+  .hero{grid-template-columns:1fr}.hero-visual{min-height:460px}
+  .intro-grid,.theory,.journey-content,.case-layout{grid-template-columns:1fr}
+  .design-questions,.activity-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .product-grid{grid-template-columns:1fr 1fr}
+  .quiz-dashboard{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  .status{display:none}.hero-copy{padding:48px 26px}.hero-visual{min-height:410px}
+  .panel-head,.intro-grid,.theory,.journey-wrap,.cases,.activities,.products,.quiz{padding-left:18px;padding-right:18px}
+  .meta-grid,.theory-points,.design-questions,.case-grid,.activity-detail-grid,.product-grid,.quiz-dashboard{grid-template-columns:1fr}
+  .node{width:68px;height:68px;border-radius:18px;font-size:1.2rem}
+  .node small{top:74px;width:100px;font-size:.6rem}
+  .closing{justify-content:center;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="frame"></div>
+<main class="page">
+<nav class="topbar" aria-label="Navegación de la semana 2">
+  <div class="brand">
+    <div class="brand-mark">UAF</div>
+    <div>
+      <strong>Semana 2</strong>
+      <small>Educación 5.0: Innovación y Tecnología</small>
+    </div>
+  </div>
+  <div class="top-actions">
+    <div class="status">Desarrollo de la materia</div>
+    <button class="contrast" id="contrastBtn" type="button">Alto contraste</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-copy">
+    <div class="kicker">Desarrollo de la materia</div>
+    <h1>Semana 2</h1>
+    <p class="hero-sub">Humanismo, inclusión y aprendizaje centrado en la persona</p>
+    <p class="hero-text">
+      En esta semana analizarás cómo diseñar experiencias educativas que respondan a personas reales,
+      consideren la diversidad, reduzcan barreras y promuevan accesibilidad, bienestar y participación.
+    </p>
+    <div class="hero-actions">
+      <button class="primary" id="theoryBtn" type="button">Explorar la teoría</button>
+      <button class="secondary" id="quizBtn" type="button">Ir al cuestionario</button>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="visual">
+      <div class="ring"></div><div class="ring two"></div>
+      <div class="center"><span>Persona<br>al centro</span></div>
+      <div class="node n1">🤝<small>Humanismo</small></div>
+      <div class="node n2">♿<small>Accesibilidad</small></div>
+      <div class="node n3">🧘<small>Bienestar</small></div>
+      <div class="node n4">🌍<small>Inclusión</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="section panel">
+  <div class="panel-head">
+    <div>
+      <h2>Propósito y ruta de aprendizaje</h2>
+      <p>La semana se orienta a comprender a las personas, detectar barreras y convertir los hallazgos en decisiones de diseño.</p>
+    </div>
+  </div>
+  <div class="intro-grid">
+    <article class="objective">
+      <h3>Objetivo de la semana</h3>
+      <p>
+        Analizar las necesidades, características y barreras de los estudiantes para diseñar
+        experiencias más humanas, accesibles e inclusivas.
+      </p>
+      <div class="objective-box">
+        <strong>Pregunta detonadora</strong><br>
+        ¿Cómo puede una experiencia educativa ser realmente innovadora si no responde a las necesidades reales de las personas?
+      </div>
+    </article>
+
+    <div class="meta-grid">
+      <article class="meta-card">
+        <div class="meta-icon">🏁</div>
+        <strong>Resultado esperado</strong>
+        <p>Definir el perfil de los usuarios, sus necesidades, barreras y condiciones de participación.</p>
+      </article>
+      <article class="meta-card">
+        <div class="meta-icon">📚</div>
+        <strong>Temas centrales</strong>
+        <p>Humanismo, aprendizaje centrado en el estudiante, inclusión, accesibilidad, bienestar y habilidades humanas.</p>
+      </article>
+      <article class="meta-card">
+        <div class="meta-icon">🧠</div>
+        <strong>Habilidad principal</strong>
+        <p>Empatía y análisis de necesidades para diseñar con mayor pertinencia.</p>
+      </article>
+      <article class="meta-card">
+        <div class="meta-icon">📦</div>
+        <strong>Evidencias</strong>
+        <p>Perfil de usuario, matriz de barreras y participación argumentada en foro.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section panel" id="theorySection">
+  <div class="panel-head">
+    <div>
+      <h2>Desarrollo teórico</h2>
+      <p>Selecciona cada tema para revisar explicaciones amplias, conceptos clave y ejemplos aplicados.</p>
+    </div>
+  </div>
+  <div class="theory">
+    <div class="topic-menu">
+      <button class="topic-btn active" data-topic="0" type="button">
+        <span class="topic-num">1</span>
+        <span><strong>Humanismo digital</strong><small>Tecnología al servicio de las personas</small></span>
+        <span>→</span>
+      </button>
+      <button class="topic-btn" data-topic="1" type="button">
+        <span class="topic-num">2</span>
+        <span><strong>Aprendizaje centrado en el estudiante</strong><small>Necesidades, participación y autonomía</small></span>
+        <span>→</span>
+      </button>
+      <button class="topic-btn" data-topic="2" type="button">
+        <span class="topic-num">3</span>
+        <span><strong>Inclusión educativa</strong><small>Acceso, participación y pertenencia</small></span>
+        <span>→</span>
+      </button>
+      <button class="topic-btn" data-topic="3" type="button">
+        <span class="topic-num">4</span>
+        <span><strong>Accesibilidad digital</strong><small>Recursos comprensibles y utilizables</small></span>
+        <span>→</span>
+      </button>
+      <button class="topic-btn" data-topic="4" type="button">
+        <span class="topic-num">5</span>
+        <span><strong>Bienestar digital</strong><small>Equilibrio, seguridad y carga cognitiva</small></span>
+        <span>→</span>
+      </button>
+      <button class="topic-btn" data-topic="5" type="button">
+        <span class="topic-num">6</span>
+        <span><strong>Habilidades humanas para el futuro</strong><small>Empatía, ética y creatividad</small></span>
+        <span>→</span>
+      </button>
+    </div>
+
+    <article class="theory-detail" aria-live="polite">
+      <div class="detail-icon" id="theoryIcon">🤝</div>
+      <h3 id="theoryTitle">Humanismo digital</h3>
+      <p id="theoryText"></p>
+      <div class="theory-points" id="theoryPoints"></div>
+      <div class="example" id="theoryExample"></div>
+    </article>
+  </div>
+</section>
+
+<section class="section panel">
+  <div class="panel-head">
+    <div>
+      <h2>Ruta de diseño centrado en la persona</h2>
+      <p>Explora el proceso desde el conocimiento de los usuarios hasta la validación de mejoras.</p>
+    </div>
+  </div>
+  <div class="journey-wrap">
+    <div class="journey-controls">
+      <button class="journey-btn active" data-journey="0" type="button">1. Conocer</button>
+      <button class="journey-btn" data-journey="1" type="button">2. Necesidades</button>
+      <button class="journey-btn" data-journey="2" type="button">3. Barreras</button>
+      <button class="journey-btn" data-journey="3" type="button">4. Apoyos</button>
+      <button class="journey-btn" data-journey="4" type="button">5. Validar</button>
+    </div>
+
+    <div class="journey-content">
+      <article class="journey-visual">
+        <div class="journey-number" id="journeyLabel">1</div>
+        <h3 id="journeyTitle">Conocer a las personas</h3>
+        <p id="journeySummary"></p>
+      </article>
+      <article class="journey-detail">
+        <h3>¿Qué implica?</h3>
+        <p id="journeyDetail"></p>
+        <div class="journey-example" id="journeyExample"></div>
+      </article>
+    </div>
+
+    <div class="design-questions">
+      <article class="design-card">
+        <strong>¿Quiénes son?</strong>
+        <p>Características, trayectorias, conocimientos previos, intereses y contexto.</p>
+      </article>
+      <article class="design-card">
+        <strong>¿Qué necesitan?</strong>
+        <p>Apoyos, claridad, acceso, acompañamiento, alternativas y retroalimentación.</p>
+      </article>
+      <article class="design-card">
+        <strong>¿Qué barreras enfrentan?</strong>
+        <p>Conectividad, dispositivos, tiempos, lenguaje, navegación, ansiedad o discapacidad.</p>
+      </article>
+      <article class="design-card">
+        <strong>¿Cómo lo comprobaremos?</strong>
+        <p>Mediante validación, observación, entrevistas y evidencia de participación.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section panel">
+  <div class="panel-head">
+    <div>
+      <h2>Casos y ejemplos aplicados</h2>
+      <p>Selecciona cada caso para identificar barreras, necesidades y posibles decisiones de mejora.</p>
+    </div>
+  </div>
+  <div class="cases">
+    <div class="case-tabs">
+      <button class="case-btn active" data-case="0" type="button">Caso 1: plataforma excluyente</button>
+      <button class="case-btn" data-case="1" type="button">Caso 2: flexibilidad sin estructura</button>
+      <button class="case-btn" data-case="2" type="button">Caso 3: evaluación única</button>
+    </div>
+
+    <div class="case-layout">
+      <article class="case-story">
+        <h3 id="caseTitle"></h3>
+        <p id="caseStory"></p>
+        <div class="case-question" id="caseQuestion"></div>
+      </article>
+      <article class="case-analysis">
+        <h3>Análisis orientador</h3>
+        <div class="case-grid" id="caseGrid"></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section panel">
+  <div class="panel-head">
+    <div>
+      <h2>Actividades de la semana</h2>
+      <p>Cada actividad incluye propósito, procedimiento, evidencia, criterios y condiciones de entrega.</p>
+    </div>
+  </div>
+  <div class="activities">
+    <div class="activity-grid" id="activityGrid"></div>
+  </div>
+</section>
+
+<section class="section panel">
+  <div class="panel-head">
+    <div>
+      <h2>Productos y especificaciones de entrega</h2>
+      <p>Los productos constituyen evidencias verificables de la capacidad para diseñar con enfoque humano e inclusivo.</p>
+    </div>
+  </div>
+  <div class="products">
+    <div class="product-grid" id="productGrid"></div>
+  </div>
+</section>
+
+<section class="section panel" id="quizSection">
+  <div class="panel-head">
+    <div>
+      <h2>Cuestionario de la Semana 2</h2>
+      <p>Dispones de dos oportunidades. Se conservará automáticamente la calificación más alta obtenida.</p>
+    </div>
+  </div>
+  <div class="quiz">
+    <div class="quiz-dashboard">
+      <article class="quiz-stat"><strong id="attemptsUsed">0</strong><span>Intentos utilizados</span></article>
+      <article class="quiz-stat"><strong>2</strong><span>Intentos disponibles</span></article>
+      <article class="quiz-stat"><strong id="bestScore">0</strong><span>Mejor calificación</span></article>
+      <article class="quiz-stat"><strong id="lastScore">—</strong><span>Última calificación</span></article>
+    </div>
+
+    <div class="quiz-instructions">
+      <strong>Indicaciones:</strong> selecciona una respuesta por pregunta. Al enviar el intento,
+      recibirás retroalimentación individual en cada reactivo. Después del primer intento podrás
+      realizar una segunda oportunidad. La plataforma conservará la calificación más alta.
+    </div>
+
+    <div class="quiz-actions">
+      <button class="quiz-btn start-quiz" id="startQuizBtn" type="button">Iniciar primer intento</button>
+      <button class="quiz-btn submit-quiz" id="submitQuizBtn" type="button" disabled>Enviar intento</button>
+    </div>
+
+    <form class="quiz-form" id="quizForm"></form>
+
+    <div class="quiz-result" id="quizResult">
+      <strong id="resultTitle">Resultado</strong>
+      <p id="resultText"></p>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div>
+    <strong>Diseñar para Educación 5.0 significa comprender a las personas, anticipar barreras y convertir la inclusión, la accesibilidad y el bienestar en decisiones concretas.</strong>
+    <span>Semana 2 · Educación 5.0: Innovación y Tecnología.</span>
+  </div>
+  <div class="closing-mark">2</div>
+</section>
+</main>
+
+<script>
+const theoryData = [{"icon": "🤝", "title": "Humanismo digital", "text": "El humanismo digital coloca a la persona en el centro de las decisiones educativas y tecnológicas. No parte de la pregunta «¿qué puede hacer la herramienta?», sino de «¿qué necesita la persona para aprender, participar y desarrollarse?». En Educación 5.0, la tecnología debe ampliar capacidades, reducir barreras, respetar la dignidad, proteger la autonomía y favorecer experiencias significativas.", "points": [["Centralidad de la persona", "Las decisiones se toman a partir de necesidades humanas, no únicamente de posibilidades técnicas."], ["Agencia", "El estudiante conserva capacidad de decidir, comprender, cuestionar y asumir responsabilidad."], ["Ética", "Se consideran privacidad, sesgos, impacto, transparencia y consecuencias de las decisiones."], ["Bienestar", "El diseño evita sobrecarga, exclusión y dependencia tecnológica innecesaria."]], "example": "Ejemplo: una plataforma adaptativa puede recomendar recursos, pero el estudiante y el docente deben comprender por qué se ofrecen, poder modificar la ruta y mantener la decisión humana."}, {"icon": "🎓", "title": "Aprendizaje centrado en el estudiante", "text": "El aprendizaje centrado en el estudiante reconoce que cada persona llega con experiencias, conocimientos previos, intereses, ritmos, expectativas y condiciones distintas. Diseñar desde esta perspectiva implica ofrecer participación activa, opciones razonables, retos auténticos, retroalimentación útil y oportunidades para tomar decisiones.", "points": [["Conocimientos previos", "El diseño parte de lo que el estudiante ya sabe, cree o ha experimentado."], ["Participación activa", "El estudiante analiza, investiga, aplica, crea y reflexiona."], ["Autonomía con estructura", "Se ofrecen decisiones y flexibilidad, pero con objetivos, fechas y criterios claros."], ["Retroalimentación", "La evaluación orienta la mejora, no solo asigna una calificación."]], "example": "Ejemplo: en lugar de exigir un único producto, el docente permite elegir entre infografía, video o prototipo, siempre que todos demuestren los mismos aprendizajes."}, {"icon": "🌍", "title": "Inclusión educativa", "text": "La inclusión educativa busca que todas las personas puedan acceder, participar, aprender y demostrar lo aprendido. No consiste únicamente en incorporar estudiantes a un mismo espacio; exige identificar y eliminar barreras físicas, digitales, pedagógicas, comunicativas, económicas, culturales y actitudinales.", "points": [["Equidad", "No todas las personas necesitan lo mismo; algunas requieren apoyos diferenciados."], ["Participación", "La inclusión se demuestra cuando las personas pueden intervenir y ser escuchadas."], ["Pertenencia", "El estudiante debe sentirse reconocido, respetado y parte de la comunidad."], ["Diseño preventivo", "Las barreras deben anticiparse desde el diseño y no atenderse solo después del problema."]], "example": "Ejemplo: ofrecer una videoclase sin subtítulos puede excluir a estudiantes con discapacidad auditiva, conectividad limitada o que necesitan revisar el contenido sin audio."}, {"icon": "♿", "title": "Accesibilidad digital", "text": "La accesibilidad digital busca que sitios, plataformas, documentos, videos y actividades sean perceptibles, operables, comprensibles y compatibles con diferentes tecnologías de apoyo. Un recurso puede ser atractivo, pero no accesible si tiene poco contraste, navegación confusa, imágenes sin descripción o instrucciones ambiguas.", "points": [["Perceptible", "La información debe presentarse de formas que puedan ser reconocidas por diferentes personas."], ["Operable", "La navegación y los controles deben poder utilizarse con distintos dispositivos o ayudas."], ["Comprensible", "El lenguaje, las instrucciones y la estructura deben ser claros."], ["Robusto", "El contenido debe funcionar en distintos navegadores, dispositivos y tecnologías de asistencia."]], "example": "Ejemplo: un botón que solo se reconoce por color puede ser confuso. Debe incluir texto, contraste adecuado y una etiqueta clara."}, {"icon": "🧘", "title": "Bienestar digital", "text": "El bienestar digital se relaciona con el uso saludable, equilibrado y consciente de la tecnología. En educación implica cuidar la carga cognitiva, el tiempo de pantalla, la presión por estar siempre conectado, la seguridad emocional y la calidad de las interacciones.", "points": [["Carga cognitiva", "Evitar interfaces saturadas, instrucciones excesivas y tareas simultáneas innecesarias."], ["Equilibrio", "Combinar actividades digitales con reflexión, interacción humana y pausas."], ["Seguridad emocional", "Promover ambientes respetuosos y mecanismos de apoyo."], ["Privacidad y límites", "No solicitar datos innecesarios ni exigir disponibilidad permanente."]], "example": "Ejemplo: una semana con cinco plataformas, mensajes constantes y entregas fragmentadas puede aumentar estrés sin mejorar el aprendizaje."}, {"icon": "🧠", "title": "Habilidades humanas para el futuro", "text": "En un entorno con inteligencia artificial y automatización, las habilidades humanas adquieren mayor valor. La empatía, el juicio ético, la creatividad, la comunicación, la colaboración y el pensamiento crítico permiten interpretar situaciones, comprender a otras personas y tomar decisiones responsables.", "points": [["Empatía", "Comprender perspectivas, emociones y necesidades de otras personas."], ["Juicio ético", "Valorar consecuencias y elegir acciones responsables."], ["Creatividad", "Proponer alternativas, conectar ideas y diseñar soluciones."], ["Colaboración", "Construir con otros, negociar y reconocer aportaciones."]], "example": "Ejemplo: una IA puede generar propuestas, pero la persona debe decidir cuál es pertinente, justa, viable y adecuada para el contexto."}];
+const journeyData = [{"label": "1", "title": "Conocer a las personas", "summary": "Identificar quiénes son los estudiantes o usuarios, qué experiencias tienen, qué esperan y en qué contexto participan.", "detail": "El diseño comienza con información sobre edad, trayectoria académica, conocimientos previos, motivaciones, expectativas, disponibilidad de tiempo, conectividad, dispositivos y condiciones personales o sociales.", "example": "Ejemplo: antes de diseñar un curso móvil, se investiga si los estudiantes disponen de datos, qué tipo de teléfono utilizan y en qué horarios pueden conectarse."}, {"label": "2", "title": "Detectar necesidades", "summary": "Reconocer qué necesitan las personas para aprender, participar y avanzar.", "detail": "Las necesidades pueden ser cognitivas, emocionales, tecnológicas, comunicativas, de accesibilidad o de acompañamiento. No deben confundirse con preferencias superficiales ni asumirse sin evidencia.", "example": "Ejemplo: estudiantes que abandonan una actividad pueden necesitar instrucciones más claras, ejemplos, acompañamiento o una carga de trabajo distinta."}, {"label": "3", "title": "Identificar barreras", "summary": "Analizar qué elementos del entorno, la actividad o la tecnología dificultan la participación.", "detail": "Las barreras pueden estar en el diseño: lenguaje complejo, navegación confusa, tiempos rígidos, recursos pesados, ausencia de subtítulos, evaluación única o falta de apoyo.", "example": "Ejemplo: un video de 40 minutos sin capítulos ni transcripción genera barreras de atención, conectividad y accesibilidad."}, {"label": "4", "title": "Diseñar apoyos", "summary": "Proponer ajustes, alternativas y recursos para responder a las necesidades detectadas.", "detail": "Los apoyos deben ser pertinentes y viables: formatos alternativos, ejemplos, guías, tiempos flexibles, subtítulos, tutoría, instrucciones segmentadas y actividades con distintos niveles de apoyo.", "example": "Ejemplo: ofrecer una versión descargable, transcripción, resumen visual y actividad guiada para un mismo contenido."}, {"label": "5", "title": "Validar con usuarios", "summary": "Comprobar si las decisiones realmente facilitan la comprensión, el acceso y la participación.", "detail": "La validación puede incluir observación, entrevista, prueba de navegación, cuestionario o revisión entre pares. Lo importante es utilizar la evidencia para mejorar.", "example": "Ejemplo: pedir a tres estudiantes que realicen una actividad y registrar dónde se confunden o qué apoyo requieren."}];
+const cases = [{"title": "Caso 1. Plataforma avanzada, experiencia excluyente", "story": "Una universidad implementa una plataforma con inteligencia artificial y actividades adaptativas. Sin embargo, la navegación es compleja, los recursos consumen muchos datos, no existen subtítulos y las instrucciones utilizan lenguaje técnico.", "question": "¿Puede considerarse una innovación educativa si una parte de los estudiantes no puede utilizarla adecuadamente?", "analysis": [["Problema central", "La tecnología es avanzada, pero genera barreras de acceso, comprensión y participación."], ["Personas afectadas", "Estudiantes con conectividad limitada, discapacidad auditiva o menor competencia digital."], ["Riesgo", "Confundir sofisticación tecnológica con calidad e inclusión."], ["Mejora", "Simplificar navegación, reducir peso, incorporar subtítulos, alternativas y orientación inicial."]]}, {"title": "Caso 2. Flexibilidad sin estructura", "story": "Un curso permite entregar cualquier actividad en cualquier momento. No hay calendario, secuencia, recordatorios ni seguimiento. Algunos estudiantes valoran la libertad, pero otros se desorientan y abandonan.", "question": "¿Cómo puede mantenerse la flexibilidad sin perder estructura y acompañamiento?", "analysis": [["Problema central", "La autonomía se interpreta como ausencia de organización."], ["Necesidad", "Ruta clara, fechas orientativas, hitos y seguimiento."], ["Riesgo", "Desorientación, procrastinación y abandono."], ["Mejora", "Flexibilidad con cronograma visible, metas semanales, alertas y apoyo docente."]]}, {"title": "Caso 3. Evaluación única para estudiantes diversos", "story": "Una materia evalúa exclusivamente mediante una exposición oral en vivo. Algunos estudiantes dominan el contenido, pero presentan ansiedad, barreras de comunicación o problemas de horario.", "question": "¿Cómo podría diversificarse la evidencia sin disminuir el nivel académico?", "analysis": [["Problema central", "Una única forma de evidencia puede medir factores distintos al aprendizaje."], ["Necesidad", "Alternativas equivalentes y criterios comunes."], ["Riesgo", "Confundir desempeño oral inmediato con comprensión profunda."], ["Mejora", "Permitir video grabado, presentación narrada o defensa escrita con la misma rúbrica."]]}];
+const activities = [{"title": "Actividad 1. Perfil de estudiante y mapa de empatía", "badge": "Individual · 30%", "description": "Construir un perfil detallado de una persona o grupo destinatario del proyecto, evitando estereotipos y basándose en información contextual.", "purpose": "Comprender a quién se dirige la experiencia educativa y qué condiciones deben considerarse.", "duration": "90 a 120 minutos.", "format": "Mapa de empatía, ficha visual o presentación de 6 a 8 diapositivas.", "ai": "Permitido para organizar preguntas o categorías; la interpretación debe ser propia y declarada.", "steps": ["Selecciona una persona o grupo relacionado con el contexto definido en la Semana 1.", "Describe datos relevantes: trayectoria, conocimientos previos, motivaciones, expectativas y contexto.", "Completa las categorías: piensa y siente, ve, escucha, dice y hace, necesidades, frustraciones y oportunidades.", "Evita generalizaciones no sustentadas; diferencia datos, observaciones e hipótesis.", "Concluye con cinco decisiones de diseño derivadas del perfil."], "criteria": ["Profundidad", "Pertinencia", "Ausencia de estereotipos", "Relación con el proyecto", "Decisiones de diseño"]}, {"title": "Actividad 2. Auditoría de inclusión y accesibilidad", "badge": "Aplicación · 35%", "description": "Analizar una experiencia, plataforma o recurso educativo para identificar barreras de acceso, navegación, comprensión, participación y bienestar.", "purpose": "Aplicar criterios de inclusión y accesibilidad a una situación real.", "duration": "120 a 150 minutos.", "format": "Lista de verificación comentada y reporte de 3 a 5 páginas.", "ai": "Permitido para generar una lista inicial; los hallazgos deben comprobarse directamente.", "steps": ["Selecciona una experiencia educativa digital relacionada con tu contexto.", "Revisa contraste, legibilidad, estructura, navegación, subtítulos, formatos, compatibilidad y claridad.", "Identifica al menos ocho barreras y clasifícalas por nivel de impacto.", "Explica a quién afecta cada barrera y qué consecuencia puede producir.", "Propón una mejora concreta, viable y verificable para cada barrera.", "Prioriza las tres mejoras que deberían implementarse primero."], "criteria": ["Observación", "Clasificación de barreras", "Impacto en usuarios", "Viabilidad", "Priorización"]}, {"title": "Actividad 3. Foro: innovación, inclusión y bienestar", "badge": "Interacción · 35%", "description": "Argumentar si una solución puede considerarse innovadora cuando genera barreras o afecta el bienestar de las personas.", "purpose": "Relacionar humanismo, inclusión, accesibilidad y bienestar con la innovación educativa.", "duration": "60 a 90 minutos.", "format": "Aportación principal de 400 a 550 palabras y dos réplicas.", "ai": "No permitido para redactar la aportación. Puede usarse para revisión ortográfica, declarándolo.", "steps": ["Presenta una postura clara frente a la pregunta: ¿puede una innovación educativa excluir?", "Incluye un caso real, documentado o hipotético bien construido.", "Analiza al menos dos dimensiones: inclusión, accesibilidad, bienestar, ética o agencia.", "Propón tres criterios mínimos que toda innovación debería cumplir.", "Responde a dos compañeros: una réplica para ampliar una idea y otra para cuestionar un supuesto."], "criteria": ["Postura", "Fundamentación", "Caso pertinente", "Criterios propuestos", "Interacción académica"]}];
+const products = [{"label": "Producto 1", "title": "Perfil de usuario y mapa de empatía", "description": "Documento visual que representa a las personas destinatarias, sus necesidades, motivaciones, barreras y condiciones de participación.", "specs": [["Contenido mínimo", "Perfil contextual, mapa de empatía, necesidades, frustraciones y decisiones de diseño."], ["Extensión", "Una ficha visual amplia o 6 a 8 diapositivas."], ["Evidencia", "Datos, observaciones o supuestos claramente diferenciados."], ["Entrega", "PDF o enlace público accesible."]], "note": "Debe demostrar que las decisiones educativas parten de personas reales y no de un usuario idealizado."}, {"label": "Producto 2", "title": "Matriz de barreras y mejoras", "description": "Análisis sistemático de barreras de inclusión y accesibilidad, acompañado de propuestas concretas de mejora.", "specs": [["Estructura", "Barrera, evidencia, personas afectadas, impacto, prioridad y mejora."], ["Cantidad", "Mínimo ocho barreras y ocho propuestas."], ["Priorización", "Seleccionar las tres mejoras de mayor impacto y viabilidad."], ["Referencias", "Al menos dos fuentes institucionales o académicas."]], "note": "Las mejoras deben poder implementarse y comprobarse; no basta con recomendaciones generales."}, {"label": "Producto 3", "title": "Participación argumentada en foro", "description": "Postura crítica sobre la relación entre innovación, inclusión, accesibilidad y bienestar.", "specs": [["Aportación", "400 a 550 palabras."], ["Réplicas", "Dos respuestas de 120 a 160 palabras."], ["Fundamentación", "Al menos una fuente citada en formato APA."], ["Criterios", "Claridad, profundidad, respeto y propuesta de criterios mínimos."]], "note": "La interacción debe aportar nuevas ideas, preguntas o mejoras; no se consideran suficientes respuestas de acuerdo superficial."}];
+const questions = [{"question": "¿Qué principio distingue al humanismo digital?", "options": ["Colocar la tecnología en el centro de todas las decisiones.", "Colocar a la persona y sus necesidades en el centro del diseño.", "Eliminar la participación docente.", "Automatizar todos los procesos educativos."], "correct": 1, "feedback_correct": "Correcto. El humanismo digital parte de las necesidades, la dignidad, la agencia y el bienestar de las personas.", "feedback_incorrect": "El humanismo digital no centra el diseño en la herramienta, sino en la persona y en la forma en que la tecnología puede ampliar sus capacidades."}, {"question": "¿Qué significa aprendizaje centrado en el estudiante?", "options": ["Permitir que el estudiante haga cualquier actividad sin criterios.", "Diseñar considerando necesidades, conocimientos previos, intereses y participación activa.", "Eliminar los objetivos de aprendizaje.", "Sustituir todas las explicaciones por recursos digitales."], "correct": 1, "feedback_correct": "Correcto. El aprendizaje centrado en el estudiante considera contexto, conocimientos previos, necesidades, autonomía y participación activa.", "feedback_incorrect": "Centrar el aprendizaje en el estudiante no significa ausencia de estructura, sino diseñar con base en sus características y promover un papel activo."}, {"question": "¿Cuál de las siguientes situaciones representa una barrera de accesibilidad?", "options": ["Un video con subtítulos y transcripción.", "Un documento con estructura clara.", "Una plataforma que depende únicamente del color para indicar errores.", "Una actividad con instrucciones segmentadas."], "correct": 2, "feedback_correct": "Correcto. Utilizar solo color puede impedir que algunas personas comprendan la información.", "feedback_incorrect": "Los subtítulos, la estructura clara y las instrucciones segmentadas mejoran la accesibilidad. Depender únicamente del color genera una barrera."}, {"question": "¿La inclusión educativa consiste únicamente en permitir el acceso a una plataforma?", "options": ["Sí, porque el acceso técnico garantiza el aprendizaje.", "No, también implica participación, comprensión, pertenencia y posibilidad de demostrar el aprendizaje.", "Sí, siempre que la plataforma sea moderna.", "No, porque la inclusión solo se relaciona con discapacidad."], "correct": 1, "feedback_correct": "Correcto. La inclusión abarca acceso, participación, aprendizaje, pertenencia y evidencias pertinentes.", "feedback_incorrect": "El acceso técnico es solo una parte. La inclusión exige que las personas puedan participar, comprender, aprender y demostrar lo aprendido."}, {"question": "¿Qué acción favorece el bienestar digital?", "options": ["Utilizar muchas plataformas para demostrar innovación.", "Enviar mensajes y tareas a cualquier hora.", "Diseñar cargas razonables, instrucciones claras y tiempos de descanso.", "Solicitar disponibilidad permanente."], "correct": 2, "feedback_correct": "Correcto. El bienestar digital considera carga cognitiva, equilibrio, claridad, tiempos razonables y seguridad emocional.", "feedback_incorrect": "La sobrecarga, la disponibilidad permanente y el uso innecesario de plataformas afectan el bienestar digital."}, {"question": "¿Por qué la accesibilidad beneficia a más personas y no solo a quienes tienen una discapacidad?", "options": ["Porque mejora claridad, navegación, comprensión y usabilidad general.", "Porque elimina la necesidad de diseñar actividades.", "Porque reduce todos los contenidos.", "Porque sustituye la evaluación."], "correct": 0, "feedback_correct": "Correcto. Las mejoras de accesibilidad suelen beneficiar a muchas personas al aumentar claridad, comprensión y facilidad de uso.", "feedback_incorrect": "La accesibilidad no elimina contenido ni evaluación; mejora la forma en que las personas acceden, comprenden y utilizan los recursos."}, {"question": "¿Qué diferencia existe entre igualdad y equidad?", "options": ["No existe ninguna diferencia.", "La igualdad ofrece lo mismo; la equidad proporciona apoyos según necesidades.", "La equidad elimina los criterios académicos.", "La igualdad siempre produce inclusión."], "correct": 1, "feedback_correct": "Correcto. La equidad reconoce necesidades distintas y proporciona apoyos para favorecer oportunidades justas.", "feedback_incorrect": "Dar exactamente lo mismo no siempre produce resultados justos. La equidad considera necesidades y barreras diferentes."}, {"question": "¿Cuál es el primer paso para diseñar una experiencia centrada en la persona?", "options": ["Elegir una herramienta tecnológica.", "Comprar una plataforma.", "Conocer a las personas, su contexto y sus necesidades.", "Definir el color del curso."], "correct": 2, "feedback_correct": "Correcto. El diseño centrado en la persona comienza con la comprensión de usuarios, necesidades y contexto.", "feedback_incorrect": "La tecnología debe seleccionarse después. Primero se conoce a las personas y se identifican necesidades y barreras."}, {"question": "¿Qué habilidad humana sigue siendo esencial en entornos con IA?", "options": ["Aceptar automáticamente cualquier resultado.", "Memorizar respuestas generadas.", "Ejercer juicio ético, empatía y pensamiento crítico.", "Delegar todas las decisiones."], "correct": 2, "feedback_correct": "Correcto. La IA no sustituye el juicio ético, la empatía, la creatividad ni el pensamiento crítico.", "feedback_incorrect": "La automatización aumenta la necesidad de habilidades humanas para interpretar, cuestionar y decidir responsablemente."}, {"question": "¿Qué evidencia demuestra que una mejora de accesibilidad funciona?", "options": ["La opinión del diseñador únicamente.", "El uso de una herramienta moderna.", "La validación con usuarios y la reducción observable de barreras.", "La cantidad de colores utilizados."], "correct": 2, "feedback_correct": "Correcto. Una mejora debe probarse con usuarios y mostrar que reduce barreras o mejora la participación.", "feedback_incorrect": "La intención no basta. Es necesario validar con usuarios y reunir evidencia de que la barrera disminuyó."}];
+
+const topicButtons=[...document.querySelectorAll(".topic-btn")];
+function renderTheory(index){
+  topicButtons.forEach((btn,i)=>btn.classList.toggle("active",i===index));
+  const d=theoryData[index];
+  theoryIcon.textContent=d.icon;
+  theoryTitle.textContent=d.title;
+  theoryText.textContent=d.text;
+  theoryPoints.innerHTML=d.points.map(p=>`<div class="point"><strong>${p[0]}</strong>${p[1]}</div>`).join("");
+  theoryExample.textContent=d.example;
+}
+topicButtons.forEach((btn,index)=>btn.addEventListener("click",()=>renderTheory(index)));
+renderTheory(0);
+
+const journeyButtons=[...document.querySelectorAll(".journey-btn")];
+function renderJourney(index){
+  journeyButtons.forEach((btn,i)=>btn.classList.toggle("active",i===index));
+  const d=journeyData[index];
+  journeyLabel.textContent=d.label;
+  journeyTitle.textContent=d.title;
+  journeySummary.textContent=d.summary;
+  journeyDetail.textContent=d.detail;
+  journeyExample.textContent=d.example;
+}
+journeyButtons.forEach((btn,index)=>btn.addEventListener("click",()=>renderJourney(index)));
+renderJourney(0);
+
+const caseButtons=[...document.querySelectorAll(".case-btn")];
+function renderCase(index){
+  caseButtons.forEach((btn,i)=>btn.classList.toggle("active",i===index));
+  const d=cases[index];
+  caseTitle.textContent=d.title;
+  caseStory.textContent=d.story;
+  caseQuestion.textContent=d.question;
+  caseGrid.innerHTML=d.analysis.map(i=>`<div class="case-item"><strong>${i[0]}</strong><p>${i[1]}</p></div>`).join("");
+}
+caseButtons.forEach((btn,index)=>btn.addEventListener("click",()=>renderCase(index)));
+renderCase(0);
+
+activityGrid.innerHTML=activities.map(a=>`
+  <article class="activity-card">
+    <div class="activity-head">
+      <h3>${a.title}</h3>
+      <span class="activity-badge">${a.badge}</span>
+    </div>
+    <div class="activity-body">
+      <p>${a.description}</p>
+      <div class="activity-detail-grid">
+        <div class="activity-detail"><strong>Propósito</strong><p>${a.purpose}</p></div>
+        <div class="activity-detail"><strong>Duración estimada</strong><p>${a.duration}</p></div>
+        <div class="activity-detail"><strong>Formato</strong><p>${a.format}</p></div>
+        <div class="activity-detail"><strong>Uso de IA</strong><p>${a.ai}</p></div>
+      </div>
+      <ol class="steps">${a.steps.map(s=>`<li>${s}</li>`).join("")}</ol>
+      <div class="criteria">${a.criteria.map(c=>`<span class="criterion">${c}</span>`).join("")}</div>
+    </div>
+  </article>
+`).join("");
+
+productGrid.innerHTML=products.map(p=>`
+  <article class="product-card">
+    <div class="product-top">
+      <span>${p.label}</span>
+      <h3>${p.title}</h3>
+    </div>
+    <div class="product-body">
+      <p>${p.description}</p>
+      <div class="specs">
+        ${p.specs.map(s=>`<div class="spec"><strong>${s[0]}</strong><span>${s[1]}</span></div>`).join("")}
+      </div>
+      <div class="product-note">${p.note}</div>
+    </div>
+  </article>
+`).join("");
+
+theoryBtn.onclick=()=>theorySection.scrollIntoView({behavior:"smooth"});
+quizBtn.onclick=()=>quizSection.scrollIntoView({behavior:"smooth"});
+contrastBtn.onclick=()=>{
+  const active=document.body.classList.toggle("high");
+  contrastBtn.textContent=active?"Contraste normal":"Alto contraste";
+};
+
+const storageKey="uaf_educacion5_semana2_quiz_v1";
+let state={attempts:0,best:0,last:null};
+try{
+  const stored=JSON.parse(localStorage.getItem(storageKey));
+  if(stored && typeof stored.attempts==="number") state=stored;
+}catch(e){}
+
+let quizActive=false;
+let quizSubmitted=false;
+
+function saveState(){
+  try{localStorage.setItem(storageKey,JSON.stringify(state));}catch(e){}
+}
+
+function updateDashboard(){
+  attemptsUsed.textContent=state.attempts;
+  bestScore.textContent=state.best;
+  lastScore.textContent=state.last===null?"—":state.last;
+  if(state.attempts>=2){
+    startQuizBtn.disabled=true;
+    startQuizBtn.textContent="Intentos agotados";
+  }else if(state.attempts===1){
+    startQuizBtn.textContent="Iniciar segundo intento";
+  }else{
+    startQuizBtn.textContent="Iniciar primer intento";
+  }
+}
+
+function buildQuiz(){
+  quizForm.innerHTML=questions.map((q,index)=>`
+    <article class="question-card">
+      <h3>${index+1}. ${q.question}</h3>
+      <div class="option-list">
+        ${q.options.map((option,optIndex)=>`
+          <label class="option-label">
+            <input type="radio" name="q${index}" value="${optIndex}">
+            <span>${option}</span>
+          </label>
+        `).join("")}
+      </div>
+      <div class="question-feedback" id="feedback${index}"></div>
+    </article>
+  `).join("");
+}
+
+startQuizBtn.addEventListener("click",()=>{
+  if(state.attempts>=2) return;
+  buildQuiz();
+  quizForm.classList.add("active");
+  quizResult.classList.remove("show");
+  submitQuizBtn.disabled=false;
+  startQuizBtn.disabled=true;
+  quizActive=true;
+  quizSubmitted=false;
+  quizSection.scrollIntoView({behavior:"smooth",block:"start"});
+});
+
+submitQuizBtn.addEventListener("click",()=>{
+  if(!quizActive || quizSubmitted) return;
+
+  const unanswered=[];
+  questions.forEach((q,index)=>{
+    if(!quizForm.querySelector(`input[name="q${index}"]:checked`)) unanswered.push(index+1);
+  });
+
+  if(unanswered.length){
+    alert("Responde todas las preguntas antes de enviar. Faltan: "+unanswered.join(", "));
+    return;
+  }
+
+  let correctCount=0;
+  questions.forEach((q,index)=>{
+    const selected=Number(quizForm.querySelector(`input[name="q${index}"]:checked`).value);
+    const feedback=document.getElementById(`feedback${index}`);
+    feedback.classList.add("show");
+
+    if(selected===q.correct){
+      correctCount++;
+      feedback.classList.add("correct");
+      feedback.classList.remove("incorrect");
+      feedback.textContent=q.feedback_correct;
+    }else{
+      feedback.classList.add("incorrect");
+      feedback.classList.remove("correct");
+      feedback.textContent=q.feedback_incorrect;
+    }
+
+    quizForm.querySelectorAll(`input[name="q${index}"]`).forEach(input=>input.disabled=true);
+  });
+
+  const score=Math.round((correctCount/questions.length)*100);
+  state.attempts++;
+  state.last=score;
+  state.best=Math.max(state.best,score);
+  saveState();
+
+  quizSubmitted=true;
+  quizActive=false;
+  submitQuizBtn.disabled=true;
+
+  resultTitle.textContent=`Calificación del intento: ${score}/100`;
+  resultText.textContent=`Respuestas correctas: ${correctCount} de ${questions.length}. Mejor calificación registrada: ${state.best}/100. ${state.attempts<2 ? "Todavía dispones de una oportunidad adicional." : "Has utilizado las dos oportunidades disponibles."}`;
+  quizResult.classList.add("show");
+
+  updateDashboard();
+  if(state.attempts<2) startQuizBtn.disabled=false;
+});
+
+updateDashboard();
+</script>
+</body>
+</html>
